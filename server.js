@@ -5,6 +5,7 @@ var methodOverride = require('method-override');
 var bodyParser  = require('body-parser');
 var morgan      = require('morgan');
 var mongoose    = require('mongoose');
+
 //Config File
 var config = require('./config');
 
@@ -12,7 +13,9 @@ var config = require('./config');
 //================Configuration==========//
 
 var port = process.env.PORT || 3000;
-mongoose.connect(config.database); // connect to database
+// mongoose.connect(config.database); // connect to database
+mongoose.connect('mongodb://localhost/myappdatabase');
+
 
 // / use body parser so we can get info from POST and/or URL parameters
 app.use(bodyParser.urlencoded({ extended: false }));

@@ -3,10 +3,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var TermSchema = new Schema({
-    clientId:{type:Number,default:12309280},
     group: {type:String},
     key: {type:String},
     translations:[{
+      clientId:{type:Number,default:12309280},
       lang:{type:String},
       val:{type:String}
     }],
