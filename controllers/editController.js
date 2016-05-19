@@ -35,7 +35,6 @@ module.exports = {
     new:true
     },function(err,thisTerm){
       if(err)throw err;
-      console.log(thisTerm,'softDelete')
       res.send(thisTerm);
     })
   }

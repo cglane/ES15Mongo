@@ -5,10 +5,11 @@ var mongoose = require('mongoose');
 var config = require('../config');
 var termsExample = require('./exampleJSON.json');
 var examples = require('./examples.js');
-      // I want to create a connection with the database, and when I'm done, I call done().
+      // I want to create a connections with the database, and when I'm done, I call done().
       var objectId,key;
       var url = 'http://localhost:3000';
       var clientId = 12345;
+
       before(function(done){
         mongoose.connect(config.database);
         done();
@@ -19,12 +20,19 @@ var examples = require('./examples.js');
       	 .get('/api/hello')
       	  .end(function(err, res) {
               if(err)throw err;
-              var items = JSON.parse(res.status);
-              console.log(items,'res')
               res.status.should.be.equal(200);
                 done();
               });
           });
+          it('should be able to start', function(done) {
+          request(url)
+        	 .get('/api/hello')
+        	  .end(function(err, res) {
+                if(err)throw err;
+                res.status.should.be.equal(200);
+                  done();
+                });
+            });
         })
 
         describe('APi',function(){
@@ -66,6 +74,44 @@ var examples = require('./examples.js');
               })
           })
 
+          it('should be able to add a translation',function(done){
+            request(url)
+              .post('/api/add_translation/'+key)
+              .send(examples.transExample)
+              .end(function(err,res){
+                if(err)throw err;
+                res.status.should.equal(200)
+                // res.body.lang.should.equal(transExample.lang);
+              })
+          })
+
+            it('should be able to get one term object',function(done){
+              request(url)
+                .get('/api/get_one_term/'+examples.singleExample.key)
+                .end(function(err,res){
+                  if(err)throw err;
+                  res.status.should.equal(200);
+                })
+            })
+
+          it('should return accurate key values',function(done){
+            request(url)
+              .get('/api/get_all_terms/')
+              .end(function(err,res){
+                if(err)throw err;
+                res.body.fishing.should.equal(examples.companyExample.translations[0].val)
+              })
+          })
+
+          it('should return company specific translations by group',function(done){
+            request(url)
+              .get('/api/get_all_translations_group/'+examples.singleExample.group+'/'+'en-us'+'/'+examples.transExample.clientId)
+              .end(function(err,res){
+                if(err)throw err;
+                res.status.should.equal(200);
+                // res.body.fishing.should.equal(examples.companyExample.translations[0].val)
+              })
+          })
           it('should be able to set softDelete',function(done){
             request(url)
               .delete('/api/soft_delete/'+objectId)
@@ -75,43 +121,17 @@ var examples = require('./examples.js');
                 // res.body.softDelete.should.equal(true);
               })
           })
-          it('should be able to add a translation',function(done){
-            request(url)
-              .post('/api/add_translation/'+key)
-              .send(examples.transExample)
-              .end(function(err,res){
-                if(err)throw err;
-                console.log(res,'res')
-                // res.body.lang.should.equal(transExample.lang);
-              })
-          })
-          // it('should return accurate key values',function(done){
-          //   request(url)
-          //     .get('/api/get_localization/'+clientId)
-          //     .end(function(err,res){
-          //       if(err)throw err;
-          //       res.body.fishing.should.equal(examples.companyExample.translations[0].val)
-          //     })
-          // })
-          // it('should return all key values',function(done){
-          //   request(url)
-          //     .get("/api/get_all/"+clientId)
-          //     .end(function(err,res){
-          //       if(err) throw err;
-          //       console.log(JSON.res.items)
-          //       res.status.should.be.equal(200);
-          //     })
-          // })
+
 
         })
-        // describe('Data Upload',function(){
-        //   it('should create new terms from json',function(done){
-        //     request(url)
-        //       .post('/upload_create_file')
-        //       .send(examples.uploadData)
-        //       .end(function(err,res){
-        //         if(err)throw err;
-        //         res.status.should.be.equal(200);
-        //       })
-        //   })
-        // })
+        describe('Data Upload',function(){
+          it('should create new terms from json',function(done){
+            request(url)
+              .post('/api/upload_create_file/common/12345/en-us')
+              .send(examples.fileAddress)
+              .end(function(err,res){
+                if(err)throw err;
+                res.status.should.be.equal(200);
+              })
+          })
+        })

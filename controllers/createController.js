@@ -19,7 +19,6 @@ Term.findOne({key:re.key},function(err,term){
   if(err)throw err;
   if(!term){
     newTerm.save(function(err,termRes){
-      console.log(termRes,'termRes')
       res.json(termRes);
     })
   }else{

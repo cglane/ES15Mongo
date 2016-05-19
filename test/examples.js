@@ -9,7 +9,7 @@ singleExample:{
   softDelete: 0
 },
 updateExample:{
-  group:"commons",
+  group:"common",
   createdBy:"Chuck",
   comments: "Just a change",
   updatedBy: "Charels"
@@ -30,9 +30,9 @@ companyExample:{
   softDelete: 0
 },
 transExample:{
-  clientId:12309280,
-  lang:"en-sp",
-  val:"Your are cruising",
+  clientId:123,
+  lang:"en-us",
+  val:"Your are killing it",
 },
 uploadData:{
   fileName:'./exampleJSON.json',
@@ -40,5 +40,8 @@ uploadData:{
   createdBy: 'Charles',
   comments: 'please work',
   lang:'en-US'
-}
+},
+fileAddress:[
+  './test/exampleJSON.json'
+]
 }
