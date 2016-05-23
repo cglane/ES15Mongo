@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
     editCtrl = require("../controllers/editController.js"),
     uploadCtrl = require('../controllers/uploadController.js'),
     getCtrl = require("../controllers/getController.js");
-    
+
 module.exports = function (apiRoutes) {
 
   apiRoutes.get('/hello', function(req, res) {
@@ -22,7 +22,7 @@ module.exports = function (apiRoutes) {
   //============Upload and Edit==================//
   apiRoutes.post('/create_term',createCtrl.createTerm);
 
-  apiRoutes.post('/add_translation/:key',uploadCtrl.addTranslation);
+  apiRoutes.post('/include_translation/:key',uploadCtrl.includeTranslation);
 
   apiRoutes.post('/upload_create_file/:group/:companyId/:language',uploadCtrl.uploadFile);
 

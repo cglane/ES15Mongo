@@ -3,7 +3,7 @@ var Term = require('../models/term.js');
 var _ = require('underscore');
 
 
-  function extractLanguage(term,language){
+  function extractTranslations(term,language){
     var returnArr = [];
     _.each(term.translations,function(trans){
       if(trans.lang === language)returnArr.push(trans);
@@ -11,9 +11,9 @@ var _ = require('underscore');
     return returnArr;
   }
 
-  function rateTranslation(translations,gdgId,companyId){
+  function rateTranslation(gdgId,companyId,term,language){
     var gdgTrans,companyTrans;
-    _.each(translations,function(trans){
+    _.each(extractTranslations(term,language),function(trans){
       if(trans.clientId == gdgId)gdgTrans = trans;
       if(trans.clientId == companyId)companyTrans = trans;
     })
@@ -46,36 +46,12 @@ module.exports = {
     Term.find({'group':group},function(err, terms){
       if(err)throw err;
       _.each(terms,function(term){
-        var transl = extractLanguage(term,language);
-        var prefTrans = rateTranslation(transl,gdgId,companyId);
-        returnObj[term.key] = prefTrans.val;
+        var acptTrans = rateTranslation(gdgId,companyId,term,language);
+        returnObj[term.key] = acptTrans.val;
       })
-      console.log(returnObj,'returnObj');
       res.send(returnObj);
     })
-  },
-  getCompanyTranslations:function(req,res,next){
-    console.log('aslkdjlkajsdjkl');
-    var clientId = req.params.clientId,
-        companyArr  = [],
-        returnArr = [];
-        Term.find({'softDelete':false},function(err,allTerms){
-          _.each(allTerms,function(term){
-            _.each(term.translations,function(trans){
-              if(trans.clientId == clientId){
-                trans.group = term.group;
-                companyArr.push(trans);
-              };
-            });
-          });
-          _.each(companyArr,function(obj){
-            var key = obj.group + obj.key;
-            returnArr[key] = obj.val;
-          })
-          console.log(returnArr,'returnArr');
-          res.send(returnArr);
-        })
-
   }
+
 
 }

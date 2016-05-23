@@ -53,7 +53,10 @@ var apiRoutes = express.Router();
 require('./api/routes.js')(apiRoutes);
 //adding prefix of api to all fo these routes
 app.use('/api', apiRoutes);
+require('./uploadConf.js')();
 
 // ===============================================
 app.listen(port);
+
+
 console.log('Magic happens at http://localhost:' + port);

@@ -40,8 +40,5 @@ uploadData:{
   createdBy: 'Charles',
   comments: 'please work',
   lang:'en-US'
-},
-fileAddress:[
-  './test/exampleJSON.json'
-]
+}
 }

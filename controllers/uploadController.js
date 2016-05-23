@@ -1,7 +1,6 @@
-var Promise = require('es6-promise').Promise;
-var Term = require('../models/term.js');
-var _ = require('underscore');
-var fs = require('fs');
+var Term = require('../models/term.js'),
+      _ = require('underscore'),
+    fs = require('fs');
 
 function translationExists(transArray, value,companyId,language){
   var returnVal = false;
@@ -15,7 +14,6 @@ function translationExists(transArray, value,companyId,language){
 }
 
 function addToDB(companyId,group,key,val,language){
-
     Term.find({'key':key}).exec(function(err,resTerm){
       if(err)throw err;
       if(resTerm.length > 1){
@@ -41,6 +39,7 @@ function createNewTerm(companyId,group, language, key, val){
     // console.log(newTerm,'newTerm');
     newTerm.save(function(err,termRes){
       if(err)throw err;
+      // console.log(termRes.translations,'termRes');
       console.log(termRes.key, 'created successfully')
     })
 }
@@ -55,39 +54,27 @@ function addTranslation(rtnTerm,companyId,key,value,language){
       })
       rtnTerm[0].save(function(err,newTerm){
         if(err)throw err;
-        console.log(newTerm.key, ' translation saved Successfully');
+        console.log(newTerm.key, ' translation added Successfully');
         return true;
       })
     }else{
+      console.log('already exists');
       return false;
     }
 }
 
 module.exports = {
 
-  addTranslation: function(req,res,next){
-    var key = req.params.key;
-    Term.findOne({'key':key}).exec(function(err,termRes){
-      if(err)throw err;
-      if(termRes){
-        //if there is no matching translation add to array
-        if(!translationExists(termRes.translations,req.body.val)){
-          termRes.translations.push({
-            clientId:req.body.clientId,
-            lang:req.body.lang,
-            val:req.body.val
-          })
-          termRes.save(function(err,newTerm){
-            if(err)throw err;
-            res.send(newTerm)
-          })
-        }else{
-          res.send('already exists')
-          console.log('translation already exists')
-        }
-      }
-    })
+    includeTranslation: function(req,res,next){
+      Term.find({key:req.params.key}).exec(function(err,termRes){
+        if(err)throw err;
+        res.send(
+          {'success':
+          addTranslation(termRes,req.body.clientId,req.params.key,req.body.val,req.body.lang)
+        });
+      })
   },
+
   uploadFile: function(req,res,next){
     var companyId = req.params.companyId,
         group = req.params.group,
@@ -95,7 +82,7 @@ module.exports = {
         uploadedTerms = 0,
         promiseArr = [];
 
-        fs.readFile(req.body[0],'utf8',function(err,data){
+        fs.readFile(req.body.url,'utf8',function(err,data){
           if(err){
             return console.log(err);
           }
@@ -106,5 +93,6 @@ module.exports = {
             res.send({success:'file read successfully'});
         })
       }
+
 
     }
