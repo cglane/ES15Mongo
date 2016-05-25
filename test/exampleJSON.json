@@ -1,5 +1,0 @@
-{
-  "progressRptPastDueBody": "OUr records indicate that your progress report for <%= requestName %> due on <%= dueDate %> is now past due. We are anxious to hear about the success of your activity/program. Please submit your progress report as soon as possible.",
-  "projectApprovedBody": "Your volunteer activity, <%= projectName %>, has been approved and is open for volunteers to sign up for! Please login to the portal to add your assignments, invite volunteers, and more. You can also use this site to track your volunteers, monitor waitlists, and enter hours for the volunteers following the event.",
-  "projectApprovedSub": "Suggestedddd Activity Approved"
-}
