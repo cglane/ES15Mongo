@@ -2,7 +2,8 @@ var fs = require('fs'),
     _ = require('underscore'),
     Term = require('./models/term.js'),
     q = require('q'),
-    uploadPath = ['en-US','de-DE','en-GB','es-SP','fr-FR','it-IT','nl-NL','pt-BR','zh-CN'],
+    uploadPaths = ['en-US','de-DE','en-GB','es-SP','fr-FR','it-IT','nl-NL','pt-BR','zh-CN'],
+    other = ['en-US','de-DE','en-GB','es-SP','fr-FR','it-IT','nl-NL','pt-BR','zh-CN'],
     clientId = '12309280';
 
 
@@ -26,12 +27,12 @@ function insertTranslation(term,value,language){
     })
     term.save(function(err,termRes){
       if(err)throw err;
-      console.log(termRes.key,': translation added');
-      deferred.resolve();
+      // console.log(termRes.key,': translation added');
+      deferred.resolve(termRes.key);
     })
   }else{
-    deferred.resolve();
-    console.log('translation not added already exists');
+    deferred.resolve('fail');
+    // console.log('translation not added already exists');
   }
   return deferred.promise;
 }
@@ -51,24 +52,34 @@ function createTerm(key,value,language,group){
   })
   newTerm.save(function(err,item){
     if(err)throw err;
-    console.log(key,": saved successfully");
-    deferred.resolve();
+    // console.log(key,": saved successfully");
+    deferred.resolve(item.key);
   })
   return deferred.promise;
 }
-
+function amEnglish(term){
+  var returnVal = false;
+  _.each(term.translations,function(el,itr){
+    if (el.lang == 'en-US') returnVal = true ;
+  })
+  return returnVal;
+}
 function addToDB(key,value,language,group){
   var deferred = q.defer();
   Term.findOne({'key':key}).exec(function(err,term){
     if(err)throw err;
-    if(term){
-      insertTranslation(term,value,language).then(function(){
+    if(term && amEnglish(term)){
+      insertTranslation(term,value,language).then(function(el){
+        console.log(el,'inserted');
         deferred.resolve();
       });
     }else{
-      createTerm(key,value,language,group).then(function(){
-        deferred.resolve();
-      });
+      if(language == 'en-US'){
+        createTerm(key,value,language,group).then(function(el){
+          console.log(el, 'created');
+          deferred.resolve();
+        });
+      }
     }
   })
   return deferred.promise;
@@ -82,44 +93,43 @@ function deleteAll(){
 function logAll(){
   Term.find({'softDelete':false},function(err,res){
     if(err)throw err;
-    console.log(res,'res');
+    _.each(res,function(el){
+      console.log(el.key,'key');
+      console.log(el.translations);
+    })
     // (res.length > 1)? console.log(res.length,'#Files'): console.log('nothing in db');;
   })
 }
 function logOneTerm(){
-  Term.find({'key':'pwdLabel'},function(err,res){
+  Term.find({'key':'postProjectSurvey'},function(err,res){
     console.log(res,'res');
   })
 }
-function uploadAll(){
-  _.each(uploadPath,function(folderPath){
-    var language = folderPath;
-    fs.readdir('./i18n'+'/'+folderPath,function(err,files){
-      if(err)console.log(err)
-      _.each(files,function(filePath,itr){
-        var group = filePath.split('.')[0],
-            location = './i18n/'+folderPath+'/'+filePath,
-            fileArr = filePath.split('.');
-        if(fileArr[fileArr.length-1] == 'json'){
-          fs.readFile(location,'utf-8',function(err,fileData){
-            if(err)throw err;
-            var jsonData = JSON.parse(fileData);
-              _.each(jsonData,function(el,key){
-                addToDB(key,fileData[key],language,group).then(function(){
-                  console.log(key,'key');
-                });
+function uploadFolder(){
+      var folderPath = uploadPaths[9],
+          language = folderPath;
+      fs.readdir('./i18n'+'/'+folderPath,function(err,files){
+        if(err)throw(err)
+          for (var j = 0; j < files.length; j++) {
+            var group = files[j].split('.')[0],
+                location = './i18n/'+folderPath+'/'+files[j],
+                fileArr = files[j].split('.');
+              fs.readFile(location,'utf-8',function(err,fileData){
+                if(err)throw err;
+                var jsonData = JSON.parse(fileData);
+                for(key in jsonData){
+                  addToDB(key,jsonData[key],language,group);
+                }
               })
-          })
-        }
+          }
       })
-    })
-  })
+
 }
 
 module.exports = function(){
-  // logOneTerm();
-logAll();
+  logOneTerm();
+// logAll();
 // deleteAll();
-// uploadAll();
+  // uploadFolder();
 
 }
