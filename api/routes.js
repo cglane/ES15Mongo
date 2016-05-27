@@ -35,6 +35,8 @@ module.exports = function (apiRoutes) {
 
   apiRoutes.get('/get_all_translations_group/:group/:language/:companyId',getCtrl.getAllTranslationsByGroup);
 
+  apiRoutes.get('/get_company_terms/:clientId',getCtrl.getCompanyTerms);
+
 //=============Change To Soft Delete============//
   apiRoutes.delete('/soft_delete/:_id',editCtrl.softDelete);
 

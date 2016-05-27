@@ -19,6 +19,7 @@ angular
          console.log(filterGroup(terms.data));
       })
     }
+
     vm.searchTerms = function(){
       _.each(vm.terms.data,function(term){
         if(term.key == vm.searchParams){
@@ -26,6 +27,7 @@ angular
         }
       })
     }
+    
     vm.clearSearch = function(){
       vm.searchParams = undefined;
       vm.searchResults = null;

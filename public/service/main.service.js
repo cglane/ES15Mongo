@@ -17,10 +17,15 @@
         return $http.put(url+'/api/edit_term/'+term._id, term)
       }
 
+      var getCompanyTerms = function(clientId){
+        return $http.get(url+'/api/get_company_terms/'+clientId)
+      }
+
     return{
       getOneTerm:getOneTerm,
       getAllTerms:getAllTerms,
-      editOneTerm:editOneTerm
+      editOneTerm:editOneTerm,
+      getCompanyTerms:getCompanyTerms,
     };
   });
 })();

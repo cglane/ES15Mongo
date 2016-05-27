@@ -20,6 +20,7 @@ var _ = require('underscore');
     return (companyTrans)? companyTrans:gdgTrans;
   }
 
+
 module.exports = {
 
   getOneTerm: function(req,res,next){
@@ -51,7 +52,28 @@ module.exports = {
       })
       res.send(returnObj);
     })
+  },
+
+  getCompanyTerms:function(req,res, next){
+    var companyObj = {'en-US':{},'de-DE':{},'en-GB':{},'es-SP':{},'fr-FR':{},'it-IT':{},'nl-NL':{},'pt-BR':{},'zh-CN':{}};
+    Term.find({'softDelete': false},function(err,terms){
+      //setUp Object
+      _.each(terms,function(term){
+        _.each(term.translations,function(trans){
+          companyObj[trans.lang][term.group] = {};
+        })
+      })
+      _.each(terms,function(term){
+        _.each(term.translations,function(trans){
+          if (trans.clientId == req.params.clientId) {
+            companyObj[trans.lang][term.group][term.key] = trans.val;
+          }
+        })
+      })
+      res.send(companyObj)
+    })
   }
+
 
 
 }

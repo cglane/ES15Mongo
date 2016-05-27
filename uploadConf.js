@@ -4,7 +4,7 @@ var fs = require('fs'),
     q = require('q'),
     uploadPaths = ['en-US','de-DE','en-GB','es-SP','fr-FR','it-IT','nl-NL','pt-BR','zh-CN'],
     other = ['en-US','de-DE','en-GB','es-SP','fr-FR','it-IT','nl-NL','pt-BR','zh-CN'],
-    clientId = '123456880';
+    clientId = '1234';
 
 
 function transExists(term,clientId,language){
@@ -70,13 +70,13 @@ function addToDB(key,value,language,group){
     if(err)throw err;
     if(term && amEnglish(term)){
       insertTranslation(term,value,language).then(function(el){
-        console.log(el,'inserted');
+        // console.log(el,'inserted');
         deferred.resolve();
       });
     }else{
       if(language == 'en-US'){
         createTerm(key,value,language,group).then(function(el){
-          console.log(el, 'created');
+          // console.log(el, 'created');
           deferred.resolve();
         });
       }
@@ -111,37 +111,38 @@ function uploadFolder(val,callback){
           language = folderPath,
           files = fs.readdirSync('./i18n/'+folderPath),
           promiseArr = [];
+          console.log(files.length,'files.length');
           for (var j = 0; j < files.length; j++) {
               var location = './i18n/'+folderPath+'/'+files[j],
-                  fileData = fs.readFileSync(location,'utf-8');
-                var group = files[j].split('.')[0],
-                    fileArr = files[j].split('.'),
-                    jsonData = JSON.parse(fileData),
-                    keys  = Object.keys(jsonData),
-                    itr = 0;
+                  fileData = fs.readFileSync(location,'utf-8'),
+                  group = files[j].split('.')[0],
+                  fileArr = files[j].split('.'),
+                  jsonData = JSON.parse(fileData),
+                  keys  = Object.keys(jsonData);
+                  itr = 0;
                     function loop(){
                       promiseArr.push(addToDB(keys[itr],jsonData[keys[itr]],language,group).then(function(el){
+                        console.log('#');
                       }))
                       if(++itr < keys.length)loop();
                     }loop();
-                    return q.all(promiseArr).then(function(){
-                      callback();
-                    })
                 }
+                return q.all(promiseArr).then(function(){
+                  callback();
+                })
           }
-
 
 
 module.exports = function(){
   // logOneTerm();
 // logAll();
 // deleteAll();
-  // uploadFolder();
-  var promiseArr = [],
-    itr = 0;
-  function loop(){
-    promiseArr.push(uploadFolder(itr,function(){
-    }))
-    if(++itr < uploadPaths.length)loop();
-  }loop();
+  // uploadFolder(0);
+  // var promiseArr = [],
+  //   itr = 0;
+  // function loop(){
+  //   promiseArr.push(uploadFolder(itr,function(){
+  //   }))
+  //   if(++itr < uploadPaths.length)loop();
+  // }loop();
 }
