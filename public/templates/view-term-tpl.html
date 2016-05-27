@@ -1,0 +1,26 @@
+<div ng-controller = "TermController as tc"class="jumbotron">
+  <a class = 'text-center' href="#/main"><span style="font-size:2em; color:black"class = 'glyphicon glyphicon-home'></span></a>
+  <h1>{{tc.term.key}}</h1>
+  <div class="col-lg-6">
+    <ul ng-repeat = "(key,val) in tc.term" class="list-group">
+      <li ng-hide = "key == 'translations' || key == '__v' || key == '_id' || key == 'softDelete'"class = "list-group-item">
+        <a>{{key}}:</a>
+        <a editable-text="tc.term[key]"onbeforesave="tc.editTerm(key,$data)">{{ tc.term[key] || "empty" }}</a>
+      </li>
+    </ul>
+    <li ng-click = 'showKeys = !showKeys'class = "list-group-item">
+      <a>Translations</a>
+      <span ng-show = 'showKeys'class = 'glyphicon glyphicon-chevron-up pull-right'></span>
+      <span ng-hide = 'showKeys'ng-click = 'showKeys = true'class = 'glyphicon glyphicon-chevron-down pull-right'></span>
+    </li>
+      <ul ng-show= 'showKeys'ng-repeat = "trans in tc.term.translations">
+        <ul ng-repeat = "(subKey, subVal) in trans">
+          <li>
+            <a>{{subKey}}:</a>
+            <span>{{subVal}}</span>
+          </li>
+        </ul>
+        <br>
+      </ul>
+  </div>
+</div>

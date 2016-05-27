@@ -4,6 +4,7 @@ var Term = require('../models/term.js');
 module.exports = {
 
   editTerm: function(req,res,next){
+    console.log(req.body,'req.body');
       var re = req.body,
           _id =  req.params._id;
 
@@ -11,8 +12,7 @@ module.exports = {
           '_id': _id
         },{$set:{
           'group':re.group,
-          'createdBy':re.createdBy,
-          'updatedAt': new Date(),
+          'updatedAt': re.updatedAt,
           'updatedBy': re.updatedBy,
           'comments': re.comments
               }

@@ -9,6 +9,10 @@
   "author": "Charles Lane",
   "license": "ISC",
   "dependencies": {
-    "angular": "^1.5.5"
+    "angular": "^1.5.5",
+    "angular-route": "^1.5.5",
+    "angular-ui-router": "^0.3.0",
+    "bootstrap": "^3.3.6",
+    "moment": "^2.13.0"
   }
 }

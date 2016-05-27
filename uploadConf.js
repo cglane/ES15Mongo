@@ -4,7 +4,7 @@ var fs = require('fs'),
     q = require('q'),
     uploadPaths = ['en-US','de-DE','en-GB','es-SP','fr-FR','it-IT','nl-NL','pt-BR','zh-CN'],
     other = ['en-US','de-DE','en-GB','es-SP','fr-FR','it-IT','nl-NL','pt-BR','zh-CN'],
-    clientId = '12309280';
+    clientId = '123456880';
 
 
 function transExists(term,clientId,language){
@@ -105,31 +105,43 @@ function logOneTerm(){
     console.log(res,'res');
   })
 }
-function uploadFolder(){
-      var folderPath = uploadPaths[9],
-          language = folderPath;
-      fs.readdir('./i18n'+'/'+folderPath,function(err,files){
-        if(err)throw(err)
-          for (var j = 0; j < files.length; j++) {
-            var group = files[j].split('.')[0],
-                location = './i18n/'+folderPath+'/'+files[j],
-                fileArr = files[j].split('.');
-              fs.readFile(location,'utf-8',function(err,fileData){
-                if(err)throw err;
-                var jsonData = JSON.parse(fileData);
-                for(key in jsonData){
-                  addToDB(key,jsonData[key],language,group);
-                }
-              })
-          }
-      })
 
-}
+function uploadFolder(val,callback){
+      var folderPath = uploadPaths[val],
+          language = folderPath,
+          files = fs.readdirSync('./i18n/'+folderPath),
+          promiseArr = [];
+          for (var j = 0; j < files.length; j++) {
+              var location = './i18n/'+folderPath+'/'+files[j],
+                  fileData = fs.readFileSync(location,'utf-8');
+                var group = files[j].split('.')[0],
+                    fileArr = files[j].split('.'),
+                    jsonData = JSON.parse(fileData),
+                    keys  = Object.keys(jsonData),
+                    itr = 0;
+                    function loop(){
+                      promiseArr.push(addToDB(keys[itr],jsonData[keys[itr]],language,group).then(function(el){
+                      }))
+                      if(++itr < keys.length)loop();
+                    }loop();
+                    return q.all(promiseArr).then(function(){
+                      callback();
+                    })
+                }
+          }
+
+
 
 module.exports = function(){
-  logOneTerm();
+  // logOneTerm();
 // logAll();
 // deleteAll();
   // uploadFolder();
-
+  var promiseArr = [],
+    itr = 0;
+  function loop(){
+    promiseArr.push(uploadFolder(itr,function(){
+    }))
+    if(++itr < uploadPaths.length)loop();
+  }loop();
 }

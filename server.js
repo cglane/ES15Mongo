@@ -15,7 +15,8 @@ var config = require('./config');
 var port = process.env.PORT || 3000;
 // mongoose.connect(config.database); // connect to database
 mongoose.connect('mongodb://localhost/myappdatabase');
-
+//connect to public html files
+app.use(express.static(__dirname + '/public'));
 
 // / use body parser so we can get info from POST and/or URL parameters
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -53,7 +54,7 @@ var apiRoutes = express.Router();
 require('./api/routes.js')(apiRoutes);
 //adding prefix of api to all fo these routes
 app.use('/api', apiRoutes);
-// require('./uploadConf.js')();
+require('./uploadConf.js')();
 
 // ===============================================
 app.listen(port);

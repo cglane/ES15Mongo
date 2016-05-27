@@ -1,0 +1,31 @@
+<div ng-controller = "MainController as vm"class="jumbotron">
+  <h1>Groups</h1>
+  <div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <input type="text" ng-model = 'vm.searchParams'class="form-control" placeholder="Search for terms...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" ng-click = 'vm.searchTerms()'type="button">Go!</button>
+        <button class="btn btn-default" ng-click = 'vm.clearSearch()'type="button"><span class = 'glyphicon glyphicon-remove'></span></button>
+      </span>
+    </div><!-- /input-group -->
+    <a ng-href="#/view_term/{{vm.searchResults}}"><h3>{{vm.searchResults}}</h3></a>
+  </div><!-- /.col-lg-6 -->
+  <div class="col-lg-6">
+  </div><!-- /.col-lg-6 -->
+</div>
+<br><a href="#"></a>
+  <div class="container col-lg-6">
+    <ul ng-repeat = "(key,val) in vm.groups" class = "list-group">
+      <li ng-click = 'showKeys = !showKeys'class = "list-group-item"><a ng-href="#/view_group/{{key}}">{{key}}</a>
+        <span ng-show = 'showKeys'class = 'glyphicon glyphicon-chevron-up pull-right'></span>
+        <span ng-hide = 'showKeys'ng-click = 'showKeys = true'class = 'glyphicon glyphicon-chevron-down pull-right'></span>
+      </li>
+      <h6 ng-show = 'showKeys'>Terms</h6>
+      <ul type = 'square'ng-show= 'showKeys'ng-repeat = "subKey in val">
+        <li><a ng-href="#/view_term/{{subKey.key}}">{{subKey.key}}</a></li>
+      </ul>
+    </ul>
+  </div>
+
+</div>
