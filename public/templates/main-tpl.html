@@ -23,7 +23,7 @@
       </li>
       <h6 ng-show = 'showKeys'>Terms</h6>
       <ul type = 'square'ng-show= 'showKeys'ng-repeat = "subKey in val">
-        <li><a ng-href="#/view_term/{{subKey.key}}">{{subKey.key}}</a></li>
+        <li><a ng-href="#/view_term/{{subKey.key}}/{{subKey.group}}">{{subKey.key}}</a></li>
       </ul>
     </ul>
   </div>

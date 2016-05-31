@@ -17,7 +17,8 @@
         <ul ng-repeat = "(subKey, subVal) in trans">
           <li>
             <a>{{subKey}}:</a>
-            <span>{{subVal}}</span>
+            <a editable-text="subVal"onbeforesave="tc.editTranslation(subKey,$data,trans)">{{ subVal || "empty" }}</a>
+            <!-- <span>{{subVal}}</span> -->
           </li>
         </ul>
         <br>

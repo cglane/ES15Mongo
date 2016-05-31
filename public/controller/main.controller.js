@@ -15,8 +15,10 @@ angular
       MainService.getAllTerms().then(function(terms){
          vm.terms = terms;
          vm.groups = filterGroup(terms.data);
-         console.log(terms,'terms');
          console.log(filterGroup(terms.data));
+      })
+      MainService.getNeedTranslation().then(function(terms){
+        console.log(terms,'need Translation');
       })
     }
 
@@ -27,7 +29,7 @@ angular
         }
       })
     }
-    
+
     vm.clearSearch = function(){
       vm.searchParams = undefined;
       vm.searchResults = null;

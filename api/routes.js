@@ -28,14 +28,18 @@ module.exports = function (apiRoutes) {
 
   apiRoutes.put('/edit_term/:_id',editCtrl.editTerm);
 
+  // apiRoutes.put('/edit_translation/:termId/:transId',editCtrl.editTranslation);
+
   //============GET Term information=============//
-  apiRoutes.get('/get_one_term/:key',getCtrl.getOneTerm);
+  apiRoutes.get('/get_one_term/:key/:group',getCtrl.getOneTerm);
 
   apiRoutes.get('/get_all_terms/',getCtrl.getAllTerms);
 
   apiRoutes.get('/get_all_translations_group/:group/:language/:companyId',getCtrl.getAllTranslationsByGroup);
 
   apiRoutes.get('/get_company_terms/:clientId',getCtrl.getCompanyTerms);
+
+  apiRoutes.get('/get_need_translation/',getCtrl.getNeedTranslation);
 
 //=============Change To Soft Delete============//
   apiRoutes.delete('/soft_delete/:_id',editCtrl.softDelete);

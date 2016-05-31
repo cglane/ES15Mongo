@@ -3,7 +3,6 @@ var fs = require('fs'),
     Term = require('./models/term.js'),
     q = require('q'),
     uploadPaths = ['en-US','de-DE','en-GB','es-SP','fr-FR','it-IT','nl-NL','pt-BR','zh-CN'],
-    other = ['en-US','de-DE','en-GB','es-SP','fr-FR','it-IT','nl-NL','pt-BR','zh-CN'],
     clientId = '1234';
 
 
@@ -17,13 +16,54 @@ function transExists(term,clientId,language){
   return returnVal;
 }
 
-function insertTranslation(term,value,language){
+function transVal(term,lang,callback){
+  _.each(term.translations,function(trans){
+    if(trans.lang == lang){
+      callback(trans.val);
+    }
+  })
+}
+
+function addTranslationsTerm(term,usVal){
+  var langs = ['de-DE','en-GB','es-SP','fr-FR','it-IT','nl-NL','pt-BR','zh-CN'],
+      returnArr = [];
+      _.each(langs,function(lang){
+        if( term.translations.every(function(trans){
+            return trans.lang !== lang;
+          })){
+            term.translations.push({
+              clientId:clientId,
+              lang:lang,
+              val:usVal,
+              needsTrans:true
+            })
+          }
+      })
+      term.save(function(err,term){
+        if(err)throw err;
+        console.log(term.key,term.group);
+      });
+}
+
+function needsTrans(){
+  Term.find({'softDelete':false},function(err,allTerms){
+    if(err)throw err;
+    _.each(allTerms,function(currTerm){
+      transVal(currTerm,'en-US',function(el){
+        addTranslationsTerm(currTerm,el);
+      })
+    });
+  })
+}
+
+function insertTranslation(term,value,language,needsTrans){
   var deferred = q.defer();
   if(!transExists(term,clientId,language)){
     term.translations.push({
       clientId:clientId,
       lang:language,
-      val:value
+      val:value,
+      needsTrans:needsTrans
     })
     term.save(function(err,termRes){
       if(err)throw err;
@@ -45,7 +85,8 @@ function createTerm(key,value,language,group){
     translations:[{
       clientId:clientId,
       lang:language,
-      val:value
+      val:value,
+      needsTrans:false
     }],
     createdBy:'Charles Lane',
     comments:'First Upload',
@@ -64,19 +105,20 @@ function amEnglish(term){
   })
   return returnVal;
 }
+
 function addToDB(key,value,language,group){
   var deferred = q.defer();
-  Term.findOne({'key':key}).exec(function(err,term){
+  Term.findOne({'key':key, 'group': group}).exec(function(err,term){
     if(err)throw err;
     if(term && amEnglish(term)){
-      insertTranslation(term,value,language).then(function(el){
-        // console.log(el,'inserted');
+      insertTranslation(term,value,language,false).then(function(el){
+        console.log(el,'inserted');
         deferred.resolve();
       });
     }else{
       if(language == 'en-US'){
         createTerm(key,value,language,group).then(function(el){
-          // console.log(el, 'created');
+          console.log(el, 'created');
           deferred.resolve();
         });
       }
@@ -84,12 +126,14 @@ function addToDB(key,value,language,group){
   })
   return deferred.promise;
 }
+
 function deleteAll(){
   Term.remove(function(err){
     if(err)throw err;
     console.log('collection deleted');
   })
 }
+
 function logAll(){
   Term.find({'softDelete':false},function(err,res){
     if(err)throw err;
@@ -100,6 +144,7 @@ function logAll(){
     // (res.length > 1)? console.log(res.length,'#Files'): console.log('nothing in db');;
   })
 }
+
 function logOneTerm(){
   Term.find({'key':'postProjectSurvey'},function(err,res){
     console.log(res,'res');
@@ -137,7 +182,10 @@ module.exports = function(){
   // logOneTerm();
 // logAll();
 // deleteAll();
-  // uploadFolder(0);
+  // uploadFolder(0,function(el){
+  //   console.log(el);
+  // });
+
   // var promiseArr = [],
   //   itr = 0;
   // function loop(){
@@ -145,4 +193,32 @@ module.exports = function(){
   //   }))
   //   if(++itr < uploadPaths.length)loop();
   // }loop();
+
+  // needsTrans();
+
+  // Term.find({'translations.needsTrans': true},function(err,allTerms){
+  //   var returnArr = {};
+  //   _.each(allTerms,function(term){
+  //     _.each(term.translations,function(trans){
+  //       returnArr[trans.lang] = [];
+  //     })
+  //   })
+  //   _.each(allTerms,function(term){
+  //     var engVal = '';
+  //     _.each(term.translations,function(trans){
+  //       if(trans.lang == 'en-US')engVal = trans.val;
+  //       if(trans.needsTrans){
+  //         returnArr[trans.lang].push(engVal + ": " + term.group + "."+ term.key);
+  //       }
+  //     })
+  //   })
+  //   console.log(returnArr);
+  //   fs.writeFile('./needsTranslation.json',JSON.stringify(returnArr, null, 4),function(err){
+  //     if(err){
+  //       return console.log(err);
+  //     }
+  //     console.log('fileSaved');
+  //   })
+  // })
+
 }

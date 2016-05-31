@@ -9,8 +9,8 @@
         return $http.get(url+'/api/get_all_terms/');
       }
 
-      var getOneTerm = function(key){
-        return $http.get(url+'/api/get_one_term/'+key)
+      var getOneTerm = function(key,group){
+        return $http.get(url+'/api/get_one_term/'+key+'/'+group)
       }
 
       var editOneTerm = function(term){
@@ -21,11 +21,22 @@
         return $http.get(url+'/api/get_company_terms/'+clientId)
       }
 
+      var editTranslation = function(translation){
+        var term_id = localStorage.getItem("termId");
+        return $http.put(url+'/api/edit_translation/'+term_id+'/'+translation._id,translation)
+      }
+
+      var getNeedTranslation = function(){
+        return $http.get(url+'/api/get_need_translation/');
+      }
+
     return{
       getOneTerm:getOneTerm,
       getAllTerms:getAllTerms,
       editOneTerm:editOneTerm,
       getCompanyTerms:getCompanyTerms,
+      editTranslation:editTranslation,
+      getNeedTranslation:getNeedTranslation
     };
   });
 })();

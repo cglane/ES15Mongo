@@ -24,7 +24,7 @@ var _ = require('underscore');
 module.exports = {
 
   getOneTerm: function(req,res,next){
-    Term.findOne({'key':req.params.key},function(err,term){
+    Term.findOne({'key':req.params.key,'group':req.params.group},function(err,term){
       if(err)throw err;
       res.send(term)
     })
@@ -71,6 +71,13 @@ module.exports = {
         })
       })
       res.send(companyObj)
+    })
+  },
+
+  getNeedTranslation:function(req,res,next){
+    var returnArr = [];
+    Term.find({'translations.needsTrans': true},function(err,allTerms){
+      res.send(allTerms);
     })
   }
 

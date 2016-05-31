@@ -8,7 +8,8 @@ var TermSchema = new Schema({
     translations:[{
       clientId:{type:Number,default:12309280},
       lang:{type:String},
-      val:{type:String}
+      val:{type:String},
+      needsTrans:{type:Boolean,default:false}
     }],
     updatedAt:{type:Date, default: Date.now},
     updatedBy:{type:String, default: ''},
