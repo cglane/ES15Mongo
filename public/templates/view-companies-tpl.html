@@ -1,0 +1,26 @@
+<div ng-controller = "CompanyGroupsController as cg"class="jumbotron">
+  <a class = 'text-center' ng-href="#/companies"><span style="font-size:2em; color:black"class = 'glyphicon glyphicon-home'></span></a>
+  <a ng-click = 'downloadLocally()'>Download Locally</a>
+  <h1>{{cg.clientId}}</h1>
+  <div class="row">
+  <div class="container col-lg-6 col-md-offset-1">
+    <ul ng-repeat = "(key, val) in cg.groups" class = "list-group">
+      <li ng-click = 'showGroups = !showGroups'class = "list-group-item"><a>{{key}}</a>
+        <span ng-show = 'showGroups'class = 'glyphicon glyphicon-chevron-up pull-right'></span>
+        <span ng-hide = 'showGroups'ng-click = 'showGroups = true'class = 'glyphicon glyphicon-chevron-down pull-right'></span>
+      </li>
+      <h6 ng-show = 'showGroups'>Groups</h6>
+      <ul type = 'square'ng-show= 'showGroups'ng-repeat = "(subKey,subVal) in val">
+        <li ng-click = 'showKeys = !showKeys' class = 'list-group-item'><a>{{subKey}}</a>
+          <span ng-show = 'showKeys'class = 'glyphicon glyphicon-chevron-up pull-right'></span>
+          <span ng-hide = 'showKeys'ng-click = 'showKeys = true'class = 'glyphicon glyphicon-chevron-down pull-right'></span>
+        </li>
+        <h6 ng-show = 'showKeys'>Keys</h6>
+        <ul type = 'square' ng-show = 'showKeys' ng-repeat = '(nanoKey, nanoVal) in subVal'>
+          <li><a ng-href="#/view_company_term/{{subKey}}/{{nanoKey}}/{{cg.clientId}}">{{nanoKey}}</a>
+        </ul>
+      </ul>
+    </ul>
+  </div>
+
+</div>

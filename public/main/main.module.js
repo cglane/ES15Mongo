@@ -24,7 +24,7 @@
     })
     .config(function($stateProvider, $urlRouterProvider) {
 
-      $urlRouterProvider.otherwise('/');
+      $urlRouterProvider.otherwise('/companies');
 
       $stateProvider
 
@@ -48,6 +48,21 @@
             url:'/view_term/:key/:group',
             controller:'TermController',
             templateUrl: 'templates/view-term-tpl.html'
+          })
+          .state("companies",{
+            url:'/companies',
+            controller:'CompanyController',
+            templateUrl:'templates/companies-tpl.html'
+          })
+          .state("view_companies",{
+            url:'/view_company/:clientId',
+            controller:'CompanyGroupsController',
+            templateUrl:'templates/view-companies-tpl.html'
+          })
+          .state("view_company_term",{
+            url:'/view_company_term/:group/:key/:clientId',
+            controller:'CompanyTermController',
+            templateUrl:'templates/view-company-term-tpl.html'
           })
   });
 

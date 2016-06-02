@@ -6,16 +6,16 @@ angular
   .module('main')
   .controller('MainController',function($stateParams,$location,$scope,MainService,$filter){
     var vm = this;
-
+    vm.groups = {};
     function filterGroup(array){
       return _.groupBy(array,"group")
     }
 
     function init(){
       MainService.getAllTerms().then(function(terms){
-         vm.terms = terms;
+        //  vm.terms = terms;
+        //  console.log('got all terms');
          vm.groups = filterGroup(terms.data);
-         console.log(filterGroup(terms.data));
       })
       MainService.getNeedTranslation().then(function(terms){
         console.log(terms,'need Translation');

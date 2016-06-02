@@ -1,7 +1,9 @@
 var Promise = require('es6-promise').Promise;
 var Term = require('../models/term.js');
 var _ = require('underscore');
-
+var getCtrl = require('./getController.js');
+var config = require('../config.js');
+var q = require('q');
 
   function extractTranslations(term,language){
     var returnArr = [];
@@ -19,6 +21,29 @@ var _ = require('underscore');
     })
     return (companyTrans)? companyTrans:gdgTrans;
   }
+
+  function companyTerms(clientId){
+    var deferred = q.defer();
+    var companyObj = {'en-US':{},'de-DE':{},'en-GB':{},'es-SP':{},'fr-FR':{},'it-IT':{},'nl-NL':{},'pt-BR':{},'zh-CN':{}};
+    Term.find({'softDelete': false},function(err,terms){
+      //setUp Object
+      _.each(terms,function(term){
+        _.each(term.translations,function(trans){
+          companyObj[trans.lang][term.group] = {};
+        })
+      })
+      _.each(terms,function(term){
+        _.each(term.translations,function(trans){
+          if (trans.clientId == clientId) {
+            companyObj[trans.lang][term.group][term.key] = trans.val;
+          }
+        })
+      })
+      deferred.resolve(companyObj);
+    })
+    return deferred.promise;
+  }
+
 
 
 module.exports = {
@@ -55,22 +80,8 @@ module.exports = {
   },
 
   getCompanyTerms:function(req,res, next){
-    var companyObj = {'en-US':{},'de-DE':{},'en-GB':{},'es-SP':{},'fr-FR':{},'it-IT':{},'nl-NL':{},'pt-BR':{},'zh-CN':{}};
-    Term.find({'softDelete': false},function(err,terms){
-      //setUp Object
-      _.each(terms,function(term){
-        _.each(term.translations,function(trans){
-          companyObj[trans.lang][term.group] = {};
-        })
-      })
-      _.each(terms,function(term){
-        _.each(term.translations,function(trans){
-          if (trans.clientId == req.params.clientId) {
-            companyObj[trans.lang][term.group][term.key] = trans.val;
-          }
-        })
-      })
-      res.send(companyObj)
+    companyTerms(req.params.clientId).then(function(obj){
+      res.send(obj);
     })
   },
 
@@ -79,6 +90,40 @@ module.exports = {
     Term.find({'translations.needsTrans': true},function(err,allTerms){
       res.send(allTerms);
     })
+  },
+
+  getCompanies:function(req,res,next){
+    var returnObj = {};
+    Term.find({'softDelete':false},function(err,allTerms){
+      _.each(allTerms,function(terms){
+        _.each(terms.translations,function(trans){
+          console.log(trans.clientId);
+          returnObj[trans.clientId] = trans.clientId;
+        })
+      })
+      res.send(returnObj)
+    })
+  },
+
+  writei18n:function(req,res,next){
+    var companyObj = {'en-US':{},'de-DE':{},'en-GB':{},'es-SP':{},'fr-FR':{},'it-IT':{},'nl-NL':{},'pt-BR':{},'zh-CN':{}};
+    var count = 0;
+    companyTerms(config.gdgId).then(function(returnObj){
+      companyTerms(req.params.clientId).then(function(companyObj){
+        console.log(companyObj,'companyObj');
+        console.log(returnObj['en-US']['account']['emailMatch'],'returnObj');
+        for(var lang in returnObj){
+          for(var group in returnObj[lang]){
+            for(var term in returnObj[lang][group]){
+              if(typeof companyObj[lang][group][term] !== 'undefined'){
+                console.log(returnObj[companyObj][lang][group][term]);
+              }
+            }
+          }
+        }
+      })
+    })
+
   }
 
 

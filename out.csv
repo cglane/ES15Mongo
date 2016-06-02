@@ -1,0 +1,179 @@
+account,accountNotVerified,Account not verified
+account,passwordMatch,Password fields must match.
+apply,approvalReturn,Approval Return
+apply,organization,Organization
+apply,selectApplicantsWarning,"Note: Only one applicant may edit the request at a time, or you risk losing data."
+apply,selectApplicantsWarning2,"Once an applicant has been invited, you cannot remove them. Please talk to your system administrator if you would like to remove an applicant that has already been invited."
+common,addAComment,Add a Comment
+common,additionalInfo,Additional Information
+common,approvalConfirmation,Approval Confirmation
+common,approvals,Approvals
+common,approvalUpdated,Approval updated
+common,comments,Comments
+common,currentLocation,Current Location
+common,cycles,Cycles
+common,decline,Decline
+common,decisionRecordCreated,Decision Record has been created!
+common,editRequest,Edit Request
+common,enroll,Enroll
+common,enrollEnd,Enrollment End
+common,enrollStart,Enrollment Start
+common,enterYourZip,Enter your location in the search box to find projects near you!
+common,iAgreeTo,I Agree To
+common,invited,Invited
+common,invitedByApprovals,Invited By
+common,makeadonationHome, Make A Donation
+common,messageSent,Message sent.
+common,moveToAward,Move to Award
+common,myself,Myself
+common,na,N/A
+common,newUser,Are you a new user?
+common,noActivePrograms,There are currently no active volunteer programs. Please contact your system administrator for help.
+common,noPaths,Approval Paths have not been set up.
+common,noProgramsAvailable,Sorry
+common,oneTime,One Time Deduction
+common,openEnEnd,Open Enrollment for Payroll Deductions ends
+common,openEnrollOngoing, Open enrollment for this program is ongoing
+common,optOut,Opt Out
+common,optSuccess,You have successfully opted out
+common,payrollDedSaved, Payroll Deduction Saved
+common,payrollDets,Payroll Deduction Details
+common,personal,Personal
+common,referredBy,Referred by:
+common,requester,Requester
+common,return,Return
+common,returnToApplicant,Return to Applicant
+common,savingDed,Saving Payroll Deduction
+common,selectProgram,Select Program
+common,sending,Sending
+common,sorryErr,"Sorry, something went wrong."
+common,submitChanges,Submit Changes
+common,team,Team
+common,thisProgram,This program does not allow editing or canceling deductions after open enrollment ends
+common,types,Types
+common,viewProgram,View Program
+common,yourDecision,Your Decision
+common,yourEnrolled1,You are currently enrolled in
+common,yourEnrolled2,active payroll deductions for this program
+common,youHaveBeenAdded,You have been added
+common,youHaveBeenRemoved,You have been removed
+donate,enterAmountOnetime,Enter the amount you want to have deducted one-time
+donate,oneTimePayroll,Make this a one time payroll deduction?
+emails,declinedReason,Declined reason:<br>
+emails,matchFulfilledCustom,has been processed and fulfilled by DonateWell.
+group,canNotDeleteAdmin,Cannot delete sole admin.
+group,deleteGroup,Delete Group
+group,employeeRemoved,The employee has been removed from the group.
+group,inviteCanceled,The invitation has been canceled.
+group,messageBeingSent,Your message is being sent.
+group,requestDeleted,This Request Has Been Deleted.
+group,requestedGroupInvite,You have requested to join this group.
+manage,awardAmount,Award Amount
+manage,awardMade,This request has been awarded.
+manage,commentModalText,Please provide a comment describing why you are sending this request back to the applicant.
+manage,decisionWarning,"You are the last approver in this approval path. By clicking approve, this request will be moved to a status of 'Approved'."
+manage,moveToAwardModal,Please fill out the following award information:
+manage,numberOfProgressReports,Number of Progress Reports Required
+manage,selectApprovalPath,Select Approval Path
+nonprofits,GDG,Good Done Great
+profile,aboutToCancel,You are about to cancel a recurring payroll deduction for
+profile,annualAmt,Annual Amount
+profile,areYouSure,Are you sure?
+profile,cancelDeduction,"Yes, Cancel Enrollment"
+profile,confirmCancel,Confirm Donation Cancellation
+profile,deductionNote,"Note: if you are canceling a payroll deduction, one more deduction may occur depending on your requested date of cancellation."
+profile,dontCancel,"No, Do Not Cancel"
+profile,editPayrollDeduction,Edit Payroll Deduction
+profile,myPayroll,My Payroll Deductions
+profile,theChanges,The changes will take effect starting your next pay period
+review,employeeReviewer,Employee Reviewer
+review,employeeReviewers,Employee Reviewers
+review,externalReviewer,External Reviewer
+review,externalReviewers,External Reviewers
+review,manageReviewers,Manage Reviewers
+review,reviewCommittee,Review Committee
+review,reviewCommittees,Review Committees
+review,reviewers,Reviewers
+search,datepickerPlaceholder,MM/DD/YYYY HH:MM AM/PM
+search,enterYourQuestionHere,Enter your question here
+search,filter,Filter
+search,followButton,Follow
+search,following,Following
+search,notFollowing,You are no longer following
+signin,errorMsg2,The email entered does not match your login email. Please try again.
+signin,ssoLink,SSO Sign In
+signup,acctUnverified,Your account is unverified.
+signup,acctUnverified2,You are unable to access the portal because your account is unverified. Please check your email's inbox for instructions on how to complete your registration.
+signup,acctUnverified3,Please type the email address associated with your account below to resend the verification email.
+templates,autoLogSub,<%- assignmentName %>: Hours Automatically Logged
+templates,autoLogBody,"Your volunteer assignment, <%- assignmentName %>, for the project, <%- projectName %>, has automatically logged <%- autoHours %> hours for each of the associated volunteers."
+templates,autoRegisteredSub,<%- projectName %> Registration
+templates,autoRegisteredBody,"You have been added by <%- employee %> as a volunteer for the following project.<br><br><strong>Program:</strong> <%- programName %><br><strong>Project:</strong> <%- projectName %><br><strong>Leaders: </strong><%- leaders.join(',') %><br><strong>Time: </strong><%- startDate %> - <%- endDate %><br><strong>Location:</strong> <%- location %>"
+templates,coordinatorAddedBody,You've been added as a coordinator to the <%- projectName %> project. Please login to the portal to view information about this project and/or make changes.
+templates,coordinatorAddedSub,<%- projectName %>
+templates,logHoursBody,"Thank you for volunteering for <%- projectName %>. If you have not done so already, please login to the portal using the link below and log your hours for this project."
+templates,logHoursSub,<%- projectName %>
+templates,matchSubmitted,Thank you for submitting your request for a match. Once the request has been reviewed you will receive further communication about the status of your request. This may take up to 30 days.
+templates,matchSubmittedSubject,Match Request Received
+templates,maxParticipantsBody,"Way to go! Your volunteer project, <%- projectName %>, starting on <%- startDate %> has an assignment that has reached the maximum number of volunteers. Please be sure to communicate with your volunteers about project details."
+templates,maxParticipantsSub,A project you are coordinating is full!
+templates,projectWaitlistBody,"Your project, <%- projectName %>, starting on <%- startDate %> has reached maximum capacity and now has volunteers on the waitlist. Please visit the employee volunteer portal using the link below to manage your volunteers. We will let you know if space becomes available again on your project."
+templates,projectWaitlistSub,A project you are coordinating has a waitlist...
+templates,spaceAvailableBody,Thank you for taking the time to coordinate the <%- projectName %> project! Space has become available in your project and you have volunteers on a waitlist. Please visit the employee volunteer portal at the link below to manage your volunteers.
+templates,spaceAvailableSub,A project you are coordinating has space available...
+templates,submittedRequestSub,Request Received
+templates,thankCoordinatorBody,Thank you for taking the time to coordinate the <%- projectName %> project! Please remember to visit the portal where you can log your volunteer hours and record hours for other volunteers who participated in the project.
+templates,thankCoordinatorSub,Thank you for coordinating!
+templates,volEligibilityBody,You may be eligible to apply for a volunteer grant based on your volunteer time with <%- orgName %>. You may apply for the grant(s) in the employee portal at any time before the end of the fiscal year.
+templates,volEligibilityClosing,Thank you for your valuable time serving our community!
+templates,volEligibilitySub,Volunteer Grant Eligibility
+templates,volGrantDeclinedBody,"Thank you for submitting a <%- volorboard.toLowerCase() %> grant application on behalf of <%- orgName %> in the amount of <%- vAmount %>. Unfortunately, we have declined your <%- volorboard.toLowerCase() %> grant application."
+templates,volGrantDeclinedClosing,"If you have further questions, please contact us. Thank you for your valuable time serving our community!"
+templates,volGrantDeclinedSub,<%- volorboard %> Grant Declined
+templates,volGrantSubmittedBody,Thank your for submitting a <%- volorboard.toLowerCase() %> grant application on behalf of <%- orgName %> in the amount of <%- vAmount %>. We have received your application and will contact you with our decision shortly.
+templates,volGrantSubmittedSub,<%- volorboard %> Grant Request Received
+templates,volHoursConfirmedBody,Thank you for volunteering at <%- projectName %> for <%- hours %> hours. We value your hard work and commitment to your community.
+templates,volHoursConfirmedSub,Thank you for volunteering!
+templates,volMatchBody,Thank you for expressing an interest in <%- oppName %>. The Organization contact will reach out to you with further instructions. You can refer to the message that was sent below:<br><br><%- messageBody %>
+templates,volMatchSub,Volunteer Match Interest Confirmation
+templates,waitlistedBody,"Thank you for registering to participate in <%- projectName %>. Unfortunately, there is no longer space available. You have been placed on a waitlist, however. If an opening becomes available, you will be added to the project by the project leader. If you are confirmed as a participant, an email will follow. Thank you for helping to make a difference in your local community."
+templates,waitlistedSub,Added to <%- projectName %> waitlist
+templates,waitlistRegisteredBody,A spot opened up on the <%- projectName %> volunteer project and you have been registered off the waitlist! Please see the project details below and visit the Volunteer Site for more information about your volunteer project!
+templates,waitlistRegisteredSub,Registration for <%- projectName %>
+templates,welcomeApplicantBody,"A new account has been created for you in the <%- companyName %> grant applicant portal. To log in, please visit the link below and login using your email address.<br><br><a href='<%- signinURL %>'><%- signinURL %></a><br><br>Your temporary password is: <%- tempPassword %>"
+templates,welcomeReviewerBody,An account has been created for you to review grant applications.
+templates,welcomeSub,Welcome to <%- companyName %>
+templates,yourRequestTo,Your request to <%- companyName %>
+tooltip,editPickListOptions,Edit Pick List Options
+volunteer,addingVolunteers,Adding Volunteers
+volunteer,addingSuccessful,Successfully Added Volunteers
+volunteer,assignProjectEnd,Assignment end date cannot be past Project end date.
+volunteer,assignProjectStart,Assignment start date cannot be prior to Project start date.
+volunteer,assignEndStart,End date cannot be prior or equal to start date.
+volunteer,autologHelp,The number entered below represents the hours that will be automatically logged when the Assignment ends.
+volunteer,autologHours,Autolog Hours
+volunteer,clearProgram,Clear Program
+volunteer,contactOrg,Contact Organization
+volunteer,coordAgree,By checking this box you are agreeing to coordinate this project.
+volunteer,couldNotContactOrg,Could not contact organization
+volunteer,couldNotCreateInterest,Could not create volunteer interest.
+volunteer,couldNotUpdateInterest,Could not update volunteer interest.
+volunteer,dateEndError,Date Volunteered cannot be after End Date
+volunteer,dateStartError,Date Volunteered cannot be before Start Date
+volunteer,findAProjectHome, Find A Project
+volunteer,imInterested,I'm Interested
+volunteer,newAssignment,New Assignment
+volunteer,noOpportunities,"no opportunities to display, please make sure you have entered a valid location."
+volunteer,noProject,No Project
+volunteer,noRequirements,No requirements listed.
+volunteer,noSkills,No skills listed.
+volunteer,orgConfirmation,Did you recieve confirmation from the organization about the project details?
+volunteer,opportunitiesNearMe,Opportunities Near Me
+volunteer,poweredBy,Powered By
+volunteer,questionnaireExport,Export Questionnaire and Answers as CSV
+volunteer,removeInterest,Remove Interest
+volunteer,requirements,Requirements
+volunteer,teamGrantRecordCreated,Team Grant record created successfully.
+volunteer,teamGrantRecordCreating,Creating your Team Grant record...
+volunteer,volunteerMatchTerms,Volunteer Match Terms and Conditions
+volunteer,volMatchTip,"Volunteer Match was not able to return results. Please ensure your are including a state in your search. For example 'Charleston, SC'."

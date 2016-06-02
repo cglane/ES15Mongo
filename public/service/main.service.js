@@ -30,7 +30,26 @@
         return $http.get(url+'/api/get_need_translation/');
       }
 
+      var deleteTerm = function(id){
+        return $http.delete(url + '/api/soft_delete/'+id);
+      }
+
+      var getCompanies = function(){
+        return $http.get(url + '/api/get_companies/');
+      }
+
+      var deleteTrans = function(transId){
+        return $http.delete(url+'/api/delete_translation/'+localStorage.getItem('termId')+'/'+transId);
+      }
+
+      var writei18n = function(clientId){
+        return $http.get(url+'/api/write_i18n/'+clientId);
+      }
     return{
+      writei18n:writei18n,
+      deleteTrans:deleteTrans,
+      getCompanies:getCompanies,
+      deleteTerm:deleteTerm,
       getOneTerm:getOneTerm,
       getAllTerms:getAllTerms,
       editOneTerm:editOneTerm,

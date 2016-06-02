@@ -3,7 +3,8 @@ var fs = require('fs'),
     Term = require('./models/term.js'),
     q = require('q'),
     uploadPaths = ['en-US','de-DE','en-GB','es-SP','fr-FR','it-IT','nl-NL','pt-BR','zh-CN'],
-    clientId = '1234';
+    clientId = '12345678910',
+    csvWriter = require('csv-write-stream');
 
 
 function transExists(term,clientId,language){
@@ -197,27 +198,16 @@ module.exports = function(){
   // needsTrans();
 
   // Term.find({'translations.needsTrans': true},function(err,allTerms){
-  //   var returnArr = {};
-  //   _.each(allTerms,function(term){
-  //     _.each(term.translations,function(trans){
-  //       returnArr[trans.lang] = [];
-  //     })
-  //   })
+  //   var returnObj = {};
+  //   var writer = csvWriter({ headers:['','','']})
+  //   writer.pipe(fs.createWriteStream('./out.csv'))
   //   _.each(allTerms,function(term){
   //     var engVal = '';
   //     _.each(term.translations,function(trans){
-  //       if(trans.lang == 'en-US')engVal = trans.val;
-  //       if(trans.needsTrans){
-  //         returnArr[trans.lang].push(engVal + ": " + term.group + "."+ term.key);
+  //       if(trans.lang == 'en-US'){
+  //         writer.write([term.group,term.key,trans.val])
   //       }
   //     })
-  //   })
-  //   console.log(returnArr);
-  //   fs.writeFile('./needsTranslation.json',JSON.stringify(returnArr, null, 4),function(err){
-  //     if(err){
-  //       return console.log(err);
-  //     }
-  //     console.log('fileSaved');
   //   })
   // })
 

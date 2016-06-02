@@ -37,6 +37,35 @@ module.exports = {
           if(err)throw err;
           res.send(thisTerm);
         })
-      }
+      },
+
+    editTranslation:function(req,res){
+      Term.findOneAndUpdate(
+        {'_id':req.params.termId,'translations._id':req.params.transId},
+        {$set:{
+          'translations.$.needsTrans':req.body.needsTrans,
+          'translations.$.val':req.body.val,
+          'translations.$.lang':req.body.lang,
+          'translations.$.clientId':req.body.clientId
+        }
+      },{
+        new:true
+      },function(err,term){
+        if(err)throw err;
+        res.send(term);
+        });
+    },
+
+    deleteTranslation:function(req,res){
+      Term.findOneAndUpdate({'_id':req.params.termId},
+        {$pull:{
+          'translations':{'_id':req.params.transId}
+        }
+      },function(err,term){
+        if(err)throw err;
+        res.send(term);
+        console.log(term,'term');
+      })
+    }
 
 }

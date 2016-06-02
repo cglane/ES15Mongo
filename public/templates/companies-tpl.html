@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="jumbotron">
+    <h1 class = 'col-md-offset-1'>Companies</h1>
+  </div>
+  <div ng-controller = 'CompanyController as cc'class="col-md-3 col-md-offset-3">
+    <ul class = 'list-group 'ng-repeat = 'company in cc.companies'>
+      <li ng-click = 'cc.seeCompany(company)'class = 'list-group-item '><a ng-href="#/view_company/{{company}}">{{company}}</a></li>
+    </ul>
+    <ul class = 'list-group'>
+      <li ng-click = 'cc.goMain()'class = 'list-group-item'><a href="#/main">See All</a></li>
+    </ul>
+  </div>
+</div>

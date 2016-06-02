@@ -3,23 +3,38 @@
   <h1>{{tc.term.key}}</h1>
   <div class="col-lg-6">
     <ul ng-repeat = "(key,val) in tc.term" class="list-group">
-      <li ng-hide = "key == 'translations' || key == '__v' || key == '_id' || key == 'softDelete'"class = "list-group-item">
+      <li ng-if= "!tc.termKeys(key)"class = "list-group-item">
         <a>{{key}}:</a>
-        <a editable-text="tc.term[key]"onbeforesave="tc.editTerm(key,$data)">{{ tc.term[key] || "empty" }}</a>
+        <a editable-text="tc.term[key]"onbeforesave="tc.editTerm(key,$data)"  >{{ tc.term[key] || "empty" }}</a>
+      </li>
+      <li ng-hide = "key == 'softDelete' || key == 'translations' || key == '__v'"ng-if= "tc.termKeys(key)"class = "list-group-item">
+        <a>{{key}}:</a>
+        <a>{{ tc.term[key] || "empty" }}</a>
       </li>
     </ul>
-    <li ng-click = 'showKeys = !showKeys'class = "list-group-item">
-      <a>Translations</a>
-      <span ng-show = 'showKeys'class = 'glyphicon glyphicon-chevron-up pull-right'></span>
-      <span ng-hide = 'showKeys'ng-click = 'showKeys = true'class = 'glyphicon glyphicon-chevron-down pull-right'></span>
-    </li>
+    <ul class = 'list-group'>
+      <li class = 'list-group-item'> <a>softDelete:</a> <input ng-change = 'tc.softDelete(tc.term)'type="checkbox" ng-model = 'tc.term.softDelete'></li>
+      <br>
+      <li ng-click = 'showKeys = !showKeys'class = "list-group-item">
+        <a>Translations</a>
+        <span ng-show = 'showKeys'class = 'glyphicon glyphicon-chevron-up pull-right'></span>
+        <span ng-hide = 'showKeys'ng-click = 'showKeys = true'class = 'glyphicon glyphicon-chevron-down pull-right'></span>
+      </li>
+    </ul>
       <ul ng-show= 'showKeys'ng-repeat = "trans in tc.term.translations">
         <ul ng-repeat = "(subKey, subVal) in trans">
-          <li>
+          <li ng-hide = "subKey == 'needsTrans' || subKey == '_id'">
             <a>{{subKey}}:</a>
             <a editable-text="subVal"onbeforesave="tc.editTranslation(subKey,$data,trans)">{{ subVal || "empty" }}</a>
-            <!-- <span>{{subVal}}</span> -->
           </li>
+          <li ng-show = "subKey == '_id'">
+            <a>{{subKey}}:</a>
+            <a >{{ subVal || "empty" }}</a>
+          </li>
+        </ul>
+        <ul>
+          <li> <a>needsTranslation: </a><input ng-change = "tc.editTranslation('needsTrans',trans.needsTrans,trans)"type="checkbox" ng-model = 'trans.needsTrans'></li>
+          <button ng-click = 'tc.deleteTrans(trans)' class = 'btn btn-danger'type="button" name="button">Delete</button>
         </ul>
         <br>
       </ul>

@@ -19,6 +19,7 @@ module.exports = function (apiRoutes) {
       res.send('Collection deleted')
     })
   })
+  apiRoutes.get('/write_i18n/:clientId',getCtrl.writei18n);
   //============Upload and Edit==================//
   apiRoutes.post('/create_term',createCtrl.createTerm);
 
@@ -28,9 +29,10 @@ module.exports = function (apiRoutes) {
 
   apiRoutes.put('/edit_term/:_id',editCtrl.editTerm);
 
-  // apiRoutes.put('/edit_translation/:termId/:transId',editCtrl.editTranslation);
+  apiRoutes.put('/edit_translation/:termId/:transId',editCtrl.editTranslation);
 
   //============GET Term information=============//
+
   apiRoutes.get('/get_one_term/:key/:group',getCtrl.getOneTerm);
 
   apiRoutes.get('/get_all_terms/',getCtrl.getAllTerms);
@@ -41,7 +43,12 @@ module.exports = function (apiRoutes) {
 
   apiRoutes.get('/get_need_translation/',getCtrl.getNeedTranslation);
 
+  apiRoutes.get('/get_companies/',getCtrl.getCompanies);
+
 //=============Change To Soft Delete============//
+
   apiRoutes.delete('/soft_delete/:_id',editCtrl.softDelete);
+
+  apiRoutes.delete('/delete_translation/:termId/:transId',editCtrl.deleteTranslation)
 
 }

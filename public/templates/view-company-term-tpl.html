@@ -1,0 +1,42 @@
+<div ng-controller = "CompanyTermController as ct"class="jumbotron">
+  <a class = 'text-center' ng-href="#/view_company/{{ct.clientId}}"><span style="font-size:2em; color:black"class = 'glyphicon glyphicon-home'></span></a>
+  <h1>{{ct.term.key}}</h1>
+  <div class="col-lg-6">
+    <ul ng-repeat = "(key,val) in ct.term" class="list-group">
+      <li ng-if= "!ct.termKeys(key)"class = "list-group-item">
+        <a>{{key}}:</a>
+        <a editable-text="ct.term[key]"onbeforesave="ct.editTerm(key,$data)"  >{{ ct.term[key] || "empty" }}</a>
+      </li>
+      <li ng-hide = "key == 'softDelete' || key == 'translations' || key == '__v'"ng-if= "ct.termKeys(key)"class = "list-group-item">
+        <a>{{key}}:</a>
+        <a>{{ ct.term[key] || "empty" }}</a>
+      </li>
+    </ul>
+    <ul class = 'list-group'>
+      <li class = 'list-group-item'> <a>softDelete:</a> <input ng-change = 'ct.softDelete(ct.term)'type="checkbox" ng-model = 'ct.term.softDelete'></li>
+      <br>
+      <li ng-click = 'showKeys = !showKeys'class = "list-group-item">
+        <a>Translations</a>
+        <span ng-show = 'showKeys'class = 'glyphicon glyphicon-chevron-up pull-right'></span>
+        <span ng-hide = 'showKeys'ng-click = 'showKeys = true'class = 'glyphicon glyphicon-chevron-down pull-right'></span>
+      </li>
+    </ul>
+      <ul ng-show= 'showKeys'ng-repeat = "trans in ct.term.translations">
+        <ul ng-repeat = "(subKey, subVal) in trans">
+          <li ng-hide = "subKey == 'needsTrans' || subKey == '_id'">
+            <a>{{subKey}}:</a>
+            <a editable-text="subVal"onbeforesave="ct.editTranslation(subKey,$data,trans)">{{ subVal || "empty" }}</a>
+          </li>
+          <li ng-show = "subKey == '_id'">
+            <a>{{subKey}}:</a>
+            <a >{{ subVal || "empty" }}</a>
+          </li>
+        </ul>
+        <ul>
+          <li> <a>needsTranslation: </a><input ng-change = "ct.editTranslation('needsTrans',trans.needsTrans,trans)"type="checkbox" ng-model = 'trans.needsTrans'></li>
+          <button ng-click = 'ct.deleteTrans(trans)' class = 'btn btn-danger'type="button" name="button">Delete</button>
+        </ul>
+        <br>
+      </ul>
+  </div>
+</div>
