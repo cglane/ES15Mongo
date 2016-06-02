@@ -4,7 +4,9 @@ var fs = require('fs'),
     q = require('q'),
     uploadPaths = ['en-US','de-DE','en-GB','es-SP','fr-FR','it-IT','nl-NL','pt-BR','zh-CN'],
     clientId = '12345678910',
-    csvWriter = require('csv-write-stream');
+    csvWriter = require('csv-write-stream'),
+    writeCtrl = require('./controllers/writeController.js'),
+    path = require('path');
 
 
 function transExists(term,clientId,language){
@@ -152,16 +154,26 @@ function logOneTerm(){
   })
 }
 
-function uploadFolder(val,callback){
+function uploadFolder(val,callback, paths){
       var folderPath = uploadPaths[val],
           language = folderPath,
           files = fs.readdirSync('./i18n/'+folderPath),
           promiseArr = [];
           console.log(files.length,'files.length');
           for (var j = 0; j < files.length; j++) {
-              var location = './i18n/'+folderPath+'/'+files[j],
-                  fileData = fs.readFileSync(location,'utf-8'),
-                  group = files[j].split('.')[0],
+              var location = './i18n/'+folderPath+'/'+files[j];
+              try{
+                var fileData = fs.readFileSync(location,'utf-8') ;
+              }catch(e){
+                if(e.code === 'ENOENT'){
+                  console.log('file not found');
+                  continue;
+                }else{
+                  throw e;
+                }
+              }
+
+              var group = files[j].split('.')[0],
                   fileArr = files[j].split('.'),
                   jsonData = JSON.parse(fileData),
                   keys  = Object.keys(jsonData);
@@ -187,13 +199,13 @@ module.exports = function(){
   //   console.log(el);
   // });
 
-  // var promiseArr = [],
-  //   itr = 0;
-  // function loop(){
-  //   promiseArr.push(uploadFolder(itr,function(){
-  //   }))
-  //   if(++itr < uploadPaths.length)loop();
-  // }loop();
+  var promiseArr = [],
+    itr = 0;
+  function loop(){
+    promiseArr.push(uploadFolder(itr,function(){
+    }))
+    if(++itr < uploadPaths.length)loop();
+  }loop();
 
   // needsTrans();
 

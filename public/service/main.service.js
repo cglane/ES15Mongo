@@ -42,11 +42,12 @@
         return $http.delete(url+'/api/delete_translation/'+localStorage.getItem('termId')+'/'+transId);
       }
 
-      var writei18n = function(clientId){
-        return $http.get(url+'/api/write_i18n/'+clientId);
+      var getFullCompanyTerms = function(clientId){
+        return $http.get(url+'/api/get_full_company_terms/'+clientId);
       }
+
     return{
-      writei18n:writei18n,
+      getFullCompanyTerms:getFullCompanyTerms,
       deleteTrans:deleteTrans,
       getCompanies:getCompanies,
       deleteTerm:deleteTerm,

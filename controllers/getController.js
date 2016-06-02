@@ -44,6 +44,9 @@ var q = require('q');
     return deferred.promise;
   }
 
+  function writeToFolder(object){
+
+  }
 
 
 module.exports = {
@@ -104,28 +107,23 @@ module.exports = {
       res.send(returnObj)
     })
   },
-
-  writei18n:function(req,res,next){
+  getFullCompanyTerms: function(req,res,next){
     var companyObj = {'en-US':{},'de-DE':{},'en-GB':{},'es-SP':{},'fr-FR':{},'it-IT':{},'nl-NL':{},'pt-BR':{},'zh-CN':{}};
-    var count = 0;
     companyTerms(config.gdgId).then(function(returnObj){
       companyTerms(req.params.clientId).then(function(companyObj){
-        console.log(companyObj,'companyObj');
-        console.log(returnObj['en-US']['account']['emailMatch'],'returnObj');
         for(var lang in returnObj){
           for(var group in returnObj[lang]){
             for(var term in returnObj[lang][group]){
-              if(typeof companyObj[lang][group][term] !== 'undefined'){
-                console.log(returnObj[companyObj][lang][group][term]);
+              if(companyObj[lang][group][term]){
+                returnObj[lang][group][term] = companyObj[lang][group][term];
               }
             }
           }
         }
+        res.send(returnObj)
       })
     })
-
   }
-
 
 
 }

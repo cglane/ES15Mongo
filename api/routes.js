@@ -19,7 +19,10 @@ module.exports = function (apiRoutes) {
       res.send('Collection deleted')
     })
   })
-  apiRoutes.get('/write_i18n/:clientId',getCtrl.writei18n);
+  //============Write Files======================//
+
+  // apiRoutes.get('/write_i18n/:clientId',getCtrl.writei18n);
+
   //============Upload and Edit==================//
   apiRoutes.post('/create_term',createCtrl.createTerm);
 
@@ -44,6 +47,8 @@ module.exports = function (apiRoutes) {
   apiRoutes.get('/get_need_translation/',getCtrl.getNeedTranslation);
 
   apiRoutes.get('/get_companies/',getCtrl.getCompanies);
+
+  apiRoutes.get('/get_full_company_terms/:clientId', getCtrl.getFullCompanyTerms)
 
 //=============Change To Soft Delete============//
 

@@ -11,9 +11,8 @@ angular
 
     function init(){
 
-      MainService.writei18n(12345678910).then(function(el){
-        console.log(el,'el');
-        console.log('look at log');
+      MainService.getFullCompanyTerms(13520310).then(function(terms){
+        console.log(terms,'terms');
       })
 
       // MainService.getCompanies().then(function(companies){

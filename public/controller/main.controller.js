@@ -7,6 +7,7 @@ angular
   .controller('MainController',function($stateParams,$location,$scope,MainService,$filter){
     var vm = this;
     vm.groups = {};
+    
     function filterGroup(array){
       return _.groupBy(array,"group")
     }
