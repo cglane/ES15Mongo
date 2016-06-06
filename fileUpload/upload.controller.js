@@ -19,6 +19,7 @@ function transExists(term,clientId,language){
   return returnVal;
 }
 
+
 function transVal(term,lang,callback){
   _.each(term.translations,function(trans){
     if(trans.lang == lang){
