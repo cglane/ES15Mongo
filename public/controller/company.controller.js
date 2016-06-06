@@ -10,15 +10,10 @@ angular
 
 
     function init(){
-
-      MainService.getFullCompanyTerms(13520310).then(function(terms){
-        console.log(terms,'terms');
+      MainService.getCompanies().then(function(companies){
+        console.log(companies,'companies');
+        cc.companies = companies.data;
       })
-
-      // MainService.getCompanies().then(function(companies){
-      //   console.log(companies,'companies');
-      //   cc.companies = companies.data;
-      // })
     }
 
     cc.seeCompany = function(id){

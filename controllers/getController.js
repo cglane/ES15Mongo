@@ -107,6 +107,7 @@ module.exports = {
       res.send(returnObj)
     })
   },
+
   getFullCompanyTerms: function(req,res,next){
     var companyObj = {'en-US':{},'de-DE':{},'en-GB':{},'es-SP':{},'fr-FR':{},'it-IT':{},'nl-NL':{},'pt-BR':{},'zh-CN':{}};
     companyTerms(config.gdgId).then(function(returnObj){

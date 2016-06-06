@@ -54,8 +54,10 @@ var apiRoutes = express.Router();
 require('./api/routes.js')(apiRoutes);
 //adding prefix of api to all fo these routes
 app.use('/api', apiRoutes);
-require('./uploadConf.js')();
+// require('./uploadConf.js')();
 // require('./write.js')();
+require('./fileUpload/upload.config.js')();
+require('./csvMerge.js')();
 
 
 // ===============================================

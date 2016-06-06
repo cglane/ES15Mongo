@@ -1,0 +1,834 @@
+area,key,pt-BR
+NPOprofile,account,Conta
+NPOprofile,accountNumber,Número da Conta
+NPOprofile,addAContact,Adicione um Contato
+NPOprofile,addASocialLink,Adicione um Link Social
+NPOprofile,bankInfo,Informações Bancárias
+NPOprofile,bankName,Nome do Banco
+NPOprofile,bankNamePlaceholder,A razão social completa do seu banco
+common,contacts,Contatos
+NPOprofile,displayName,Nome de Exibição
+NPOprofile,displayNamePlaceholder,Nome de exibição da sua organização
+NPOprofile,emailPlaceholder,info@nossosite.com
+NPOprofile,informationEmail,E-mail para Informações
+NPOprofile,informationNumber,Número para Informações
+NPOprofile,link,Link
+NPOprofile,mailingAddress,Endereço Postal
+NPOprofile,mailingAddressPlaceholder,"""101 East Main St, Charleston SC, USA"""
+NPOprofile,mission,Missão
+NPOprofile,nameOnAccount,Nome na Conta/Favorecido Aceitável
+NPOprofile,orgInfo,Info. da Organização
+NPOprofile,phonePlaceholder,(646) 580-6284
+NPOprofile,routingNumber,Número de Roteamento
+NPOprofile,shortMissionPlaceholder,Breve descrição da sua organização ou missão
+NPOprofile,type,Tipo
+NPOprofile,webAddress,Endereço do Site
+NPOprofile,webAddressPlaceholder,http://www.minha-organizacao.com
+NPOprofile,updateBankInfo,Atualizar Informações Bancárias
+NPOprofile,updateOrgInfo,Atualizar Info. da Organização
+account,confirmPW,Confirme a Senha
+account,confirmPWPlaceholder,Redigite sua senha
+account,confirmRegistration,Confirme Seu Registro
+account,createAccount,Crie uma Conta
+account,emailAddress,Endereço de E-mail
+account,emailPlaceholder,Insira o endereço de e-mail
+account,employeeId,ID do Funcionário
+account,firstName,Primeiro Nome
+account,firstNamePlaceholder,Primeiro nome
+account,forgetPassword,Esqueci minha senha...
+account,forgotPasswordInstructions,"""Caso tenha esquecido sua senha, você precisará redefini-la.  Digite o endereço de e-mail associado à sua conta e clique em """
+account,formInstructions,Insira as seguintes informações para criar a sua conta
+account,lastName,Sobrenome
+account,lastNamePlaceholder,Sobrenome
+account,login,Entrar
+account,password,Senha
+account,passwordPlaceholder,Insira sua senha
+account,passwordPopOver,"""Sua senha deve ter no mínimo 6 caracteres e incluir pelo menos 1 letra minúscula, 1 letra MAIÚSCULA, 1 número e 1 um caractere de pontuação."""
+account,passwordReset,"""Senha redefinida com sucesso. Por favor, confira seu e-mail."""
+account,remember,Lembre-se do meu nome de usuário
+account,resetPW,Redefinir Senha
+account,returnToSignin,Voltar à Página de Entrada
+account,signin,Entrar
+account,signout,Sair
+account,userExistsError,O endereço de e-mail já existe no sistema.
+account,userNotFound,Não conseguimos localizar o endereço de e-mail no sistema.
+apply,addContacts,Adicionar Contatos
+apply,cancel,Cancelar
+apply,change,Alterar
+apply,contactEmail,E-mail
+apply,contactName,Nome
+apply,contactPhone,Telefone
+apply,contacts,Contatos
+apply,details,Detalhes
+apply,form,Formulário
+apply,myNonprofits,Minhas Organizações
+apply,newContact,Novo Contato
+apply,nonprofit,Organização
+apply,nonprofitContacts,Contatos da Organização
+apply,save,Salvar
+apply,saveAndContinue,Salvar e Continuar
+apply,select,Selecionar
+apply,selectContacts,Selecionar Contatos
+apply,selectContactsInstructions,Selecione os contatos da organização para adicionar a esta inscrição
+apply,selected,Selecionado(s)
+apply,selectNonprofit,Selecione uma organização
+common,about,Sobre
+common,actions,Ações
+common,add,Adicionar
+common,address,Endereço
+common,allCoworkers,Todos os Colegas de Trabalho
+common,amFollowing,Estou seguindo
+common,amount,Quantia
+common,anonymous,Anônimo
+common,apply,Aplicar
+common,assignmentSelector,"""Por favor, selecione uma atribuição à qual vincular coordenadores: """
+common,attended,Participou
+common,authDashboard,Painel
+common,back,Voltar
+common,byInitiative,Por Iniciativa
+common,byOrganization,Por Organização
+common,byProgram,Por Programa
+common,cancel,Cancelar
+common,clear,Limpar
+common,clickHere,Clique Aqui
+common,close,Fechar
+common,companyImpact,Impacto da Empresa
+common,companyInitiatives,Iniciativas da Empresa
+common,congratulationsMessage,Parabéns! Você recebeu um Pagamento de
+common,contact,Contato
+common,coworker,Colega de Trabalho
+common,coworkers,Colegas de Trabalho
+common,createdAt,Criado Em
+common,cycleOpen,Ciclo Aberto
+common,date,Data
+common,datePlaceholder,MM/DD/AA
+common,dashboard,Painel
+common,delete,Excluir
+common,details,Detalhes
+common,disabled,Desativado
+common,documentUpload,Envio de Arquivos
+common,dollars,Dólares
+common,donateNowButton,Doar Agora
+common,edit,Editar
+common,email,E-mail
+common,employeeParticipation,Participação do Funcionário
+common,endDate,Data Final
+common,endTime,Hora Final
+common,event,Projeto
+common,faq,faq
+common,faqLong,Perguntas Frequentes
+common,faqs,FAQs
+common,friends,Amigos
+common,friendsFamily,Amigos e Familiares
+common,give,Doar
+common,giveLater,Eu doarei mais tarde
+common,giveNow,Doar Agora!
+common,giving,Doando
+common,givingHistory,Histórico de Doações
+common,goals,Metas
+common,grant,Subsídio
+common,group,Grupo
+common,groupGiving,Doações em Grupo
+common,groupImpact,Impacto do Grupo
+common,groups,Grupos
+common,haveSupported,Eu apoiei
+common,help,Ajuda!
+common,here,aqui
+common,historyDoesNotExist,O Histórico Não Existe
+common,hi,Olá
+common,home,Início
+common,hours,Horas
+common,impact,Impacto
+common,initiative,Iniciativa
+common,information,Informações
+common,instructions,Instruções
+common,invite,Convidar
+common,inviteOnly,Somente por Convite
+common,in,em
+common,join,Ingressar
+common,learnMore,Saiba Mais
+common,less,Menos
+common,makeadonation,Faça uma Doação!
+common,matching,Equivalência
+common,matchingGifts,Prêmios de Equivalência
+common,message,Mensagem
+common,messages,Mensagens
+common,messaging,Envio de Mensagens
+common,mobilePhone,Telefone Móvel
+common,more,Mais
+common,moreInfo,Mais Info.
+common,mygiving,Minhas Doações
+common,myimpact,Meu Impacto
+common,myGroupImpact,Impacto do Meu Grupo
+common,myOrganizations,Minhas organizações
+common,name,Nome
+common,new,Novo
+common,next,Próximo
+common,no,Não
+common,nonprofits,Organizações
+common,ongoing,Contínuo(a)
+common,optional,(opcional)
+common,organization,Organização
+common,orgsThat,Organizações que...
+common,other,Outras
+common,overview,Panorama
+common,participants,Participantes
+common,participation,Participação
+common,paycheck,contracheque
+common,payments,Pagamentos
+common,payrollDeduction,Dedução em Folha
+common,payrollDeductions,Deduções em Folha
+common,per,por
+common,personalHours,Horas Pessoais
+common,phone,Número de Telefone
+common,preview,Visualizar
+common,previous,Anterior
+common,privacy,Privacidade
+common,private,Privado
+common,profile,Perfil
+common,program,Programa
+common,programs,Programas
+common,programIsNoLongerActive,Este programa já não está ativo
+common,projects,Projetos
+common,projectHours,Horas do Projeto
+common,public,Público
+common,questions,Perguntas
+common,recordADonation,Registrar uma Doação
+common,remainingMatchFunds,Doações Equivalentes Disponíveis
+common,remainingMatchFundsExplanation,Esta é a quantia restante de doações equivalentes para a qual você é elegível durante este ano fiscal.
+common,requestAMatch,Solicitar Equivalência
+common,roster,Rol
+common,save,Salvar
+common,search,Procurar
+common,select,Selecionar
+common,selected,Selecionado(s)
+common,selectAVolunteerProgram,Selecione Um Programa Voluntário
+common,selectedNonprofit,Organização selecionada
+common,selectOrganization,Selecione uma organização
+common,send,Enviar
+common,setagoal,Defina uma meta
+common,settings,Configurações
+common,setupPayrollDeduction,Doações em Folha
+common,signOut,Sair
+common,signUp,Registrar-se
+common,skills,Competências
+common,sponsor,Patrocinador
+common,startDate,Data Inicial
+common,startTime,Hora Inicial
+common,state,Estado
+common,status,Status
+common,streetAddress,Endereço
+common,submission,Hora de envio
+common,submit,Enviar
+common,subject,Assunto
+common,timePlaceholder,HH:MM AM/PM
+common,title,Título
+common,text,Texto
+common,togoal,à meta
+common,total,Total
+common,totalGiving,Doações Totais
+common,totalHours,Horas Totais
+common,totalImpact,Impacto Total
+common,openings,Aberturas
+common,totalParticipation,Participação total
+common,tourTitle,Tour
+common,type,Tipo
+common,unlimited,Sem máx.
+common,upload,Enviar
+common,users,Usuários
+common,viewFullDesctiption,Ver Descrição Completa
+common,volunteer,Voluntário
+common,volunteers,Voluntários
+common,volunteerDate,Data como Voluntário
+common,volunteerGrants,Concessões aos Voluntários
+common,volunteering,Voluntariado
+common,volunteerLater,Vou me Voluntariar Depois
+common,volunteerNow,Voluntarie-se Agora!
+common,volunteerParticipation,Participação como Voluntário
+common,year,Ano
+common,yes,Sim
+common,zipCityState,"""CEP, Cidade ou Estado"""
+company,pageTitle,Iniciativas da Empresa
+company,,
+dashboard,apply,Aplicar
+common,awards,Prêmios
+dashboard,claim,Reivindicar
+dashboard,claimNon,Reivindique Sua Organização!
+dashboard,dashboard,Painel
+dashboard,faq,FAQs
+dashboard,featuredPrograms,Programas em Destaque
+dashboard,inProgress,Em Andamento
+common,manage,Gerenciar
+dashboard,manageAll,Gerenciar Todos
+dashboard,messages,Mensagens
+dashboard,myNons,Minhas organizações
+dashboard,newMessageText,Você possui %1 novas mensagens
+dashboard,noMessages,"""No momento, você não possui mensagens."""
+dashboard,noOrgAlert,"""Por favor, comece reivindicando sua organização!"""
+dashboard,payments,Pagamentos
+dashboard,programs,Programas
+common,requests,Solicitações
+dashboard,requestStatus,"""Você ainda não possui solicitações. Para iniciar uma inscrição, """
+common,reports,Relatórios
+dashboard,stats,Estatísticas
+common,viewAll,Ver Tudo
+dashboard,viewAvil,ver Programas disponíveis
+donate,billingAddress,Endereço de Cobrança
+donate,cardNumber,Número do Cartão
+donate,cardExpirationDate,mm/aaaa
+common,city,Cidade
+donate,clickUploadReceipt,Clique aqui para enviar seu recibo
+common,country,País
+donate,cvCode,Código CV
+donate,dedication,Dedique este presente a um amigo ou ente querido
+donate,donationDate,Insira a data em que fez a doação
+donate,donationType,Tipo de Doação
+donate,donateNowTooltip,"""Faça uma doação online usando seu cartão de crédito e solicite uma equivalência, se elegível."""
+donate,enterHonoreeName,Nome deles
+donate,expirationDate,Data de Validade
+donate,inHonorOf,Em honra de
+donate,inMemoryOf,Em memória de
+donate,givingProgram,Programa de Doações
+donate,makeAnonymously,Fazer esta doação anonimamente
+donate,nameAsItAppears,Nome conforme consta no cartão
+common,nonprofit,Organização
+donate,pageTitleOnline,Doar Agora
+donate,pageTitleOffline,Registrar uma Doação
+donate,pageTitlePayroll,Dedução em Folha
+donate,paymentDetails,Dados de Pagamento
+donate,postalCode,CEP
+common,recipient,Destinatário
+donate,recordDonationTooltip,"""Registre uma doação que você realizou em outro lugar e solicite uma equivalência, se elegível."""
+donate,requestMatch,Solicitar equivalência
+donate,s,
+donate,selectedNonprofit,Organização selecionada
+donate,selectANonprofit,Selecione uma organização
+donate,selectedOrganization,A organização selecionada se qualifica para os seguintes programas de doações
+donate,selectGivingProgram,Favor selecionar um programa de doação
+donate,setupDeductionTooltip,Configure uma nova dedução em folha.
+common,specialInstructions,Instruções Especiais
+donate,state,Estado
+donate,specificPurpose,Peça que a organização use a doação para um fim específico
+donate,streetAddress,Endereço
+donate,toDonateSearch,"""Para doar, por favor, escolha um destinatário; procure pelo nome, local ou EIN"""
+donate,uploadReceipt,Envie uma cópia do recibo obtido nesta doação
+donate,validCardNumber,Número de Cartão Válido
+emails,acceptedToGroup,Você foi aceito no grupo
+emails,cancellationSpace1,"""Foi disponibilizado um espaço no seu projeto em razão do cancelamento por um dos seus participantes. Como lembrete, você tem membros de equipe na lista de espera do seu projeto. Por favor, revisite o"""
+emails,cancellationSpace2,para adicionar colegas de trabalho da sua lista de espera. Eles receberão uma notificação por e-mail informando sobre sua adição como voluntário no projeto.
+emails,congratulations,Parabéns
+emails,dear,Prezado(a)
+emails,forgot_pwd_body,Recebemos uma solicitação para redefinir a sua senha. A nova senha temporária que você usará para efetuar login é:
+emails,forgot_pwd_link_text,Entrar
+emails,forgot_pwd_subject,Solicitação de Redefinição de Senha
+emails,invitedBy,Você foi convidado por
+emails,leader,Líder
+emails,loginToRegister,Efetue login no portal do funcionário para se registrar nesta oportunidade empolgante
+emails,projectDate,Data do Projeto
+emails,signUpHere,Registre-se Aqui
+emails,thankYou,Obrigado
+emails,thanksAgain,Obrigado Novamente
+emails,thankCoordinator,Obrigado por coordenar o projeto voluntário
+emails,verify_email_body,"""Obrigado por se registrar. Por favor, clique no link abaixo para confirmar seu endereço de e-mail."""
+emails,verify_email_subject,Bem-vindo(a) ao Good Done Great
+emails,volunteerFor,para voluntariar-se para
+emails,volunteerProject,Projeto Voluntário
+feeds,ifYouWouldLikeToSearch,"""Caso queira procurar por outras organizações ou colegas de trabalho para seguir, por favor, clique no botão correspondente abaixo para começar."""
+feeds,shareThoughts,Compartilhe suas ideias...
+feeds,feedPromptGroup,Compartilhe suas ideias...
+feeds,feedPromptNonprofit,Compartilhe suas ideias...
+feeds,feedPromptProgram,Compartilhe suas ideias...
+feeds,feedPromptProject,Compartilhe suas ideias...
+feeds,filterAll,Todos(as) os(as)
+feeds,filterCompany,Empresas
+feeds,filterCoworker,Colegas de Trabalho
+feeds,filterCharity,Instituições de Caridade
+feeds,filterProgram,Programas
+feeds,filterProject,Projetos
+feeds,filterGroup,Grupos
+feeds,me,Eu
+feeds,msgYouAreNoLongerFollowing,Você não está mais seguindo {0}
+feeds,msgYouAreNowFollowing,Você agora está seguindo {0}
+feeds,msgErrUnableToFollow,"""Desculpe, não foi possível seguir {0} neste momento"""
+feeds,msgErrUnableToUnFollow,"""Desculpe, não foi possível deixar de seguir {0} neste momento"""
+feeds,msgNotFollowingAnyone,"""Aqui você verá uma lista de pessoas, organizações, programas, projetos e grupos que você está seguindo.  Escolha uma das opções abaixo para encontrar uma organização ou colega de trabalho e, então, clique em Seguir.  Visite a página de voluntariado para seguir um projeto voluntário ou a página de doações para seguir um programa de doações.  Crie um grupo na página do seu perfil de usuário e outros membros do grupo poderão acompanhar as atividades dele."""
+feeds,postYourComment,Publicar seu comentário
+goals,createNew,Criar uma nova meta
+goals,iWantTo,Eu quero
+goals,in,em
+goals,progress,Progresso
+goals,currentGoals,Metas Atuais
+goals,goal,Meta
+group,acceptInvite,Aceitar Convite
+group,allCoworkers,Todos os Colegas de Trabalho
+group,allGroups,Todos os Grupos
+group,approve,Aprovar
+group,cancelInvitation,Cancelar Convite
+common,cancelRequest,Cancelar Solicitação
+group,createGroup,Criar Grupo
+group,declineInvite,Recusar Convite
+group,groupAdmin,Administrador do Grupo:
+group,groupDescription,Descrição do Grupo
+group,groupMessage,Mensagem do Grupo
+group,groupName,Nome do Grupo
+group,groupsNotExist,Grupos não existem
+group,invitations,Convites
+group,invite,Convidar
+group,inviteGroupMembers,Convidar Membros do Grupo
+group,inviteMembers,Convidar Membros
+group,leaveGroup,Sair do Grupo
+group,members,Membros
+group,membershipRequests,Solicitação de Participação
+group,messageMessage,Mensagem
+group,messageSend,Enviar Mensagem
+group,messageSubject,Assunto
+group,myGroups,Meus Grupos
+group,newGroup,Novo Grupo
+group,newGroupMessage,Nova Mensagem de Grupo
+group,noCoworkers,Sua busca retornou 0 resultado.
+group,noInvitations,Não há convites no momento.
+group,noPending,"""Selecione Encontrar Colegas de Trabalho para procurar por colegas e convidá-los para o seu grupo."""
+group,participating,Participando
+group,noRequests,Não há solicitações de participação no momento.
+group,pendingInvitations,Rascunhos de Convites
+group,reject,Recusar
+common,remove,Remover
+group,requestInvitation,Solicitar Convite
+group,sendInvitations,Enviar Convites
+group,getYourGroupInvolved,Envolva Seu Grupo!
+group,groupNoGivingMessage,"""Seu grupo não tem estado muito ativo no momento.  Conforme fizerem doações e se voluntariarem, você poderá ver um sumário de informações para cada programa que apoiarem."""
+home,search,Procurar
+images,addAPhoto,Adicione uma Foto
+images,addPhoto,Adicionar Foto
+images,chooseAPhoto,Escolha uma Foto
+images,chooseADifferentPhoto,Escolha uma Foto Diferente
+images,cropPhoto,Recortar
+images,deletePhoto,Excluir Foto
+images,enterATitleForThisImage,Insira um título para esta imagem
+images,loadingPhoto,Carregando Foto...
+images,rotatePhoto,Girar
+impact,noGivingTitle,Acompanhe seu impacto!
+impact,noGivingMessage,"""Quer doe dinheiro, quer se voluntarie para ajudar uma organização, você causará um impacto.  Conforme você continuar retribuindo em sua comunidade, nós o ajudaremos a acompanhar sua contribuição pessoal."""
+impact,noGivingGetStartedMessage,Comece a causar impacto!
+impact,noGroupGivingTitle,Doações em Grupo!
+impact,noGroupGivingMessage,"""Ao se reunir com outras pessoas, você pode causar um impacto ainda maior com as suas doações.  No momento, você não pertence a nenhum grupo que esteja doando ativamente.  Depois de ingressar num grupo, você poderá ver o desempenho do seu grupo no ano passado, neste ano e durante a vida inteira do grupo."""
+impact,noGroupGivingLastYearMessage,"""Desculpe, você não possui informações de doações em grupo no ano passado"""
+impact,yourTotalImpact,Seu Impacto Total
+impact,lifetime,Vitalício
+common,thisYear,Este Ano
+impact,lastYear,Ano Passado
+impact,noGivingLastYearMessage,"""Desculpe, você não possui informações de doações no ano passado"""
+manage,2013,2013
+manage,2014,2014
+manage,2015,2015
+manage,approved,Aprovado
+manage,awarded,Premiado
+common,award,Prêmio
+manage,awards,Prêmios
+manage,clickToUploadAgreement,Clique aqui para enviar o Contrato
+manage,congratsMessage,Parabéns!  Você foi Premiado com um
+manage,congratsMessage2, Subsídio!
+manage,congratulationsString,"""Parabéns pelo seu Prêmio!  Para que o pagamento seja emitido, você deve primeiro baixar e preencher o Contrato de Subsídio"""
+manage,date,Data
+manage,decided,Decidido
+manage,draft,Rascunho
+manage,grant,Subsídio
+manage,grantProgram,Programa de Subsídio
+manage,grantAgreement,Já baixou e preencheu seu contrato?  Carregue-o aqui para enviar:
+manage,program,Programa
+manage,incomplete,Incompleto
+manage,inReview,Em Análise
+manage,loi,LOI
+manage,loiDeclined,LOI Rejeitada
+manage,loiSubmitted,LOI Enviada
+manage,nonprofit,Organização
+manage,organization,Organização
+manage,progressMessage,Você tem um Relatório de Progresso futuro com vencimento em
+common,progressReport,Relatório de Progresso
+common,progressReports,Relatórios de Progresso
+manage,reopened,Reaberto
+common,request,Solicitação
+manage,requests,Solicitações
+manage,sponsor,Patrocinador
+manage,startReport,Iniciar Relatório
+manage,status,Status
+manage,submit,Enviar
+common,submitted,Enviado
+manage,thisYear,Este Ano
+manage,type,Tipo
+manage,volunteer,Voluntário
+message,archive,Arquivar
+message,body,Corpo
+message,companyMessages,Mensagens da Empresa
+message,delete,Excluir
+message,from,De
+message,givingHistory,Histórico de Doações
+message,goToVolunteerPage,Ir à Página de Voluntariado
+message,inbox,Caixa de Entrada
+message,manageGroup,Gerenciar Grupo
+message,manageProject,Gerenciar Projeto
+message,markasread,Marcar como lida
+message,markasunread,Marcar como não lida
+message,messages,Mensagens
+message,noMessages,Nenhuma Mensagem
+message,of,de
+message,restore,Restaurar para a caixa de entrada
+message,searchForAnotherNPO,Procurar por outra organização
+message,send,Enviar
+message,sent,Enviado
+message,subject,Assunto
+message,to,para
+message,toCap,Para
+message,viewGroup,Ver Grupo
+message,viewProject,Ver Projeto
+message,viewProjectAndSignUp,Ver Projeto e Registrar-me
+nonprofits,accepted,Aceito
+nonprofits,activities,Atividades
+nonprofits,affiliation,Filiação
+nonprofits,awards,Prêmios
+nonprofits,assets,Bens
+nonprofits,claimFiscalSponsor,Reivindique um Patrocinador Fiscal
+nonprofits,contacts,Contatos
+nonprofits,date,Data
+nonprofits,deductibility,Dedutibilidade
+nonprofits,donateWell,DonateWell
+nonprofits,donateWellButtonTooltip,Veja e edite o perfil da organização na DonateWell.
+nonprofits,exemptOrganizationStatus,Status de Organização Isenta
+nonprofits,filingRequirements,Requisitos de Arquivamento
+nonprofits,financials,Finanças
+nonprofits,fiscalSponsorInstructions,"""A fim de se inscrever em nome de uma organização não 503(c) usando um patrocinador fiscal, você deve inserir algumas informações sobre a sua organização."""
+nonprofits,fiscalSponsors,Patrocinadores Fiscais
+nonprofits,fiscalYearEnd,Fim do Ano Fiscal
+nonprofits,foundationStatus,Status da Fundação
+nonprofits,grantProgram,Programa de Subsídio
+nonprofits,groupExemptionNumber,Número de Isenção do Grupo
+common,history,Histórico
+nonprofits,income,Renda
+nonprofits,lastTaxReturn,Última Declaração Fiscal
+nonprofits,latestIRSFiling,Última Declaração de IR
+common,mission,Missão
+nonprofits,myNposHeader,Minhas organizações reivindicadas
+nonprofits,newOrgSubmitButton,Criar Organização
+nonprofits,newRequest,Nova solicitação
+nonprofits,noneClaimed,Você não tem nenhuma organização selecionada.
+nonprofits,nonprofit,Organização
+nonprofits,nonprofitFocus,Foco da Organização
+nonprofits,nonprofits,Organizações
+nonprofits,opportunitiesToDonate,Oportunidades de Doar
+nonprofits,opportunitiesToVolunteer,Oportunidades de Voluntariado
+nonprofits,organization,Organização
+nonprofits,orgName,Nome da Organização
+nonprofits,overview,Panorama
+nonprofits,payments,Pagamentos
+nonprofits,pub78,Status da Publicação 78
+nonprofits,reports,Relatórios
+nonprofits,requested,Solicitado
+nonprofits,requestName,Nome da Solicitação
+nonprofits,requests,Solicitações
+nonprofits,revenue,Receita
+nonprofits,rulingDate,Data da Decisão
+nonprofits,searchPrompt,"""Para reivindicar sua organização, procure pelo nome, local ou EIN."""
+nonprofits,status,Status
+nonprofits,slider,Barra Deslizante
+nonprofits,socialLinks,Links Sociais
+nonprofits,socialStream,Fluxo Social
+nonprofits,subsection,Subseção
+nonprofits,type,Tipo
+common,viewPrograms,Ver Programas
+nonprofits,year,Ano
+common,award,Nome
+payments,organization,Organização
+payments,payment,Pagamento
+payments,paid,Pago
+profile,activePayrollDeductions,Deduções Ativas em Folha
+profile,addNewDeduction,Adicione uma nova dedução em folha procurando abaixo por uma organização
+profile,addPayrollDeduction,Adicionar Dedução em Folha
+profile,allGroups,Todos os Grupos
+profile,amountToDonate,Insira a quantia que deseja doar
+profile,cancelRequest,Cancelar Solicitação
+profile,changePassword,Alterar Senha
+profile,changePic,Alterar Imagem
+profile,city,Cidade
+profile,clickPayrollDonateButton,Clique no botão de doações em folha.
+profile,confirmPassword,Confirme a Senha
+profile,contactInfo,Info. de Contato
+profile,country,País
+profile,createGroup,Criar Um Novo Grupo
+profile,currentPayrollDeductions,Atuais Deduções em Folha
+profile,dedicateThisGift,Dedique este presente a um amigo ou ente querido
+profile,deductionsBeginOn,Deduções em folha começarão em
+profile,doesNotMatch,não coincidem
+profile,editProfilePic,Editar Foto de Perfil
+profile,emailAddress,Endereço de E-mail
+profile,emailNotifications,Gostaria de receber notificações no endereço de e-mail informado?
+profile,enterHonoreeName,Insira o nome do homenageado aqui
+common,firstName,Primeiro Nome
+profile,fullAddress,Endereço Completo
+profile,goalsNotExist,As metas não existem
+common,description,Descrição
+profile,groupName,Nome do Grupo
+profile,groupPrivacy,Privacidade
+profile,groupPrivacyToolTip,"""Grupos públicos podem ser vistos e estão abertos à participação de qualquer pessoa. Grupos só para convidados podem ser encontrados nos resultados da busca, mas os usuários não podem participar sem um convite. Grupos privados não podem ser encontrados nos resultados da busca e a participação neles só ocorre por convite."""
+profile,groupsHeader,Grupos
+profile,groupsNotExist,Grupos não existem
+profile,invalid,Inválido
+profile,inHonorOf,Em Honra de
+profile,inMemoryOf,Em Memória de
+profile,inviteHeader,Convidar Membros do Grupo
+profile,isRequired,é necessário(a)
+profile,isToLong,é muito longo(a)
+profile,joinGroup,Ingressar
+common,lastName,Sobrenome
+profile,leaveGroup,Sair do Grupo
+profile,makeDonationAnonymously,Fazer esta doação anonimamente
+profile,middleName,Nome do Meio
+profile,mobilePhone,Telefone Móvel
+profile,myFiscalSponsors,Meus Patrocinadores Fiscais
+profile,myGroups,Meus Grupos
+profile,newGroup,Novo Grupo
+profile,newPassword,Nova Senha
+profile,noCurrentDeductions,Você não configurou nenhuma dedução em folha para este programa.
+profile,officePhone,Telefone do Trabalho
+common,password,Senha
+profile,paychecksPerYear,Contracheques Por Ano
+profile,payrollDeductionProgram,Programa de Dedução em Folha
+profile,payrollDeductions,Deduções em Folha
+profile,pendingInviteTitle,Convites Pendentes
+profile,personalInfo,Info. Pessoais
+profile,pleaseEnterValidEmail,Favor inserir um e-mail válido
+profile,pleaseSelectValidAddress,Favor selecionar um endereço válido
+profile,profile,Perfil
+profile,profilePicture,Foto de Perfil
+profile,requestInvite,Solicitar Convite
+profile,requestPending,Solicitação Pendente
+profile,searchForNPOToDonate,"""Procure por uma organização para a qual gostaria de doar, na barra de busca abaixo."""
+profile,selectNewProfPic,Selecione uma nova Foto de Perfil
+profile,selectYourNPO,"""Selecione sua organização. Depois, insira a quantia que gostaria de doar por ano e calcularemos a quantia deduzida por contracheque."""
+profile,settingUpPayrollDeductions,Configurando e Gerenciando Suas Doações em Folha
+profile,setupAPayrollDeduction,Configure uma Dedução em Folha
+common,shirt,Tamanho da Camisa
+profile,specialInstructions,Instruções Especiais
+profile,specificPurpose,Peça que a organização use a doação para um fim específico
+profile,state,Estado
+profile,street,Rua/Avenida
+profile,toDonatePleaseChoose,"""Para doar, por favor, escolha um destinatário; procure pelo nome, local ou EIN"""
+profile,toManageDeductions,para gerenciar as doações em folha
+profile,upcomingPayrollDeductions,Futuras Deduções em Folha
+profile,youHaveUntil,Você tem até
+profile,youMayMakeChangesToDeductions, Você pode realizar alterações em suas deduções em folha até o fechamento do negócio em
+profile,zip,CEP
+search,adminEmail,E-mail do Administrador
+search,cantFind,Não é possível encontrar o que você está procurando
+search,cantFindOrg,Não é possível encontrar sua organização nos resultados
+search,checkAbbreviations,"""Confira abreviações. Por exemplo, tente procurar por 'Co' em vez de 'Condado'"""
+search,contactOrgAdmin,O administrador da organização precisará contatar a DonateWell para ser adicionado ao nosso banco de dados. Você pode preencher o formulário abaixo e enviar uma mensagem a eles para informá-los de que estão perdendo a oportunidade de receber doações.
+common,datepickerPlaceholder,MM/DD/AAAA HH:MM AM/PM
+search,doubleCheck,Verifique duas vezes a ortografia
+search,donateNowButton,Doar Agora
+search,enterYourQuestionHere,Insira sua pergunta aqui
+search,filter,Filtro
+search,followButton,Seguir
+search,following,Seguindo
+search,globalSearchPlaceholder,Procure por uma organização...
+search,myOrganizations,Minhas Organizações
+search,nonprofitFocus,Foco da Organização
+search,notFollowing,Você não está mais seguindo
+search,notFollowingMessage,"""Ao seguir uma organização, você se manterá atualizado sobre suas atividades e eventos.  Para seguir uma organização, clique no botão Procurar, encontre uma organização do seu interesse e clique em Seguir."""
+search,notFollowingTitle,Você não está seguindo nenhuma organização
+search,notSupportedMessage,"""Aqui você encontrará uma lista de organizações que você apoiou no passado, seja como voluntário, doador ou de outra forma.  Envolva-se hoje mesmo ao clicar em Procurar e encontrar uma organização que você queira ajudar."""
+search,notSupportedTitle,Você não apoiou nenhuma organização
+search,nowFollowing,Você agora está seguindo
+search,orgName,Nome da Organização
+search,orgNotInDatabase,Se uma organização não estiver no banco de dados
+search,recordsPanelMessageCannotComplete,"""Não pudemos completar sua busca neste momento. Por favor, tente novamente mais tarde."""
+search,recordsPanelMessageNoResults,Sua busca retornou 0 resultado
+search,recordsPanelMessageResultsHere,Os resultados da sua busca aparecerão aqui...
+search,requestAMatch,Registrar uma Doação
+search,searchDatePlaceholder,MM/DD/AAAA HH:MM AM/PM
+search,searchOneWord,"""Procure por duas palavras em vez de três, etc. Exemplo:  'Banco alimentar' em vez de 'Banco de alimentos'"""
+search,searchByOrg,Procure pelo EIN da organização
+search,searchCommon,Procurar
+search,searchForNPO,Procure por uma organização
+search,searchForUser,Procure por um Colega de Trabalho
+search,searchLocationPlaceholder,"""Rua, Cidade, Estado ou CEP"""
+search,searchPlaceholder,"""Procure pelo nome, local ou EIN"""
+search,searchUserPlaceholder,Procure pelo nome
+search,searchDonatePlaceholder,"""Para doar, por favor, escolha um destinatário; procure pelo nome, local ou EIN"""
+search,searchVolunteerPlaceholder,"""Para selecionar uma organização, procure pelo nome, local ou EIN"""
+search,searchVolunteers,Procurar Voluntários
+search,selectNPOForProject,"""Selecione uma organização para este projeto - procure pelo nome, local ou EIN"""
+search,sort,Ordenar
+search,streetCityStateCountry,"""Rua, Cidade, Estado e País"""
+search,unFollow,Deixar de Seguir
+search,whenSearching,"""Ao procurar por uma organização, é importante lembrar-se de que a DonateWell usa as informações arquivadas junto à Receita Federal para fins de confirmação. Caso tenha problemas em localizar uma organização, tente seguir"""
+signin,errorMsg1,"""Nome de usuário ou senha incorreta. Por favor, tente novamente."""
+signin,forgotPwd,Esqueceu Sua Senha?
+signin,loginNameLabel,E-mail
+signin,nonprofitWelcomeText,"""Crie sua conta, reivindique sua organização, veja programas e gerencie solicitações. Comece hoje mesmo!"""
+common,signIn,Entrar
+signin,pwdLabel,Senha
+signin,signUpLink,Registrar-se
+signin,submitButton,Login
+signin,welcome,Bem-vindo(a)
+signup,downloadWaiver,Baixar Renúncia
+signup,pageTitle,Registrar-se
+signup,signInLink,Entrar
+signup,forgotPwd,Esqueceu Sua Senha?
+signup,submitButton,Login
+signup,loginNameLabel,E-mail
+signup,pwdLabel,Senha
+volunteer,addCause,Adicionar Causa
+volunteer,addCoordinator,Adicionar Coordenador
+volunteer,addSkill,Adicionar Competência
+volunteer,ageRestricted,Restrição de Idade
+volunteer,altAmountForEach,Favor confirmar seu subsídio de
+volunteer,amountForEach,Insira a quantia que gostaria de subsidiar:
+volunteer,areYouSureCancel,Tem certeza de que deseja cancelar seu registro em
+volunteer,areYouSureSignUp,Tem certeza de que deseja se registrar em
+volunteer,assignment,Atribuição
+volunteer,assignments,Atribuições
+volunteer,attachWaiver,Anexe um formulário de renúncia ou autorização
+volunteer,attributes,Atributos
+volunteer,availableGrantAmount,Quantia Total de Subsídio Disponível
+volunteer,birthdate,Data de Nascimento
+volunteer,cancelProject,Cancelar Projeto
+volunteer,cancelProjectRegistration,Cancelar Registro do Projeto
+volunteer,cause,Causa
+volunteer,causes,Causas
+volunteer,checkBoxes,Marque as Caixas
+volunteer,creatNewEntry,Criar Nova Entrada
+volunteer,coordinatorName,Nome do Coordenador
+volunteer,coordinators,Coordenadores
+volunteer,createdAt,Criado Em
+volunteer,createProject,Criar Projeto
+common,dateVolunteered,Data como Voluntário
+volunteer,dateHoursVolunteered,Data e Horas como Voluntário
+volunteer,defaultAssignment,Atribuição Padrão
+volunteer,denotesRequiredResponses,denota respostas obrigatórias.
+volunteer,description,Descrição
+volunteer,dontWorry,"""Não se preocupe, estamos trabalhando nisso. Confira novamente em breve."""
+volunteer,editHoursVolunteered,Editar Horas
+volunteer,editHoursVolunteeredDesc,"""Por favor, insira suas novas horas de"""
+volunteer,email,E-mail
+volunteer,eligibleNonprofits,Suas Organizações Elegíveis
+volunteer,endDateAndTime,Data e Hora Finais
+volunteer,eventInformation,Informações do Evento
+volunteer,featuredProjects,Projetos em Destaque
+volunteer,filter,Filtros
+volunteer,firstName,Primeiro Nome
+volunteer,fullProjectDesctiption,Descrição Completa do Projeto
+volunteer,groupCreate,Criar Grupo
+volunteer,groupDescription,Descrição do Grupo
+volunteer,groupName,Nome do Grupo
+volunteer,groupNewGroup,Novo Grupo
+volunteer,groupNewGroupDialog,Salvar lista de participantes como novo grupo
+volunteer,groupSaveGroup,Salvar como Grupo
+volunteer,guest,Convidado
+volunteer,invited,Convidado
+volunteer,invitedNotInvited,Não Convidado
+volunteer,inviteSend,Enviar Convites
+volunteer,inviteVolunteers,Convidar Voluntários
+volunteer,inviteUninvite,Cancelar Convite
+volunteer,joinWaitlist,Ingressar na Lista de Espera
+volunteer,help,Ajude!
+volunteer,hoursVolunteered,Horas como Voluntário
+volunteer,lastName,Sobrenome
+volunteer,learnMore,Saiba Mais
+volunteer,leaveAll,Deixar Todos
+volunteer,leaveAssignment,Deixar Atribuição
+volunteer,leaveWaitlist,Deixar Lista de Espera
+volunteer,loadingRegistrationInformation,Carregando Informações de Registro...
+volunteer,logPersonalHours,Registrar Horas Pessoais
+volunteer,logHours,Registrar Horas
+volunteer,maxParticipants,Máx. de Participantes
+volunteer,messagePlaceholder,Era uma vez...
+volunteer,messageVolunteers,Enviar Mensagem aos Voluntários
+volunteer,minAge,Idade Mínima de
+volunteer,more,Mais
+volunteer,myGivingHistory,Meu Histórico de Doações
+volunteer,myVolunteerism,Meu Voluntarismo
+volunteer,myVolunteering,Meu Voluntariado
+volunteer,nameOfProject,Nome do projeto voluntário
+common,suggestProject,Sugerir Projeto
+volunteer,newProjectMessage,Nova Mensagem do Projeto
+volunteer,newQuestion,Nova Pergunta
+volunteer,noAgeRestriction,Sem Restrição de Idade
+volunteer,noFamOrFriends,Não Permitir Amigos e Familiares
+volunteer,noFeaturedProjects,Nenhum Projeto em Destaque Ainda
+volunteer,noFeaturedProjectsDesc,"""Não se preocupe, estamos trabalhando nisso.  Confira novamente em breve!"""
+volunteer,noMaxVolunteers,Sem Máx. de Voluntários
+volunteer,noQuestionnaireResponse,Este usuário não enviou respostas para o questionário
+volunteer,nonprofit,Organização
+volunteer,nonprofitFocus,Foco da Organização
+volunteer,nonprofitSelection,Seleção de Organização
+volunteer,noProjectHours,Nenhuma Hora de Projeto Encontrada
+volunteer,noRegister,Não requer registro
+volunteer,ongoingProject,Contínuo
+volunteer,openings,Vagas
+volunteer,options,Opções
+volunteer,optionalSurvey,Preencher uma pesquisa opcional?
+volunteer,otherSettings,Outras Configurações
+volunteer,partners,Parceiros
+volunteer,postYourComment,Publique Seu Comentário
+volunteer,pickList,Lista de Escolhas
+volunteer,pickListWithText,Lista de Escolhas com Texto
+volunteer,pleaseFillOutQuestionnaire,"""Por favor, preencha este questionário para concluir o processo de registro."""
+volunteer,privacy,Privacidade
+volunteer,privacyInviteOnly,Só Para Convidados
+volunteer,privacyPrivate,Privado
+volunteer,privacyPublic,Público
+volunteer,program,Programa
+volunteer,project,Projeto
+volunteer,projects,Projetos
+volunteer,projectName,Nome do Projeto
+volunteer,projectImage,Imagem do Projeto
+volunteer,projectInfo,Info. do Projeto
+volunteer,projectDateAndLocation,Data e Local do Projeto
+volunteer,projectDescription,Descrição do Projeto
+volunteer,projectIsOngoing,O Projeto é Contínuo
+volunteer,projectsNearMe,Projetos Perto de Mim
+volunteer,questionnaire,Questionário
+volunteer,questionText,Texto da Pergunta
+volunteer,questionType,Tipo de Pergunta
+volunteer,recommendedDimensions,Dimensões recomendadas: 850 px x 315 px
+volunteer,rejectInvitation,Recusar Convite
+volunteer,registered,Registrado
+volunteer,registrations,Registros
+volunteer,responses,Respostas
+volunteer,resultsFound,Resultados Encontrados
+volunteer,registeredBy,Registrado por
+volunteer,selectAdditionalCoordinator,Selecionar Coordenador Adicional
+volunteer,selectAssignmentToLeave,Selecione a(s) Atribuição(ões) que deseja deixar
+volunteer,selectNewCause,Selecionar Nova Causa
+volunteer,selectNewSkill,Selecionar Nova Competência
+volunteer,selectProgram,Selecionar Programa
+volunteer,signedUp,Registrado
+volunteer,signUpFor,Registrar-me Em
+volunteer,signUpDeadline,Prazo de Registro
+volunteer,signUpQuestion,Pergunta de Registro
+volunteer,skills,Competências
+volunteer,shirtSize,Tamanho da Camisa
+volunteer,selectAVolunteerProgram,Selecione Um Programa Voluntário
+volunteer,selectYourAssignment,Selecione sua atribuição
+volunteer,sponsorOrganization,Organização Patrocinadora/Parceira
+volunteer,startDateAndTime,Data e Hora Iniciais
+volunteer,submit,Enviar
+volunteer,survey,Pesquisa
+volunteer,surveyQuestion,Pergunta da Pesquisa
+volunteer,tellUsAboutYourExperience,Conte-nos sobre sua experiência como voluntário(a).
+volunteer,thankYouForVolunteering,Obrigado por se voluntariar junto à
+volunteer,thisAssignmentIsFull,Esta atribuição está lotada. Você será adicionado à lista de espera.
+volunteer,thisProjectWaiver,"""Este projeto exige renúncia. Por favor, baixe-a."""
+volunteer,thereAreNoPrograms,"""No momento, não há nenhum Projeto associado a este Programa. Você tem uma ideia de Projeto? Clique em 'Novo Projeto' e compartilhe-a conosco."""
+volunteer,unlimited,Ilimitado
+volunteer,upload,Carregar
+volunteer,volunteerGrants,Subsídios aos Voluntários
+volunteer,volunteerNowTooltip,Voluntariar-me Agora
+volunteer,volunteerProgram,Programa Voluntário
+volunteer,waitlist,Lista de Espera
+volunteer,waitlisted,Na Lista de Espera
+volunteer,whatVolunteersDo,"""O que o voluntário fará, quem será atendido, etc.?"""
+volunteer,willBeInvited,(será convidado para
+volunteer,withinRadius,dentro de 25 milhas de
+volunteer,youAreNotSignedUp,Você não se registrou neste projeto
+volunteer,youHaveBeenInvited,"""Você foi convidado para participar neste projeto. Por favor, responda ao convite abaixo."""
