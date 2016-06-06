@@ -10,14 +10,24 @@ var fs = require('fs'),
     csv = require('csv-parser'),
     uploadCtrl = require('./upload.controller.js');
 
-module.exports = function(){
+    var config = {};
+    config.masterPath = (__dirname + '/../i18n/');
+    config.clientIds = fs.readdirSync(config.masterPath);
+    config.gdgId = '12345678';
 
-  var promiseArr = [],
-    itr = 0;
-  function loop(){
-    promiseArr.push(uploadCtrl.uploadFolder(itr,function(){
-      console.log('complete');
-    }))
-    if(++itr < uploadPaths.length)loop();
-  }loop();
+module.exports = function(){
+  //add gdg english First
+  uploadCtrl.uploadFolder(config,config.clientIds[0],function(){
+    console.log('gdg up and loaded');
+    _.each(config.clientIds,function(id,iteratti){
+      uploadCtrl.uploadFolder(config,id,function(){
+        console.log(iteratti,'iteratti');
+        console.log(config.clientIds.length-1);
+        if(iteratti == config.clientIds.length-1){
+          console.log('Upload Complete!!!!!!!!!!!!!!!!');
+        };
+      });
+    })
+  })
+
 }

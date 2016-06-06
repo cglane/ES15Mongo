@@ -49,7 +49,7 @@ function writeAsJson(basePath, clientId){
       for(var lang in returnObj){
         for(var group in returnObj[lang]){
           for(var term in returnObj[lang][group]){
-            if(_.contains(companyObj[lang][group], term)){
+            if(companyObj[lang][group][term]){
               returnObj[lang][group][term] = companyObj[lang][group][term];
             }
           }
@@ -60,10 +60,10 @@ function writeAsJson(basePath, clientId){
   })
 }
 
-var basePath = __dirname + '/../i18n/'
+var basePath = __dirname + '/../testerJson/'
 
 module.exports = function(){
 
-  writeAsJson(basePath, 12345678910);
+  writeAsJson(basePath, 16015839);
 
 }

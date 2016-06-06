@@ -100,7 +100,6 @@ module.exports = {
     Term.find({'softDelete':false},function(err,allTerms){
       _.each(allTerms,function(terms){
         _.each(terms.translations,function(trans){
-          console.log(trans.clientId);
           returnObj[trans.clientId] = trans.clientId;
         })
       })
