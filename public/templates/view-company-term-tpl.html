@@ -1,27 +1,27 @@
 <div ng-controller = "CompanyTermController as ct"class="jumbotron">
   <a class = 'text-center' ng-href="#/view_company/{{ct.clientId}}"><span style="font-size:2em; color:black"class = 'glyphicon glyphicon-home'></span></a>
   <h1>{{ct.term.key}}</h1>
-  <div class="col-lg-6">
+  <div class="col-lg-6 col-md-offset-1">
     <ul ng-repeat = "(key,val) in ct.term" class="list-group">
       <li ng-if= "!ct.termKeys(key)"class = "list-group-item">
-        <a>{{key}}:</a>
+        <a><strong>{{key}}:</strong></a>
         <a editable-text="ct.term[key]"onbeforesave="ct.editTerm(key,$data)"  >{{ ct.term[key] || "empty" }}</a>
       </li>
       <li ng-hide = "key == 'softDelete' || key == 'translations' || key == '__v'"ng-if= "ct.termKeys(key)"class = "list-group-item">
-        <a>{{key}}:</a>
+        <a><strong>{{key}}:</strong></a>
         <a>{{ ct.term[key] || "empty" }}</a>
       </li>
     </ul>
     <ul class = 'list-group'>
-      <li class = 'list-group-item'> <a>softDelete:</a> <input ng-change = 'ct.softDelete(ct.term)'type="checkbox" ng-model = 'ct.term.softDelete'></li>
+      <li class = 'list-group-item'> <a><strong>softDelete:</strong></a> <input ng-change = 'ct.softDelete(ct.term)'type="checkbox" ng-model = 'ct.term.softDelete'></li>
       <br>
       <li ng-click = 'showKeys = !showKeys'class = "list-group-item">
-        <a>Translations</a>
+        <a><strong><u>Translations</u></strong></a>
         <span ng-show = 'showKeys'class = 'glyphicon glyphicon-chevron-up pull-right'></span>
         <span ng-hide = 'showKeys'ng-click = 'showKeys = true'class = 'glyphicon glyphicon-chevron-down pull-right'></span>
       </li>
     </ul>
-      <ul ng-show= 'showKeys'ng-repeat = "trans in ct.term.translations">
+      <ul ng-show= 'showKeys'ng-repeat = "trans in ct.translations">
         <ul ng-repeat = "(subKey, subVal) in trans">
           <li ng-hide = "subKey == 'needsTrans' || subKey == '_id'">
             <a>{{subKey}}:</a>

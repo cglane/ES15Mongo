@@ -5,8 +5,8 @@ var mongoose = require('mongoose'),
     createCtrl = require("../controllers/createController.js"),
     editCtrl = require("../controllers/editController.js"),
     uploadCtrl = require('../controllers/uploadController.js'),
-    getCtrl = require("../controllers/getController.js");
-
+    getCtrl = require("../controllers/getController.js"),
+    loginCtrl = require("../controllers/loginController.js");
 module.exports = function (apiRoutes) {
 
   apiRoutes.get('/hello', function(req, res) {
@@ -19,12 +19,19 @@ module.exports = function (apiRoutes) {
       res.send('Collection deleted')
     })
   })
+  //============Login Logout ===================//
+  apiRoutes.post('/login/',loginCtrl.doLogin);
+
+  apiRoutes.post('/logout/',loginCtrl.logOut);
+
   //============Write Files======================//
 
   // apiRoutes.get('/write_i18n/:clientId',getCtrl.writei18n);
 
   //============Upload and Edit==================//
   apiRoutes.post('/create_term',createCtrl.createTerm);
+
+  apiRoutes.post('/create_translation',createCtrl.insertTranslation)
 
   apiRoutes.post('/include_translation/:key',uploadCtrl.includeTranslation);
 

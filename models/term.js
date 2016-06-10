@@ -1,12 +1,12 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
+var config = require("../config.js")
 var TermSchema = new Schema({
     group: {type:String},
     key: {type:String},
     translations:[{
-      clientId:{type:Number,default:12309280},
+      clientId:{type:Number,default:config.gdgId},
       lang:{type:String},
       val:{type:String},
       needsTrans:{type:Boolean,default:false}

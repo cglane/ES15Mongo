@@ -1,6 +1,6 @@
-var Term = require('./models/term.js');
+var Term = require('../models/term.js');
 var _ = require('underscore');
-var config = require('./config.js');
+var config = require('../config.js');
 var q = require('q');
 var mkdirp = require('mkdirp');
 var fs = require('fs');
@@ -12,13 +12,17 @@ function companyTerms(clientId){
     //setUp Object
     _.each(terms,function(term){
       _.each(term.translations,function(trans){
-        companyObj[trans.lang][term.group] = {};
+        if(companyObj[trans.lang]){
+          companyObj[trans.lang][term.group] = {};
+        }
       })
     })
     _.each(terms,function(term){
       _.each(term.translations,function(trans){
         if (trans.clientId == clientId) {
-          companyObj[trans.lang][term.group][term.key] = trans.val;
+          if(companyObj[trans.lang]){
+            companyObj[trans.lang][term.group][term.key] = trans.val;
+          }
         }
       })
     })
@@ -30,16 +34,17 @@ function companyTerms(clientId){
 function writeToFolder(basePath,object){
     mkdirp.sync(basePath);
       for(var lang in object){
-        var langPath  =  basePath+lang
+        var langPath  =  basePath+'/'+lang
         mkdirp.sync(langPath);
         for(var group in object[lang]){
-          var groupPath = basePath+lang+'/'+group+'.lang.json',
+          var groupPath = basePath+'/'+lang+'/'+group+'.lang.json',
               data = JSON.stringify(object[lang][group]);
               var writeStream = fs.createWriteStream(groupPath,{flags: 'w'});
               writeStream.write(data);
               writeStream.end();
         }
       }
+      console.log('It has been writen!!!!!!!!!!!!!!');
 }
 
 function writeAsJson(basePath, clientId){
@@ -60,10 +65,28 @@ function writeAsJson(basePath, clientId){
   })
 }
 
-var basePath = __dirname + '/../testerJson/'
+function getCompanyIds(callback){
+  var testIds = [
+    '12345678',
+   '13520310',
+   '14791960',
+   '16015839',
+   '20221348',
+   '25724430',
+   '112345678234567',
+ ];
+ callback(testIds);
+}
 
-module.exports = function(){
+module.exports = {
 
-  writeAsJson(basePath, 16015839);
+  writeAll: function(){
+    getCompanyIds(function(companyIds){
+      for (var i = 0; i < companyIds.length; i++) {
+        var basePath = __dirname + '/../langFiles/'+companyIds[i];
+        writeAsJson(basePath, companyIds[i]);
+      }
+    })
+  }
 
 }

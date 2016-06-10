@@ -2,7 +2,7 @@
   <a class = 'text-center' ng-href="#/companies"><span style="font-size:2em; color:black"class = 'glyphicon glyphicon-home'></span></a>
   <h1>Groups</h1>
   <div class="row">
-  <div class="col-lg-6">
+  <div class="col-lg-6 col-md-offset-1">
     <div class="input-group">
       <input type="text" ng-model = 'vm.searchParams'class="form-control" placeholder="Search for terms...">
       <span class="input-group-btn">
@@ -10,7 +10,9 @@
         <button class="btn btn-default" ng-click = 'vm.clearSearch()'type="button"><span class = 'glyphicon glyphicon-remove'></span></button>
       </span>
     </div><!-- /input-group -->
-    <a ng-href="#/view_term/{{vm.searchResults}}"><h3>{{vm.searchResults}}</h3></a>
+    <a ng-href="#/view_term/{{vm.searchResults}}">
+      <h3 ng-repeat = 'item in vm.searchResults'> {{item}}</h3>
+    </a>
   </div><!-- /.col-lg-6 -->
   <div class="col-lg-6">
   </div><!-- /.col-lg-6 -->

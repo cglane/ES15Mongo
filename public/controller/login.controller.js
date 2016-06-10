@@ -4,8 +4,24 @@
 
 angular
   .module('main')
-  .controller('LoginController',function($stateParams,$location,$scope){
+  .controller('LoginController',function($stateParams,$location,$scope,LoginService){
 
-    console.log('LoginController');
+    $scope.login = function(){
+      var obj = {
+        password: $scope.password,
+        username: $scope.username
+      }
+      LoginService.doLogin(obj).then(function(res){
+        // console.log(res,'res');
+        // if(res.data)$location.path("/companies")
+      })
+    };
+
+    $scope.logOut = function(){
+      console.log('alsdkjsd');
+      LoginService.doLogOut().then(function(){
+        console.log('You are logged Out');
+      })
+    };
 });
 })();

@@ -17,7 +17,8 @@
       'ui.router',
       'underscore',
       'jquery',
-      'xeditable'
+      'xeditable',
+      'ui.bootstrap'
     ])
     .run(function(editableOptions) {
       editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
@@ -30,7 +31,7 @@
 
           // HOME STATES AND NESTED VIEWS ========================================
           .state('login', {
-              url: '/',
+              url: '/login',
               controller:'LoginController',
               templateUrl: 'templates/login-tpl.html'
           })

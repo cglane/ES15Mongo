@@ -29,13 +29,17 @@ var q = require('q');
       //setUp Object
       _.each(terms,function(term){
         _.each(term.translations,function(trans){
-          companyObj[trans.lang][term.group] = {};
+          if(companyObj[trans.lang]){
+            companyObj[trans.lang][term.group] = {};
+          }
         })
       })
       _.each(terms,function(term){
         _.each(term.translations,function(trans){
           if (trans.clientId == clientId) {
-            companyObj[trans.lang][term.group][term.key] = trans.val;
+            if(companyObj[trans.lang]){
+              companyObj[trans.lang][term.group][term.key] = trans.val;
+            }
           }
         })
       })
@@ -44,9 +48,6 @@ var q = require('q');
     return deferred.promise;
   }
 
-  function writeToFolder(object){
-
-  }
 
 
 module.exports = {
@@ -69,7 +70,7 @@ module.exports = {
     var group = req.params.group,
         companyId = parseInt(req.params.companyId),
         language = req.params.language,
-        gdgId = 12309280,
+        gdgId = config.gdgId,
         returnObj={};
 
     Term.find({'group':group},function(err, terms){

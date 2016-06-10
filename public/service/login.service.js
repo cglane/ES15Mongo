@@ -2,11 +2,21 @@
   "use strict"
   angular
     .module('main')
-    .factory('MainService',function($http){
-      
+    .factory('LoginService',function($http){
+      var url = 'http://localhost:3000';
+
+      var doLogin = function(obj){
+        return $http.post(url+'/api/login/',obj);
+      };
+
+      var doLogOut = function(){
+        return $http.post(url+'/api/logout/',{withCredentials:true});
+      };
+
 
     return{
-
+      doLogin:doLogin,
+      doLogOut:doLogOut
     };
   });
 })();

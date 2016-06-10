@@ -46,7 +46,17 @@
         return $http.get(url+'/api/get_full_company_terms/'+clientId);
       }
 
+      var createTerm = function(term){
+        return $http.post(url+'/api/create_term',term);
+      }
+
+      var createTranslation = function(trans){
+        return $http.post(url+'/api/create_translation',trans)
+      }
+
     return{
+      createTranslation:createTranslation,
+      createTerm:createTerm,
       getFullCompanyTerms:getFullCompanyTerms,
       deleteTrans:deleteTrans,
       getCompanies:getCompanies,

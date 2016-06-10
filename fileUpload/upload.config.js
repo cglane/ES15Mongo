@@ -18,11 +18,9 @@ var fs = require('fs'),
 module.exports = function(){
   //add gdg english First
   uploadCtrl.uploadFolder(config,config.clientIds[0],function(){
-    console.log('gdg up and loaded');
+    console.log('GDG English Up and Loaded');
     _.each(config.clientIds,function(id,iteratti){
       uploadCtrl.uploadFolder(config,id,function(){
-        console.log(iteratti,'iteratti');
-        console.log(config.clientIds.length-1);
         if(iteratti == config.clientIds.length-1){
           console.log('Upload Complete!!!!!!!!!!!!!!!!');
         };

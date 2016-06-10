@@ -1,8 +1,12 @@
 <div class="row">
+  <div ng-controller = "LoginController">
+    <a ng-click = "logOut()"href="#">Logout</a>
+  </div>
   <div class="jumbotron">
     <h1 class = 'col-md-offset-1'>Companies</h1>
   </div>
   <div ng-controller = 'CompanyController as cc'class="col-md-3 col-md-offset-3">
+    <a ng-click = 'cc.createTerm()'href="#">CreateNeeOne</a>
     <ul class = 'list-group 'ng-repeat = 'company in cc.companies'>
       <li ng-click = 'cc.seeCompany(company)'class = 'list-group-item '><a ng-href="#/view_company/{{company}}">{{company}}</a></li>
     </ul>

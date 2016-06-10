@@ -100,6 +100,7 @@ function createTerm(key,value,language,group,clientId){
   })
   return deferred.promise;
 }
+
 function amEnglish(term){
   var returnVal = false;
   _.each(term.translations,function(el,itr){
@@ -147,11 +148,13 @@ function addFileToDB(data){
           }))
           if(++itr < data.keys.length)loop();
         }loop();
+
     q.all(promiseArr).then(function(){
       console.log('file Uploaded');
       console.log(data.language, data.group);
       deferred.resolve();
     })
+
     return deferred.promise;
 }
 

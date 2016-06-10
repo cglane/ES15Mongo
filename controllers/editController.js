@@ -1,6 +1,6 @@
 var Promise = require('es6-promise').Promise;
 var Term = require('../models/term.js');
-
+var writeFiles = require('../writeFile/write.js')
 module.exports = {
 
   editTerm: function(req,res,next){
@@ -20,6 +20,7 @@ module.exports = {
               new:true
             },function(err,thisTerm){
               if(err)throw err;
+              writeFiles.writeAll();
               res.send(thisTerm);
             })
           },
@@ -35,6 +36,7 @@ module.exports = {
           new:true
         },function(err,thisTerm){
           if(err)throw err;
+          writeFiles.writeAll();
           res.send(thisTerm);
         })
       },
@@ -52,6 +54,7 @@ module.exports = {
         new:true
       },function(err,term){
         if(err)throw err;
+        writeFiles.writeAll();
         res.send(term);
         });
     },
@@ -63,6 +66,7 @@ module.exports = {
         }
       },function(err,term){
         if(err)throw err;
+        writeFiles.writeAll();
         res.send(term);
         console.log(term,'term');
       })
