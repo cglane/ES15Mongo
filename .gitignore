@@ -2,3 +2,7 @@ node_modules
 test
 i18n
 ./public/node-modules
+./i18n
+./langFiles
+./language_files
+./WPG-2.0
