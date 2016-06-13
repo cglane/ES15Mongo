@@ -36,15 +36,9 @@
       <option>zh-CN</option>
     </select>
     <label >ClientId</label>
-    <select  multiple class="form-control" ng-model = "term.translations[$index].optionClientId">
-      <option>12345678</option>
-      <option>13520310</option>
-      <option>14791960</option>
-      <option>16015839</option>
-      <option>20221348</option>
-      <option>25724430</option>
+    <select  multiple class="form-control" ng-model = "term.translations[$index].optionClientId" required>
+      <option ng-repeat = "company in companyIds">{{company}}</option>
     </select>
-    <input type="text" ng-change = "term.translations[$index].optionClientId = term.translations[$index].otherClientId"ng-model = "term.translations[$index].otherClientId"name="name" placeholder="Other clientId"value="">
   </fieldset>
 </div>
 <div class="modal-footer">

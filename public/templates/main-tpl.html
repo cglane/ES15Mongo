@@ -20,7 +20,7 @@
 <br><a href="#"></a>
   <div class="container col-lg-6">
     <ul ng-repeat = "(key,val) in vm.groups" class = "list-group">
-      <li ng-click = 'showKeys = !showKeys'class = "list-group-item"><a ng-href="#/view_group/{{key}}">{{key}}</a>
+      <li ng-click = 'showKeys = !showKeys'class = "list-group-item"><a>{{key}}</a>
         <span ng-show = 'showKeys'class = 'glyphicon glyphicon-chevron-up pull-right'></span>
         <span ng-hide = 'showKeys'ng-click = 'showKeys = true'class = 'glyphicon glyphicon-chevron-down pull-right'></span>
       </li>

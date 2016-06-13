@@ -4,7 +4,7 @@
 
 angular
   .module('main')
-  .controller('compa',function($stateParams,$location,$scope,MainService,$filter){
+  .controller('GroupController',function($stateParams,$location,$scope,MainService,$filter){
     var vm = this;
 
     function filterGroup(array){

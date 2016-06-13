@@ -8,7 +8,7 @@ var mongoose    = require('mongoose');
 
 //Config File
 var config = require('./config');
-
+var writeFile = require('./writeFile/write.js')
 
 //================Configuration==========//
 
@@ -55,8 +55,7 @@ require('./api/routes.js')(apiRoutes);
 //adding prefix of api to all fo these routes
 app.use('/api', apiRoutes);
 // require('./fileUpload/upload.config.js')();
-// require('./writeFile/write.js')();
-
+writeFile.testLocalHost();
 // ===============================================
 app.listen(port);
 

@@ -48,13 +48,20 @@
 
       var createTerm = function(term){
         return $http.post(url+'/api/create_term',term);
-      }
+      };
 
       var createTranslation = function(trans){
         return $http.post(url+'/api/create_translation',trans)
-      }
+      };
+
+      var getCompanyIds = function(){
+        // still neeed an endpoint
+        // return $http.get(url + '')
+        return ['12345678','13520310','14791960','16015839','20221348','25724430'];
+      };
 
     return{
+      getCompanyIds: getCompanyIds,
       createTranslation:createTranslation,
       createTerm:createTerm,
       getFullCompanyTerms:getFullCompanyTerms,

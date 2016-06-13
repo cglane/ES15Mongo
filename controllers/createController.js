@@ -1,6 +1,6 @@
 var Term = require('../models/term.js');
 var _ = require('underscore');
-
+var writeFiles = require('../writeFile/write.js');
 
 function translationExists(translations,data){
   var rtnVal = false;

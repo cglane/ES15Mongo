@@ -5,6 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "async-waterfall": "^0.1.5",
+    "aws-sdk": "^2.3.19",
     "body-parser": "^1.15.0",
     "csv-parse": "^1.1.1",
     "csv-parser": "^1.9.3",
