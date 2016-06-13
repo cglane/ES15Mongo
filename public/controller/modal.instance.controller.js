@@ -4,13 +4,16 @@
 
 angular
   .module('main')
-  .controller('modalInstanceController',function($uibModalInstance,$uibModal,$stateParams,$state,$location,$scope,MainService,$filter){
+  .controller('modalInstanceController',function(items,$uibModalInstance,$uibModal,$stateParams,$state,$route,$location,$scope,MainService,$filter){
 
     function init(){
       $scope.translations = [new Date()];
-      $scope.term = {};
-      $scope.term.translations = [];
+      $scope.term = (items.term)?items.term:false;
+      $scope.addedTranslations = [];
+      $scope.addedTerm = {};
+      $scope.clientId = items.clientId;
       $scope.companyIds = MainService.getCompanyIds();
+      $scope.otherOption = '';
       // MainService.getCompanyIds().then(function(companyObj){
       //   $scope.companies = companies;
       // })
@@ -36,9 +39,9 @@ angular
     function addTranslation(trans,termId){
       var obj = {
         termId:termId,
-        lang:trans.lang[0],
+        lang:trans.lang,
         val:trans.value,
-        clientId:trans.optionClientId[0],
+        clientId:($scope.clientId)?$scope.clientId: trans.optionClientId,
       };
       MainService.createTranslation(obj).then(function(el){
         if(el.data.success == true){
@@ -51,11 +54,18 @@ angular
 
     $scope.ok = function (form) {
       if(!form.$error.required){
-            createTerm($scope.term,function(termId){
-                for (var i = 0; i < $scope.term.translations.length; i++) {
-                  addTranslation($scope.term.translations[i],termId)
-                }
-      })
+        if(!$scope.term){
+          createTerm($scope.addedTerm,function(termId){
+              for (var i = 0; i < $scope.addedTranslations.length; i++) {
+                addTranslation($scope.addedTranslations[i],termId);
+              }
+            });
+        }else{
+          for (var i = 0; i < $scope.addedTranslations.length; i++) {
+            addTranslation($scope.addedTranslations[i],$scope.term._id)
+          }
+        }
+        ($scope.term)?$state.reload():null;
       $uibModalInstance.close($scope.term);
     }else{
       console.log('Missing something');

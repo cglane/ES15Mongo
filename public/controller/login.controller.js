@@ -19,6 +19,7 @@ angular
 
     $scope.logOut = function(){
       console.log('alsdkjsd');
+      $location.path('/login')
       LoginService.doLogOut().then(function(){
         console.log('You are logged Out');
       })

@@ -1,6 +1,21 @@
+<div ng-controller = "LoginController">
+  <h1  class = "col-md-offset-1">
+    <a ng-href="#/companies">
+      <span class = 'glyphicon glyphicon-home'></span>
+    </a>
+    <a ng-click = "logOut()">
+      <span class = "glyphicon glyphicon-log-out"></span>
+    </a>
+  </h1>
+</div>
 <div ng-controller = "TermController as tc"class="jumbotron">
-  <a class = 'text-center' href="#/main"><span style="font-size:2em; color:black"class = 'glyphicon glyphicon-home'></span></a>
-  <h1>{{tc.term.key}}</h1>
+  <h1 class = 'col-md-offset-1'>
+    {{tc.term.key}}
+    <span ng-controller = "CompanyController as cc"ng-click = "cc.modalTerm(null,tc.term)" class = "glyphicon glyphicon-plus"></span>
+  </h1>
+</div>
+
+<div ng-controller = "TermController as tc"class="row">
   <div class="col-lg-6 col-md-offset-1">
     <ul ng-repeat = "(key,val) in tc.term" class="list-group">
       <li ng-if= "!tc.termKeys(key)"class = "list-group-item">

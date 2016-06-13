@@ -7,7 +7,7 @@ angular
   .controller('CompanyGroupsController',function($stateParams,$location,$scope,MainService,$filter){
     var cg = this;
     cg.clientId = $stateParams.clientId;
-
+    
     function init(){
       MainService.getCompanyTerms(cg.clientId).then(function(terms){
         cg.groups = terms.data;
@@ -30,7 +30,7 @@ angular
       })
       return rtnVal;
     }
-    
+
     cg.showSubGroup = function(subVal){
       return (Object.keys(subVal).length > 0)? true: false;
     }

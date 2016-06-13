@@ -3,9 +3,11 @@ var _ = require('underscore');
 var writeFiles = require('../writeFile/write.js');
 
 function translationExists(translations,data){
+  console.log(data,'data');
+  console.log(translations,'translations');
   var rtnVal = false;
   _.each(translations,function(trans){
-    if(trans.clientId == data.clientId || trans.lang == data.lang){
+    if(trans.clientId == data.clientId && trans.lang == data.lang){
       rtnVal = true;
     }
   })
@@ -24,12 +26,12 @@ module.exports = {
         comments: re.comments,
         softDelete: re.softDelete
       });
-      Term.findOne({key:re.key},function(err,term){
+      Term.findOne({key:re.key,group:re.group},function(err,term){
         if(err)throw err;
         if(!term){
           newTerm.save(function(err,termRes){
             if(err)throw err;
-            writeFiles.writeAll();
+            // writeFiles.writeAll();
             res.json({success:true,data:termRes});
           })
         }else{
@@ -39,7 +41,6 @@ module.exports = {
     },
 
     insertTranslation:function(req,res){
-      console.log(req.body,'req.body');
       Term.findOne({_id:req.body.termId},function(err,term){
         if(err)throw err;
         if(!translationExists(term.translations,req.body)){
@@ -51,7 +52,7 @@ module.exports = {
           })
           term.save(function(err,term){
             if(err)throw err;
-            writeFiles.writeAll();
+            // writeFiles.writeAll();
             res.send({success: true})
           })
         }else{

@@ -32,20 +32,23 @@ angular
       return false;
     }
 
-    cc.createTerm = function(){
+    cc.modalTerm = function(clientId,term){
     var modalInstance = $uibModal.open({
       animation: $scope.animationsEnabled,
-      templateUrl: '../templates/new-term-tpl.html',
+      templateUrl: '../templates/modal-term-tpl.html',
       controller: 'modalInstanceController',
       resolve: {
         items: function () {
-          return $scope.term;
+          return {
+            clientId: clientId,
+            term:term
+          }
         }
       }
     });
 
     modalInstance.result.then(function (term) {
-      console.log(term,'term');
+      $scope.term = term;
     }, function () {
     });
     }

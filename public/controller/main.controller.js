@@ -7,7 +7,8 @@ angular
   .controller('MainController',function($stateParams,$location,$scope,MainService,$filter){
     var vm = this;
     vm.groups = {};
-
+    vm.showSearch = false;
+    var allTerms = [];
     function filterGroup(array){
       return _.groupBy(array,"group")
     }
@@ -15,29 +16,22 @@ angular
     function init(){
       MainService.getAllTerms().then(function(terms){
          vm.groups = filterGroup(terms.data);
-      })
-      MainService.getNeedTranslation().then(function(terms){
-        console.log(terms,'need Translation');
+         allTerms = terms;
       })
     }
 
     vm.searchTerms = function(){
-      console.log('laskdjsj');
-      console.log(vm.searchParams);
-      console.log(vm.groups,'groups');
-      _.each(vm.groups,function(group){
-        _.each(group,function(term){
-          if(term.key == vm.searchParams){
-            vm.searchResults = term.key;
-            console.log(vm.searchResults,'searchResults');
-          }
-        })
-      })
+      vm.searchParams = vm.searchParams;
+      vm.searchResults = $filter('filter')(allTerms.data,{key:vm.searchParams});
+      console.log(vm.searchResults,'searchResults');
+      vm.searchError = (!vm.searchResults || vm.searchResults.length <1)? true : false;
+      console.log(vm.searchError,'searchError');
     }
 
     vm.clearSearch = function(){
       vm.searchParams = undefined;
       vm.searchResults = null;
+      vm.showSearch = false;
     }
 
     init();

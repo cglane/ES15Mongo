@@ -1,17 +1,22 @@
 <div class="row">
   <div ng-controller = "LoginController">
-    <a ng-click = "logOut()"href="#">Logout</a>
+    <h1  class = "col-md-offset-1"ng-click = "logOut()">
+      <span class = "glyphicon glyphicon-log-out"></span>
+    </h1>
   </div>
-  <div class="jumbotron">
-    <h1 class = 'col-md-offset-1'>Companies</h1>
+  <div ng-controller = "CompanyController as cc"class="jumbotron">
+    <h1 class = 'col-md-offset-1'>
+      Companies
+      <span ng-click = "cc.modalTerm()" class = "glyphicon glyphicon-plus"></span>
+    </h1>
+    <h6 class = 'col-md-offset-4' >Add A Term</h6>
   </div>
-  <div ng-controller = 'CompanyController as cc'class="col-md-3 col-md-offset-3">
-    <a ng-click = 'cc.createTerm()'href="#">CreateNeeOne</a>
+  <div ng-controller = 'CompanyController as cc'class="col-md-6 col-md-offset-3">
     <ul class = 'list-group 'ng-repeat = 'company in cc.companies'>
-      <li ng-click = 'cc.seeCompany(company)'class = 'list-group-item '><a ng-href="#/view_company/{{company}}">{{company}}</a></li>
+      <li ng-click = 'cc.seeCompany(company)'class = 'list-group-item '><a ng-href="#/view_company/{{company}}"><h3>{{company}}</h3></a></li>
     </ul>
     <ul class = 'list-group'>
-      <li ng-click = 'cc.goMain()'class = 'list-group-item'><a href="#/main">See All</a></li>
+      <li ng-click = 'cc.goMain()'class = 'list-group-item'><a href="#/main"><h3>See All</h3></a></li>
     </ul>
   </div>
 </div>

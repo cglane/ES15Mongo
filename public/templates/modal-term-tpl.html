@@ -1,0 +1,57 @@
+<div class="modal-header">
+            <h3 class="modal-title">Add a Term To The Database!</h3>
+</div>
+  <div class="modal-body">
+  <form name = "myForm">
+    <div ng-if = "!term">
+  <fieldset class="form-group">
+    <label >Group</label>
+    <input  name = "group"type="text" ng-model = 'addedTerm.group'class="form-control"  required placeholder="Group">
+  </fieldset>
+  <fieldset class="form-group">
+    <label >Key</label>
+    <input  type="text" ng-model = "addedTerm.key"class="form-control" required placeholder="Key">
+  </fieldset>
+  <fieldset class="form-group">
+    <label>Created By</label>
+    <input  type="text" ng-model = "addedTerm.createdBy" class = "form-control"placeholder = "Jesus Maria" value="">
+  </fieldset>
+  <fieldset class="form-group">
+    <label>Comments</label>
+    <input type="text" class="form-control" ng-model = "addedTerm.comments"placeholder="comments">
+  </fieldset>
+  </div>
+<a ng-click = "addTranslation()"><span>Add A Translation</span></a>
+<div ng-repeat = "trans in translations">
+  <fieldset class="form-group">
+    <label>Translation {{$index + 1}}</label>
+    <input type="text"  ng-model = "addedTranslations[$index].value"placeholder="Value"class="form-control" required>
+    <label>Language</label>
+    <select   class="form-control" ng-model = "addedTranslations[$index].lang" required>
+      <option>en-US</option>
+      <option>de-DE</option>
+      <option>en-GB</option>
+      <option>es-SP</option>
+      <option>it-IT</option>
+      <option>nl-NL</option>
+      <option>pt-BR</option>
+      <option>zh-CN</option>
+    </select>
+    <label >ClientId</label>
+    <select  ng-if = "!clientId && otherOption !== 'Other'" class="form-control" ng-change = "otherOption = addedTranslations[$index].optionClientId"ng-model = "addedTranslations[$index].optionClientId" required>
+      <option ng-repeat = "company in companyIds">{{company}}</option>
+      <option>Other</option>
+    </select>
+    {{otherOption}}
+    <input ng-if = "!clientId && otherOption =='Other'" model = "addedTranslations[$index].optionClientId"class = "form-control"type="text" name="name" value="">
+    <select ng-if = "clientId" class="form-control" ng-model = "addedTranslations[$index].optionClientId">
+      <option selected = "clientId">{{clientId}}</option>
+    </select>
+  </fieldset>
+</div>
+<div class="modal-footer">
+          <input class="btn btn-primary" type="submit" ng-click="ok(myForm)">
+          <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>
+</form>
+        </div>

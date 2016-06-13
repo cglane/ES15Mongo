@@ -55,7 +55,7 @@ require('./api/routes.js')(apiRoutes);
 //adding prefix of api to all fo these routes
 app.use('/api', apiRoutes);
 // require('./fileUpload/upload.config.js')();
-writeFile.testLocalHost();
+// writeFile.testLocalHost();
 // ===============================================
 app.listen(port);
 

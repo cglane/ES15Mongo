@@ -6,7 +6,7 @@
 
 angular
   .module('main')
-  .controller('CompanyTermController',function($stateParams,$location,$scope,MainService,$filter,$state){
+  .controller('CompanyTermController',function($uibModal,$stateParams,$location,$scope,MainService,$filter,$state){
 
     var ct = this;
         ct.key = $stateParams.key;
@@ -69,7 +69,8 @@ angular
             })
           })
       }
-    }
+    };
+
 
     init();
 

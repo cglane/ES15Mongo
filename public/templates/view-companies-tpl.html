@@ -1,8 +1,23 @@
-<div ng-controller = "CompanyGroupsController as cg"class="jumbotron">
-  <a class = 'text-center' ng-href="#/companies"><span style="font-size:2em; color:black"class = 'glyphicon glyphicon-home'></span></a>
-  <h1>{{cg.clientId}}</h1>
-  <div class="row">
-  <div class="container col-lg-6 col-md-offset-1">
+<div class = "row">
+  <div ng-controller = "LoginController">
+    <h1  class = "col-md-offset-1">
+      <a ng-href="#/companies">
+        <span class = 'glyphicon glyphicon-home'></span>
+      </a>
+      <a ng-click = "logOut()">
+        <span class = "glyphicon glyphicon-log-out"></span>
+      </a>
+    </h1>
+  </div>
+  <div ng-controller = "CompanyGroupsController as cg"class="jumbotron">
+    <h1 class = 'col-md-offset-1'>
+      {{cg.clientId}}
+      <span ng-controller = "CompanyController as cc"ng-click = "cc.modalTerm(cg.clientId,null)" class = "glyphicon glyphicon-plus"></span>
+    </h1>
+  </div>
+
+  <div ng-controller = "CompanyGroupsController as cg ">
+  <div class="container col-lg-6 col-md-offset-2">
     <ul ng-repeat = "(key, val) in cg.groups" class = "list-group">
       <li ng-show = 'cg.hideEmpty(key)'ng-click = 'showGroups = !showGroups'class = "list-group-item"><a>{{key}}</a>
         <span ng-show = 'showGroups'class = 'glyphicon glyphicon-chevron-up pull-right'></span>
