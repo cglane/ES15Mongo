@@ -14,11 +14,11 @@ angular
 
     function init(){
       MainService.getOneTerm(key,group).then(function(res){
-        localStorage.setItem('termId',res.data._id)
+        localStorage.setItem('termId',res.data._id);
         tc.term = res.data;
         tc.term.createdAt  = new Date(1 * tc.term.createdAt);
         tc.translations = res.data.translations;
-        tc.noRepeatKeys = ['translations','__v','_id','softDelete','createdAt','updatedAt','createdBy'];
+        tc.noRepeatKeys = ['translations','__v','_id','updatedBy','softDelete','createdAt','updatedAt','createdBy'];
       })
     }
 
@@ -33,14 +33,12 @@ angular
 
     tc.editTerm = function(key,val){
       tc.term[key] = val;
-      tc.term.updatedAt = new Date();
       MainService.editOneTerm(tc.term).then(function(el){
       })
     }
 
     tc.editTranslation = function(key,val,trans){
       trans[key] = val;
-      console.log(trans,'trans');
       MainService.editTranslation(trans).then(function(el){
       })
     }
@@ -69,6 +67,6 @@ angular
     }
 
     init();
-    
+
 });
 })();

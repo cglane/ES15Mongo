@@ -1,27 +1,22 @@
 var fs = require('fs'),
     _ = require('underscore'),
     Term = require('../models/term.js'),
-    q = require('q'),
-    uploadPaths = ['en-US','de-DE','en-GB','es-SP','fr-FR','it-IT','nl-NL','pt-BR','zh-CN'],
-    clientId = '12345678910',
-    csvWriter = require('csv-write-stream'),
-    writeCtrl = require('../controllers/writeController.js'),
     path = require('path'),
-    csv = require('csv-parser'),
-    uploadCtrl = require('./upload.controller.js');
+    uploadCtrl = require('./upload.controller.js'),
+    configDoc = require('../config.js');
 
     var config = {};
-    config.masterPath = (__dirname + '/../i18n/');
-    config.clientIds = fs.readdirSync(config.masterPath);
-    config.gdgId = '12345678';
 
-module.exports = function(){
+module.exports = function(masterPath){
+  configObj.masterPath = masterPath;
+  configObj.clientIds = fs.readdirSync(configObj.masterPath);
+  configObj.gdgId = config.gdgId;
   //add gdg english First
-  uploadCtrl.uploadFolder(config,config.clientIds[0],function(){
+  uploadCtrl.uploadFolder(configObj,configObj.clientIds[0],function(){
     console.log('GDG English Up and Loaded');
-    _.each(config.clientIds,function(id,iteratti){
-      uploadCtrl.uploadFolder(config,id,function(){
-        if(iteratti == config.clientIds.length-1){
+    _.each(configObj.clientIds,function(id,iteratti){
+      uploadCtrl.uploadFolder(configObj,id,function(){
+        if(iteratti == configObj.clientIds.length-1){
           console.log('Upload Complete!!!!!!!!!!!!!!!!');
         };
       });

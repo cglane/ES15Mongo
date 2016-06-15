@@ -1,13 +1,11 @@
 var Promise = require('es6-promise').Promise;
 var Term = require('../models/term.js');
-var writeFiles = require('../writeFile/write.js')
-module.exports = {
+ module.exports = {
 
   editTerm: function(req,res,next){
-    console.log(req.body,'req.body');
       var re = req.body,
           _id =  req.params._id;
-
+          console.log(req.body,'body');
       Term.findOneAndUpdate({
           '_id': _id
         },{$set:{
@@ -20,7 +18,6 @@ module.exports = {
               new:true
             },function(err,thisTerm){
               if(err)throw err;
-              writeFiles.writeAll();
               res.send(thisTerm);
             })
           },
@@ -36,7 +33,6 @@ module.exports = {
           new:true
         },function(err,thisTerm){
           if(err)throw err;
-          writeFiles.writeAll();
           res.send(thisTerm);
         })
       },
@@ -45,6 +41,7 @@ module.exports = {
       Term.findOneAndUpdate(
         {'_id':req.params.termId,'translations._id':req.params.transId},
         {$set:{
+          'updatedBy':req.body.updatedBy,
           'translations.$.needsTrans':req.body.needsTrans,
           'translations.$.val':req.body.val,
           'translations.$.lang':req.body.lang,
@@ -54,7 +51,6 @@ module.exports = {
         new:true
       },function(err,term){
         if(err)throw err;
-        writeFiles.writeAll();
         res.send(term);
         });
     },
@@ -66,8 +62,7 @@ module.exports = {
         }
       },function(err,term){
         if(err)throw err;
-        writeFiles.writeAll();
-        res.send(term);
+         res.send(term);
         console.log(term,'term');
       })
     }

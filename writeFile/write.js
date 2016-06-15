@@ -6,23 +6,20 @@ var mkdirp = require('mkdirp');
 var fs = require('fs');
 var AWS = require("aws-sdk");
 
+AWS.config.update({
+  accessKeyId: config.LanguageAPI.accessKeyId,
+   secretAccessKey: config.LanguageAPI.secretAccessKey
+ });
 
-var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY_ID;
-var AWS_SECRET_KEY = process.env.AWS_SECRET_ACCESS_KEY;
-var S3_BUCKET = process.env.AWS_BUCKET_NAME;
-AWS.config.update({accessKeyId: AWS_ACCESS_KEY, secretAccessKey: AWS_SECRET_KEY});
-
-function uploadFolder(bucketName,path,userId){
+function uploadFolder(clientId){
   var s3 = new AWS.S3(),
-      userKey = 'wpg_c/'+userId + '/app/i18n' ;
+      userKey = 'wpg_c/app/i18n/'+clientId ;
 
-  s3.createBucket({Bucket:bucketName},function(){
-    var params = {Bucket:bucketName, Key: userKey, Body: path};
+    var params = {Bucket:'static.gooddonegreat.com/', Key: userKey, Body: fs.readFileSync(__dirname+'/../langFiles/'+userId)};
     s3.putObject(params,function(err,data){
       if(err)throw err;
       console.log('Successfully Uploaded' + userId + ' to AWS!');
     })
-  })
 }
 
 function addEnglishTranslation(englishObj,companyObj){
@@ -122,7 +119,7 @@ function getCompanyIds(callback){
    '112345678234567',
  ];
  var fakeId = ['99999999999'];
- callback(fakeId);
+ callback(realIds);
 }
 
 
@@ -130,12 +127,13 @@ function getCompanyIds(callback){
 module.exports = {
 
   writeAll: function(){
-    getCompanyIds(function(companyIds){
-      for (var i = 0; i < companyIds.length; i++) {
-        var basePath = __dirname + '/../langFiles/'+companyIds[i];
-        writeAsJson(basePath, companyIds[i],function(folderPath){
-          //add Some stuff to AWS upload
-          // uploadFolder('bucketName',folderPath,companyIds[i]);
+    getCompanyIds(function(clientIds){
+      for (var i = 0; i < clientIds.length; i++) {
+        var basePath = __dirname + '/../../langFiles/'+clientIds[i];
+        writeAsJson(basePath, clientIds[i],function(folderPath){
+          // add Some stuff to AWS upload
+          // uploadFolder(clientIds[i]);
+          console.log(folderPath,'folderPath');
         });
       }
     })

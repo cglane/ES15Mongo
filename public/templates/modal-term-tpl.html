@@ -38,12 +38,9 @@
       <option>zh-CN</option>
     </select>
     <label >ClientId</label>
-    <select  ng-if = "!clientId && otherOption !== 'Other'" class="form-control" ng-change = "otherOption = addedTranslations[$index].optionClientId"ng-model = "addedTranslations[$index].optionClientId" required>
+    <select  ng-if = "!clientId "class="form-control" ng-model = "addedTranslations[$index].optionClientId" required>
       <option ng-repeat = "company in companyIds">{{company}}</option>
-      <option>Other</option>
     </select>
-    {{otherOption}}
-    <input ng-if = "!clientId && otherOption =='Other'" model = "addedTranslations[$index].optionClientId"class = "form-control"type="text" name="name" value="">
     <select ng-if = "clientId" class="form-control" ng-model = "addedTranslations[$index].optionClientId">
       <option selected = "clientId">{{clientId}}</option>
     </select>

@@ -13,10 +13,7 @@ angular
       $scope.addedTerm = {};
       $scope.clientId = items.clientId;
       $scope.companyIds = MainService.getCompanyIds();
-      $scope.otherOption = '';
-      // MainService.getCompanyIds().then(function(companyObj){
-      //   $scope.companies = companies;
-      // })
+      
     };
 
     function createTerm(term,callback){

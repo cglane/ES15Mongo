@@ -1,10 +1,7 @@
 var Term = require('../models/term.js');
 var _ = require('underscore');
-var writeFiles = require('../writeFile/write.js');
 
 function translationExists(translations,data){
-  console.log(data,'data');
-  console.log(translations,'translations');
   var rtnVal = false;
   _.each(translations,function(trans){
     if(trans.clientId == data.clientId && trans.lang == data.lang){
@@ -31,7 +28,6 @@ module.exports = {
         if(!term){
           newTerm.save(function(err,termRes){
             if(err)throw err;
-            // writeFiles.writeAll();
             res.json({success:true,data:termRes});
           })
         }else{
@@ -52,7 +48,6 @@ module.exports = {
           })
           term.save(function(err,term){
             if(err)throw err;
-            // writeFiles.writeAll();
             res.send({success: true})
           })
         }else{

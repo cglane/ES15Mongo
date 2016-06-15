@@ -5,23 +5,9 @@ var mongoose = require('mongoose'),
     createCtrl = require("../controllers/createController.js"),
     editCtrl = require("../controllers/editController.js"),
     getCtrl = require("../controllers/getController.js"),
-    loginCtrl = require("../controllers/loginController.js");
+    uploadCtrl = require('../controllers/uploadController.js');
+
 module.exports = function (apiRoutes) {
-
-  apiRoutes.get('/hello', function(req, res) {
-    console.log('ehlsjl;')
-  	res.json({ message: 'Welcome to the coolest API on earth!' });
-  });
-  apiRoutes.delete('/delete_term/',function(req,res){
-    Term.remove(function(err){
-      if(err)throw err;
-      res.send('Collection deleted')
-    })
-  })
-  //============Login Logout ===================//
-  apiRoutes.post('/login/',loginCtrl.doLogin);
-
-  apiRoutes.post('/logout/',loginCtrl.logOut);
 
   //============Write Files======================//
 
@@ -57,6 +43,10 @@ module.exports = function (apiRoutes) {
 
   apiRoutes.delete('/soft_delete/:_id',editCtrl.softDelete);
 
-  apiRoutes.delete('/delete_translation/:termId/:transId',editCtrl.deleteTranslation)
+  apiRoutes.delete('/delete_translation/:termId/:transId',editCtrl.deleteTranslation);
+
+//=============Upload Json Folder ============//
+
+  apiRoutes.post('/uploadFile/',uploadCtrl.uploadFile);
 
 }

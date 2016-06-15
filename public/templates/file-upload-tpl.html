@@ -1,0 +1,45 @@
+<div class="modal-header">
+    <h3 class="modal-title">Upload Json File</h3>
+</div>
+        <div class="modal-body">
+          <div>
+            <h1>Select text file</h1>
+            <form name = 'myForm'>
+              <input type="file" on-read-file="showContent($fileContent)" />
+              <div ng-if="uploadObj.jsonData">
+                <h2>Is this Correct?:</h2>
+                <pre>{{ uploadObj.jsonData }}</pre>
+              </div>
+              <fieldset class="form-group">
+                <label >Group</label>
+                <input  type="text" ng-model = "uploadObj.group"class="form-control" placeholder="Group" required>
+              </fieldset>
+              <fieldset class="form-group">
+                <label >Language</label>
+                <select placeholder = "language"class="form-control" ng-model = "uploadObj.language" required>
+                  <option>en-US</option>
+                  <option>de-DE</option>
+                  <option>en-GB</option>
+                  <option>es-SP</option>
+                  <option>it-IT</option>
+                  <option>nl-NL</option>
+                  <option>pt-BR</option>
+                  <option>zh-CN</option>
+                </select>  </fieldset>
+              <fieldset class = "form-group">
+                <label >ClientId</label>
+              <select placeholder = "clientId"  class="form-control" ng-model = "uploadObj.clientId"  required>
+                <option ng-repeat = "company in companyIds">{{company}}</option>
+              </select>
+            </fieldset>
+              <button type="submit" class = "btn btn-primary"ng-click = "addToDB(myForm)"name="button">Submit</button>
+            </form>
+          </div>
+          <div class = "wrapp-text"ng-if = "logResults">
+            <h6>ResultsLog</h6>
+              <p>{{logResults}}</p>
+          </div>
+          <div class="modal-footer">
+                    <button class="btn btn-success" type="submit" ng-click="ok()">Close</button>
+          </div>
+        </div>

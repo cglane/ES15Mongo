@@ -21,7 +21,7 @@ angular
         ct.translations = res.data.translations.filter(function(el){
           return el.clientId == ct.clientId;
         });
-        ct.noRepeatKeys = ['translations','__v','_id','softDelete','createdAt','updatedAt','createdBy'];
+        ct.noRepeatKeys = ['translations','__v','_id','softDelete','createdAt','updatedAt','updatedBy','createdBy'];
       })
     }
 
@@ -36,7 +36,6 @@ angular
 
     ct.editTerm = function(key,val){
       ct.term[key] = val;
-      ct.term.updatedAt = new Date();
       MainService.editOneTerm(ct.term).then(function(el){
       })
     }

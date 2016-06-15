@@ -1,5 +1,7 @@
 var rbSession = require('../lib/rbSession.js');
 var request = require('request');
+var schedule = require('node-schedule');
+var write = require('../writeFile/write.js');
 
 function rbLogin(customerId, user, pass, callback) {
   var url = 'https://www.gdg.do/rest/api/login?loginName=' + user + '&password=' + pass + '&custId=' + customerId + '&output=json';
@@ -25,6 +27,7 @@ module.exports = {
         res.clearCookie('rbSessionId');
         res.clearCookie('rbUserId');
         res.clearCookie('rbUserName');
+        write.writeAll();
         res.redirect('/#/login');
       }
     });
@@ -48,9 +51,9 @@ module.exports = {
   doLogin: function(req, res, next) {
     rbLogin(null, req.body.username, req.body.password,
       function(err, sessionId) {
-        console.log(sessionId);
-        res.cookie('rbSessionId', sessionId, { maxAge: 900000, httpOnly: true });
 
+        var sessionLength = 9000000;
+        res.cookie('rbSessionId', sessionId, { maxAge: sessionLength, httpOnly: true });
         var url = 'https://www.gdg.do/rest/api/selectQuery?' +
           'sessionId=' + sessionId +
           '&startRow=0&maxRows=1&output=json' +
@@ -59,7 +62,6 @@ module.exports = {
         request.get(url, function(err, rbRes, body) {
           if (err) res.send(err);
           else {
-            console.log(typeof body, body);
             var user;
             try {
               user = JSON.parse(body);
@@ -67,11 +69,19 @@ module.exports = {
               res.send('Error: ' + err);
             }
             if (user.length) {
-              res.cookie('rbUserId', user[0][0], { maxAge: 900000, httpOnly: true });
-              res.cookie('rbUserName', user[0][1], { maxAge: 900000, httpOnly: true });
-              res.cookie('rbUserRole', user[0][2], { maxAge: 900000, httpOnly: true });
+              res.cookie('rbUserId', user[0][0], { maxAge: sessionLength, httpOnly: true });
+              res.cookie('rbUserName', user[0][1], { maxAge: sessionLength, httpOnly: true });
+              res.cookie('rbUserRole', user[0][2], { maxAge: sessionLength, httpOnly: true });
+              //set trigger for write user files
+              setTimeout(function () {
+                write.writeAll();
+              }, sessionLength);
+
+              res.send({'success': true,'userName':user[0][1]});
+
+            }else{
+              res.send({'success': false});
             }
-            res.redirect('/#/companies')
           }
         });
     });

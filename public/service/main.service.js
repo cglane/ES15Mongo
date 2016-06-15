@@ -3,7 +3,8 @@
   angular
     .module('main')
     .factory('MainService',function($http){
-      var url = 'http://localhost:3000';
+      var url = 'http://localhost:3000',
+          userName = localStorage.getItem('userName');
 
       var getAllTerms = function(){
         return $http.get(url+'/api/get_all_terms/');
@@ -14,7 +15,16 @@
       }
 
       var editOneTerm = function(term){
-        return $http.put(url+'/api/edit_term/'+term._id, term)
+          return $http.put(url+'/api/edit_term/'+term._id, (function (){
+            var newTerm = {
+              'updatedBy': localStorage.getItem('userName'),
+              'group':term.group,
+              'updatedAt': new Date(),
+              'comments': term.comments
+            }
+            return newTerm;
+          })());
+
       }
 
       var getCompanyTerms = function(clientId){
@@ -23,6 +33,7 @@
 
       var editTranslation = function(translation){
         var term_id = localStorage.getItem("termId");
+        translation.updatedBy = userName;
         return $http.put(url+'/api/edit_translation/'+term_id+'/'+translation._id,translation)
       }
 
@@ -47,6 +58,7 @@
       }
 
       var createTerm = function(term){
+        term.createdBy = userName;
         return $http.post(url+'/api/create_term',term);
       };
 
@@ -60,7 +72,12 @@
         return ['12345678','13520310','14791960','16015839','20221348','25724430'];
       };
 
+      var uploadFile = function(obj){
+        return $http.post(url+'/api/uploadFile/', obj);
+      };
+
     return{
+      uploadFile:uploadFile,
       getCompanyIds: getCompanyIds,
       createTranslation:createTranslation,
       createTerm:createTerm,

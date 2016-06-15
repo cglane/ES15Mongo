@@ -7,30 +7,28 @@ angular
   .controller('CompanyController',function($uibModal,$stateParams,$state,$location,$scope,MainService,$filter){
     var cc = this;
 
-
-
     function init(){
       MainService.getCompanies().then(function(companies){
         console.log(companies,'companies');
         cc.companies = companies.data;
       })
-    }
+    };
 
     cc.seeCompany = function(id){
       console.log('alskdj');
       $location.path('view_company/'+id);
-    }
+    };
 
     cc.goMain = function(){
       $location.path('main');
-    }
+    };
 
     cc.hideEmpty = function(key){
       if(cc.companies[key]){
         console.log(cc.companies[key]);
       }
       return false;
-    }
+    };
 
     cc.modalTerm = function(clientId,term){
     var modalInstance = $uibModal.open({
@@ -46,9 +44,26 @@ angular
         }
       }
     });
-
     modalInstance.result.then(function (term) {
       $scope.term = term;
+    }, function () {
+    });
+    }
+
+    cc.folderUpload = function(){
+      var items = 'hello'
+      var modalInstance = $uibModal.open({
+        templateUrl: '../templates/file-upload-tpl.html',
+        controller: 'UploadController',
+        resolve:{
+          items:function(){
+            return cc.companies;
+          }
+        }
+      });
+
+    modalInstance.result.then(function () {
+      console.log('hello');
     }, function () {
     });
     }

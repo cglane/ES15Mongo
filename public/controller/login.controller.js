@@ -12,17 +12,21 @@ angular
         username: $scope.username
       }
       LoginService.doLogin(obj).then(function(res){
-        // console.log(res,'res');
-        // if(res.data)$location.path("/companies")
+        if(res.data.success){
+          console.log(res.data.userName);
+          localStorage.setItem('userName',res.data.userName)
+          $location.path("/companies");
+        }
+        else alert('Incorrect Login Information');
       })
     };
 
     $scope.logOut = function(){
-      console.log('alsdkjsd');
-      $location.path('/login')
       LoginService.doLogOut().then(function(){
+        $location.path('/login')
         console.log('You are logged Out');
       })
     };
+
 });
 })();

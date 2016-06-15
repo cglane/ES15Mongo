@@ -5,6 +5,8 @@ var methodOverride = require('method-override');
 var bodyParser  = require('body-parser');
 var morgan      = require('morgan');
 var mongoose    = require('mongoose');
+var cookieParser = require('cookie-parser');
+var loginCtrl = require("./controllers/loginController.js");
 
 //Config File
 var config = require('./config');
@@ -21,6 +23,20 @@ app.use(express.static(__dirname + '/public'));
 // / use body parser so we can get info from POST and/or URL parameters
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cookieParser());
+
+//login logout
+app.post('/api/login/',loginCtrl.doLogin);
+app.post('/api/logout/',loginCtrl.logOut);
+
+//check for sessionId
+app.use(function(req,res,next){
+  if(req.cookies.rbSessionId === undefined){
+    console.log('sessionId has expired');
+  }else if(req.cookies.rbSessionId){
+    next();
+  }
+})
 
 // use morgan to log requests to the console
 app.use(morgan('dev'));
@@ -49,12 +65,11 @@ app.use(allowCrossDomain);
 // get an instance of the router for api routes
 // ---------------------------------------------------------
 var apiRoutes = express.Router();
-
 //routes for api
 require('./api/routes.js')(apiRoutes);
 //adding prefix of api to all fo these routes
 app.use('/api', apiRoutes);
-// require('./fileUpload/upload.config.js')();
+// require('./fileUpload/upload.config.js')(__dirname+'/../i18n');
 // writeFile.testLocalHost();
 // ===============================================
 app.listen(port);

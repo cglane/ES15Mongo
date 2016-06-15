@@ -24,7 +24,7 @@
   <h2 class = "col-md-offset-1"ng-show = 'vm.searchError'>No Results</h2>
   <div  class = "col-md-offset-1"ng-repeat = "item in vm.searchResults">
     <h2>
-      <a ng-href="#/view_term/{{item.key}}">{{item.group}}.{{item.key}}</a>
+      <a ng-href="#/view_term/{{item.key}}/{{item.group}}">{{item.group}}.{{item.key}}</a>
     </h2>
   </div>
 </div>

@@ -11,7 +11,7 @@ var q = require('q');
       if(trans.lang === language)returnArr.push(trans);
     })
     return returnArr;
-  }
+  };
 
   function rateTranslation(gdgId,companyId,term,language){
     var gdgTrans,companyTrans;
@@ -20,7 +20,7 @@ var q = require('q');
       if(trans.clientId == companyId)companyTrans = trans;
     })
     return (companyTrans)? companyTrans:gdgTrans;
-  }
+  };
 
   function companyTerms(clientId){
     var deferred = q.defer();
@@ -46,7 +46,7 @@ var q = require('q');
       deferred.resolve(companyObj);
     })
     return deferred.promise;
-  }
+  };
 
 
 
