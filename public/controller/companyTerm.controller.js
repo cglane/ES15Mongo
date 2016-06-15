@@ -31,7 +31,6 @@ angular
       }else{
         return false;
       }
-      // return (_.contains(ct.noRepeatKeys,key))? true: false;
     }
 
     ct.editTerm = function(key,val){
