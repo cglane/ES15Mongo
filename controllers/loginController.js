@@ -1,7 +1,6 @@
 var rbSession = require('../lib/rbSession.js');
 var request = require('request');
 var schedule = require('node-schedule');
-var write = require('../writeFile/write.js');
 
 function rbLogin(customerId, user, pass, callback) {
   var url = 'https://www.gdg.do/rest/api/login?loginName=' + user + '&password=' + pass + '&custId=' + customerId + '&output=json';
@@ -27,7 +26,6 @@ module.exports = {
         res.clearCookie('rbSessionId');
         res.clearCookie('rbUserId');
         res.clearCookie('rbUserName');
-        write.writeAll();
         res.redirect('/#/login');
       }
     });
@@ -72,10 +70,7 @@ module.exports = {
               res.cookie('rbUserId', user[0][0], { maxAge: sessionLength, httpOnly: true });
               res.cookie('rbUserName', user[0][1], { maxAge: sessionLength, httpOnly: true });
               res.cookie('rbUserRole', user[0][2], { maxAge: sessionLength, httpOnly: true });
-              //set trigger for write user files
-              setTimeout(function () {
-                write.writeAll();
-              }, sessionLength);
+
 
               res.send({'success': true,'userName':user[0][1]});
 

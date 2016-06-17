@@ -1,12 +1,21 @@
 module.exports = {
-	'database': 'mongodb://node:node@jello.modulusmongo.net:27017/a6hExuja',
-	'gdgId': '12345678',
+	'gdgId': '12309280',
 	'CharlesL':{
-		AccessKey: 'AKIAIOFV7QTQ2UZQNKQQ',
+		AccessKeyId: 'AKIAIOFV7QTQ2UZQNKQQ',
 		SecretAccessKey: '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'
 	},
 	'LanguageAPI':{
-		AccessKey:'AKIAJKPUEUUGKYD5SNLA',
+		AccessKeyId:'AKIAJKPUEUUGKYD5SNLA',
 		SecretAccessKey:'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'
-	}	
+	},
+	'MONGODB':{
+		URL: "mongo.gdg.do",
+		User: "gdg_admin",
+		Password: "G8Q'j]'ZS}d[]Uvs"
+	},
+	'databaseUrl': "mongodb://gdg_admin:G8Q'j]'ZS}d[]Uvs@mongo.gdg.do:27017/gdg_langs",
+	'rollbase':{
+		'user':"Gdg2ApiUser",
+		'pass':"5FE&m6bs"
+	}
 	}

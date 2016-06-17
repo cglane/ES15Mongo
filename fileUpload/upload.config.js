@@ -3,11 +3,12 @@ var fs = require('fs'),
     Term = require('../models/term.js'),
     path = require('path'),
     uploadCtrl = require('./upload.controller.js'),
-    configDoc = require('../config.js');
+    config = require('../config.js');
 
-    var config = {};
+    var configObj = {};
 
 module.exports = function(masterPath){
+
   configObj.masterPath = masterPath;
   configObj.clientIds = fs.readdirSync(configObj.masterPath);
   configObj.gdgId = config.gdgId;

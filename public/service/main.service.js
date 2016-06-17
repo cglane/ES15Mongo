@@ -67,16 +67,19 @@
       };
 
       var getCompanyIds = function(){
-        // still neeed an endpoint
-        // return $http.get(url + '')
-        return ['12345678','13520310','14791960','16015839','20221348','25724430'];
+        return $http.get(url + '/api/get_companyids');
       };
 
       var uploadFile = function(obj){
         return $http.post(url+'/api/uploadFile/', obj);
       };
 
+      var getAllClientIds = function(){
+        return $http.get(url+'/api/get_all_clientIds');
+      };
+
     return{
+      getAllClientIds:getAllClientIds,
       uploadFile:uploadFile,
       getCompanyIds: getCompanyIds,
       createTranslation:createTranslation,

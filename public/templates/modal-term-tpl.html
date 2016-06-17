@@ -39,7 +39,7 @@
     </select>
     <label >ClientId</label>
     <select  ng-if = "!clientId "class="form-control" ng-model = "addedTranslations[$index].optionClientId" required>
-      <option ng-repeat = "company in companyIds">{{company}}</option>
+      <option ng-repeat = "company in companyIds">{{company.name}},{{company.id}}</option>
     </select>
     <select ng-if = "clientId" class="form-control" ng-model = "addedTranslations[$index].optionClientId">
       <option selected = "clientId">{{clientId}}</option>

@@ -29,7 +29,7 @@
               <fieldset class = "form-group">
                 <label >ClientId</label>
               <select placeholder = "clientId"  class="form-control" ng-model = "uploadObj.clientId"  required>
-                <option ng-repeat = "company in companyIds">{{company}}</option>
+                <option ng-repeat = "company in companyIds">{{company.name}},{{company.id}}</option></span>
               </select>
             </fieldset>
               <button type="submit" class = "btn btn-primary"ng-click = "addToDB(myForm)"name="button">Submit</button>

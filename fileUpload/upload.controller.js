@@ -2,8 +2,6 @@ var fs = require('fs'),
     _ = require('underscore'),
     Term = require('../models/term.js'),
     q = require('q'),
-    csvWriter = require('csv-write-stream'),
-    writeCtrl = require('../controllers/writeController.js'),
     path = require('path'),
     csv = require('csv-parser');
 

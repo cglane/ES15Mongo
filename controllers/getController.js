@@ -4,6 +4,8 @@ var _ = require('underscore');
 var getCtrl = require('./getController.js');
 var config = require('../config.js');
 var q = require('q');
+var request = require('request');
+var rollbase = require('./rbSession.js');
 
   function extractTranslations(term,language){
     var returnArr = [];
@@ -124,7 +126,66 @@ module.exports = {
         res.send(returnObj)
       })
     })
+  },
+  getClients: function(req, res, next) {
+    if (!req.cookies.rbSessionId) {
+      res.send({error: 'logouts'});
+    } else if (req.cookies.rbUserRole === '90') {
+      var url = 'https://www.gdg.do/rest/api/selectQuery?' +
+        'sessionId=' + req.cookies.rbSessionId +
+        '&startRow=0&maxRows=20000&output=json' +
+        '&query=SELECT id, name FROM CUSTOMER WHERE gdg_2_0=1 ORDER BY name DESC';
+      request.get(url, function(err, rbRes, bodyString) {
+        var body;
+        try { body = JSON.parse(bodyString); }
+        catch (err) { res.send(err) }
+        if (body.message === 'Session expired or invalid login credentials') {
+          res.send({error: 'logouts'});
+        } else {
+          var i = body.length, zones = [];
+          while (i--) {
+            zones.push({
+              id: body[i][0],
+              name: body[i][1]
+            });
+          }
+          res.json(zones);
+        }
+      });
+    } else {
+      var url = 'https://www.gdg.do/rest/api/getRecord?' +
+        'sessionId=' + req.cookies.rbSessionId +
+        '&id=' + req.cookies.rbUserId +
+        '&objName=USER&composite=1&objNames=CUSTOMER&fieldList=id,name,gdg_2_0&output=json';
+      request.get(url, function(err, rbRes, bodyString) {
+        console.log(bodyString);
+        var body;
+        try { body = JSON.parse(bodyString); }
+        catch (err) { res.send(err) }
+        if (body.message === 'Session expired or invalid login credentials') {
+          res.send({error: 'logout'});
+        } else {
+          //only return GDG 2.0 clients
+          res.json(body.composite.filter(function(client) { return client.gdg_2_0; }));
+        }
+      });
+    }
+  },
+  getAllClientIds:function(req,res){
+        rollbase.connect(1,function(err,sessionId){
+            var obj = {
+              cookies:{
+                'rbSessionId':sessionId,
+                'rbUserRole':'90'
+              }
+            }
+            var secondObj = {
+              'json':function(clients){
+                res.send(clients)
+              }
+            }
+            module.exports.getClients(obj,secondObj);
+        });
   }
-
 
 }

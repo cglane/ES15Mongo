@@ -15,8 +15,9 @@ var writeFile = require('./writeFile/write.js')
 //================Configuration==========//
 
 var port = process.env.PORT || 3000;
-// mongoose.connect(config.database); // connect to database
-mongoose.connect('mongodb://localhost/myappdatabase');
+mongoose.connect("gdg_admin:G8Q'j]'ZS}d[]Uvs@mongo.gdg.do:27017/gdg_langs");
+
+
 //connect to public html files
 app.use(express.static(__dirname + '/public'));
 
@@ -69,8 +70,10 @@ var apiRoutes = express.Router();
 require('./api/routes.js')(apiRoutes);
 //adding prefix of api to all fo these routes
 app.use('/api', apiRoutes);
-// require('./fileUpload/upload.config.js')(__dirname+'/../i18n');
+// require('./fileUpload/upload.config.js')(__dirname+'/i18n/');
+// require('./writeFile/write.js').rollbase();
 // writeFile.testLocalHost();
+// require('./writeFile/write.js').writeAll();
 // ===============================================
 app.listen(port);
 

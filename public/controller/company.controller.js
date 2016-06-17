@@ -8,10 +8,19 @@ angular
     var cc = this;
 
     function init(){
+      cc.companies = [];
       MainService.getCompanies().then(function(companies){
-        console.log(companies,'companies');
-        cc.companies = companies.data;
+        MainService.getCompanyIds().then(function(companyIds){
+          _.each(companyIds.data,function(companyObj){
+            _.each(companies.data,function(id){
+              if(id === companyObj.id){
+                cc.companies.push(companyObj);
+              }
+            })
+          })
+        })
       })
+      console.log(cc.companies,'companies');
     };
 
     cc.seeCompany = function(id){

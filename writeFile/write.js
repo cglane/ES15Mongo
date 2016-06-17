@@ -5,21 +5,56 @@ var q = require('q');
 var mkdirp = require('mkdirp');
 var fs = require('fs');
 var AWS = require("aws-sdk");
+var rollbase = require('../controllers/rbSession.js');
+var getCtrl = require('../controllers/getController.js');
+//connect to rollbase
 
 AWS.config.update({
-  accessKeyId: config.LanguageAPI.accessKeyId,
-   secretAccessKey: config.LanguageAPI.secretAccessKey
+    "accessKeyId": 'AKIAJKPUEUUGKYD5SNLA',
+    "secretAccessKey": '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',
+    "region":'us-east-1'
  });
 
-function uploadFolder(clientId){
-  var s3 = new AWS.S3(),
-      userKey = 'wpg_c/app/i18n/'+clientId ;
+function getClientIds(){
+    var deferred = q.defer();
+    rollbase.connect(1,function(err,sessionId){
+        var obj = {
+          cookies:{
+            'rbSessionId':sessionId,
+            'rbUserRole':'90'
+          }
+        }
+        var secondObj = {
+          'json':function(clients){
+            deferred.resolve(clients);
+          }
+        }
+        getCtrl.getClients(obj,secondObj);
+    });
+    return deferred.promise;
+};
 
-    var params = {Bucket:'static.gooddonegreat.com/', Key: userKey, Body: fs.readFileSync(__dirname+'/../langFiles/'+userId)};
-    s3.putObject(params,function(err,data){
-      if(err)throw err;
-      console.log('Successfully Uploaded' + userId + ' to AWS!');
+function uploadFolder(clientId){
+  var deferred = q.defer();
+  var subFolders = fs.readdirSync(__dirname + '/../../langFiles/'+clientId);
+  _.each(subFolders,function(langFolder,langItr){
+    var files = fs.readdirSync(__dirname + '/../../langFiles/'+clientId+"/"+ langFolder);
+    _.each(files,function(jsonFile,fileItr){
+      //pass to s3
+      var s3 = new AWS.S3(),
+          // userKey = 'wpg_c/'+clientId+'/app/i18n/'+langFolder,
+          userKey = 'testingLangFiles/'+clientId+'/'+langFolder +'/'+jsonFile,
+          readStream = fs.createReadStream(__dirname+'/../../langFiles/'+clientId+"/"+langFolder+"/"+jsonFile),
+          params = {Bucket:'static.gooddonegreat.com', Key: userKey, Body: readStream};
+        s3.upload(params,function(err,data){
+          if(err)throw err;
+          if(langItr == langFolder.length-1 && fileItr == jsonFile.length-1){
+            deferred.resolve();
+          }
+        })
     })
+  })
+  return deferred.promise;
 }
 
 function addEnglishTranslation(englishObj,companyObj){
@@ -108,36 +143,39 @@ function writeAsJson(basePath, clientId, callback){
   })
 }
 
-function getCompanyIds(callback){
-  var realIds = [
-    '12345678',
-   '13520310',
-   '14791960',
-   '16015839',
-   '20221348',
-   '25724430',
-   '112345678234567',
- ];
- var fakeId = ['99999999999'];
- callback(realIds);
+function writeFoldersLocally(){
+  var deferred = q.defer();
+  var itr = 0;
+  getClientIds().then(function(clients){
+    function loop(){
+      var basePath = __dirname + '/../../langFiles/'+clients[itr].id;
+      writeAsJson(basePath, clients[itr].id,function(folderPath){
+        console.log(client[itr].id, ': written locally');
+      });
+      if(++itr < clients.length)loop();
+    }loop();
+    deferred.resolve(clients);
+  })
+  return deferred.promise;
 }
-
 
 
 module.exports = {
 
   writeAll: function(){
-    getCompanyIds(function(clientIds){
-      for (var i = 0; i < clientIds.length; i++) {
-        var basePath = __dirname + '/../../langFiles/'+clientIds[i];
-        writeAsJson(basePath, clientIds[i],function(folderPath){
-          // add Some stuff to AWS upload
-          // uploadFolder(clientIds[i]);
-          console.log(folderPath,'folderPath');
-        });
-      }
+    writeFoldersLocally().then(function(clients){
+      var itr = 0;
+      function loop(){
+        console.log(clients[itr].id,'upload');
+        uploadFolder(clients[itr].id).then(function(){
+          console.log(clients[itr].id,'complete');
+          if(++itr < clients.length) loop();
+        })
+      }loop();
+      console.log('All Files Written And Uploaded!!!!!!!!');
     })
   },
+
   testLocalHost:function(){
     var basePath = __dirname + '/../../WPG-2.0/WPG/app/i18n';
     writeAsJson(basePath,'12345678');

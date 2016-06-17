@@ -12,8 +12,10 @@ angular
       $scope.addedTranslations = [];
       $scope.addedTerm = {};
       $scope.clientId = items.clientId;
-      $scope.companyIds = MainService.getCompanyIds();
-      
+      MainService.getAllClientIds().then(function(arr){
+        $scope.companyIds = arr.data;
+      })
+
     };
 
     function createTerm(term,callback){
@@ -54,11 +56,13 @@ angular
         if(!$scope.term){
           createTerm($scope.addedTerm,function(termId){
               for (var i = 0; i < $scope.addedTranslations.length; i++) {
+                $scope.addedTranslations[i].optionClientId = $scope.addedTranslations[i].optionClientId.split(',')[1];
                 addTranslation($scope.addedTranslations[i],termId);
               }
             });
         }else{
           for (var i = 0; i < $scope.addedTranslations.length; i++) {
+            $scope.addedTranslations[i].optionClientId = $scope.addedTranslations[i].optionClientId.split(',')[1];
             addTranslation($scope.addedTranslations[i],$scope.term._id)
           }
         }
