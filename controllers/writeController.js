@@ -161,7 +161,7 @@ function writeFoldersLocally(){
 }
 
 
-module.exports = function(io){
+module.exports = function(socket){
 
 
   return {
@@ -172,39 +172,32 @@ module.exports = function(io){
           console.log(clients[itr].id,'upload');
           uploadFolder(clients[itr].id).then(function(){
             console.log(clients[itr].id,'complete');
-            res.write(i,clients.length)
             if(++itr < clients.length) loop();
           })
         }loop();
         console.log('All Files Written And Uploaded!!!!!!!!');
       })
     },
+
     writeAllSocket: function(req,res){
       writeFoldersLocally().then(function(clients){
         var itr = 0;
-        io.on('connection', function(socket){
-          loop(socket);
-        })
-        function loop(socket){
+        function loop(){
           console.log(clients[itr].id,'upload');
           // uploadFolder(clients[itr].id).then(function(){
             console.log(clients[itr].id,'complete');
-            socket.emit('progress','this is awesome');
+            socket.emit("progress", {itr:itr,total:clients.length-1});
             if(++itr < clients.length) loop();
           // })
-        };
-
-        io.on('disconnect', function(socket){
-          socket.disconnect();
-        })
-        
-        res.send('All Files Written')
+        }loop();
+        res.send({'success':true})
         console.log('All Files Written And Uploaded!!!!!!!!');
       })
     },
+
     testLocalHost:function(){
       var basePath = __dirname + '/../../WPG-2.0/WPG/app/i18n';
       writeAsJson(basePath,'12345678');
     }
-  };
+}
 }

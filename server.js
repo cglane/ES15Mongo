@@ -64,7 +64,8 @@ var allowCrossDomain = function(req, res, next) {
 app.use(allowCrossDomain);
 
 io.on('connection', function(socket){
-  console.log("connected");
+  console.log('socket connected');
+  require('./api/routes.js')(apiRoutes,socket);
   socket.emit("greetings", {msg:"hello"});
 });
 // ---------------------------------------------------------
@@ -72,7 +73,6 @@ io.on('connection', function(socket){
 // ---------------------------------------------------------
 var apiRoutes = express.Router();
 //routes for api
-require('./api/routes.js')(apiRoutes,io);
 //adding prefix of api to all fo these routes
 app.use('/api', apiRoutes);
 // ===============================================

@@ -1,10 +1,18 @@
 <div >
         <div class="modal-header">
-            <h3 class="modal-title">I'm a modal!</h3>
+            <h3 class="modal-title">Deploy Changes To Amazon Cloud</h3>
 
         </div>
         <div class="modal-body">
-              <button ng-click = "writeAll()">writeAll</button>
+              <uib-progressbar max="max" value="dynamic"><span style="color:white; white-space:nowrap;">{{dynamic}} / {{max}}</span></uib-progressbar>
+              <h1>
+                <span class = "glyphicon glyphicon-cloud-upload">
+                  <button class = "btn btn-primary"ng-click = "writeAll()">Deploy</button>
+                </span>
+              </h1>
+              <h3 ng-show = "deployComplete">
+                All Files Uploaded To Amazon!
+              </h3>
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
