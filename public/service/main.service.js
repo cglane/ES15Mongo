@@ -78,7 +78,12 @@
         return $http.get(url+'/api/get_all_clientIds');
       };
 
+      var writeAllSocket = function(){
+        return $http.get(url + "/api/writeAllSocket")
+      };
+
     return{
+      writeAllSocket:writeAllSocket,
       getAllClientIds:getAllClientIds,
       uploadFile:uploadFile,
       getCompanyIds: getCompanyIds,

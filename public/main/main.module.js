@@ -20,8 +20,12 @@
       'xeditable',
       'ui.bootstrap',
       'ngFileUpload',
-      'angularFileUpload'
+      'angularFileUpload',
+      'btford.socket-io'
     ])
+    .factory('socket', function (socketFactory) {
+    return socketFactory();
+    })
     .run(function(editableOptions) {
       editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
     })

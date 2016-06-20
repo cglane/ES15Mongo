@@ -7,15 +7,16 @@ var morgan      = require('morgan');
 var mongoose    = require('mongoose');
 var cookieParser = require('cookie-parser');
 var loginCtrl = require("./controllers/loginController.js");
-
-//Config File
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
 var config = require('./config');
-var writeFile = require('./writeFile/write.js')
-
+var writeFile = require('./writeFile/write.js');
 //================Configuration==========//
 
 var port = process.env.PORT || 3000;
-mongoose.connect("gdg_admin:G8Q'j]'ZS}d[]Uvs@mongo.gdg.do:27017/gdg_langs");
+
+mongoose.connect('mongodb://localhost:27017/myappdatabase');
+// mongoose.connect("gdg_admin:G8Q'j]'ZS}d[]Uvs@mongo.gdg.do:27017/gdg_langs");
 
 
 //connect to public html files
@@ -62,20 +63,20 @@ var allowCrossDomain = function(req, res, next) {
 };
 app.use(allowCrossDomain);
 
+io.on('connection', function(socket){
+  console.log("connected");
+  socket.emit("greetings", {msg:"hello"});
+});
 // ---------------------------------------------------------
 // get an instance of the router for api routes
 // ---------------------------------------------------------
 var apiRoutes = express.Router();
 //routes for api
-require('./api/routes.js')(apiRoutes);
+require('./api/routes.js')(apiRoutes,io);
 //adding prefix of api to all fo these routes
 app.use('/api', apiRoutes);
-// require('./fileUpload/upload.config.js')(__dirname+'/i18n/');
-// require('./writeFile/write.js').rollbase();
-// writeFile.testLocalHost();
-// require('./writeFile/write.js').writeAll();
 // ===============================================
-app.listen(port);
+server.listen(port);
 
 
 console.log('Magic happens at http://localhost:' + port);

@@ -1,9 +1,17 @@
 <div class="row">
-  <div ng-controller = "LoginController">
-    <h1  class = "col-md-offset-1">
-      <span ng-click = "logOut()"class = "glyphicon glyphicon-log-out"></span>
-      <span ng-controller = "CompanyController as cc" ng-click = "cc.folderUpload()" class = "glyphicon glyphicon-upload"></span>
-    </h1>
+  <div style = "font-size:1.5em"class = "col-lg-offset-1"ng-controller = "LoginController">
+      <p ng-click = "logOut()"class = "col-md-1 text-center">
+        <span>LogOut</span><br>
+        <span ng-mouseover = "log = !log" ng-mouseleave = "log = !log"class = "glyphicon glyphicon-log-out"></span>
+      </p>
+      <p ng-controller = "CompanyController as cc" ng-click = "cc.folderUpload()"class = "col-md-1 text-center">
+        <span>Upload</span><br>
+        <span ng-mouseover = "uploadJson = !uploadJson" ng-mouseleave = "uploadJson = !uploadJson" class = "glyphicon glyphicon-upload"></span>
+      </p>
+      <p ng-controller = "CompanyController as cc" ng-click = "cc.deployCloud()"class = "col-md-1 text-center">
+        <span>Deploy</span><br>
+        <span ng-mouseover = "deploy = !deploy"ng-mouseleave = "deploy = !deploy"class = "glyphicon glyphicon-cloud-upload"></span>
+      </p>
   </div>
   <div ng-controller = "CompanyController as cc"class="jumbotron">
     <h1 class = 'col-md-offset-1'>

@@ -1,13 +1,12 @@
-
-var mongoose = require('mongoose'),
-    Promise = require('es6-promise').Promise,
-    Term = require('../models/term.js'),
-    createCtrl = require("../controllers/createController.js"),
-    editCtrl = require("../controllers/editController.js"),
-    getCtrl = require("../controllers/getController.js"),
-    uploadCtrl = require('../controllers/uploadController.js');
-
-module.exports = function (apiRoutes) {
+module.exports = function (apiRoutes, io) {
+  var mongoose = require('mongoose'),
+  Promise = require('es6-promise').Promise,
+  Term = require('../models/term.js'),
+  createCtrl = require("../controllers/createController.js"),
+  editCtrl = require("../controllers/editController.js"),
+  getCtrl = require("../controllers/getController.js"),
+  uploadCtrl = require('../controllers/uploadController.js'),
+  writeCtrl = require('../controllers/writeController.js')(io);
 
   //============Write Files======================//
 
@@ -51,5 +50,13 @@ module.exports = function (apiRoutes) {
 //=============Upload Json Folder ============//
 
   apiRoutes.post('/uploadFile/',uploadCtrl.uploadFile);
+
+//==============Write Files to AWS============//
+
+
+  apiRoutes.get('/writeAllFiles/',writeCtrl.writeAll);
+
+  apiRoutes.get('/writeAllSocket/',writeCtrl.writeAllSocket);
+
 
 }

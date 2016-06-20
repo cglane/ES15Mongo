@@ -14,6 +14,10 @@ angular
       $scope.clientId = items.clientId;
       MainService.getAllClientIds().then(function(arr){
         $scope.companyIds = arr.data;
+        if($scope.clientId){
+          var indx = arr.data.map(function(e) {return e.id; }).indexOf(parseInt($scope.clientId));
+          $scope.clientDataStr = arr.data[indx].name + ','+ arr.data[indx].id;
+        }
       })
 
     };

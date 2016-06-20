@@ -5,8 +5,9 @@ var q = require('q');
 var mkdirp = require('mkdirp');
 var fs = require('fs');
 var AWS = require("aws-sdk");
-var rollbase = require('../controllers/rbSession.js');
-var getCtrl = require('../controllers/getController.js');
+var rollbase = require('./rbSession.js');
+var getCtrl = require('./getController.js');
+
 //connect to rollbase
 
 AWS.config.update({
@@ -160,25 +161,50 @@ function writeFoldersLocally(){
 }
 
 
-module.exports = {
+module.exports = function(io){
 
-  writeAll: function(){
-    writeFoldersLocally().then(function(clients){
-      var itr = 0;
-      function loop(){
-        console.log(clients[itr].id,'upload');
-        uploadFolder(clients[itr].id).then(function(){
-          console.log(clients[itr].id,'complete');
-          if(++itr < clients.length) loop();
+
+  return {
+    writeAll: function(req,res){
+      writeFoldersLocally().then(function(clients){
+        var itr = 0;
+        function loop(){
+          console.log(clients[itr].id,'upload');
+          uploadFolder(clients[itr].id).then(function(){
+            console.log(clients[itr].id,'complete');
+            res.write(i,clients.length)
+            if(++itr < clients.length) loop();
+          })
+        }loop();
+        console.log('All Files Written And Uploaded!!!!!!!!');
+      })
+    },
+    writeAllSocket: function(req,res){
+      writeFoldersLocally().then(function(clients){
+        var itr = 0;
+        io.on('connection', function(socket){
+          loop(socket);
         })
-      }loop();
-      console.log('All Files Written And Uploaded!!!!!!!!');
-    })
-  },
+        function loop(socket){
+          console.log(clients[itr].id,'upload');
+          // uploadFolder(clients[itr].id).then(function(){
+            console.log(clients[itr].id,'complete');
+            socket.emit('progress','this is awesome');
+            if(++itr < clients.length) loop();
+          // })
+        };
 
-  testLocalHost:function(){
-    var basePath = __dirname + '/../../WPG-2.0/WPG/app/i18n';
-    writeAsJson(basePath,'12345678');
-  }
-
+        io.on('disconnect', function(socket){
+          socket.disconnect();
+        })
+        
+        res.send('All Files Written')
+        console.log('All Files Written And Uploaded!!!!!!!!');
+      })
+    },
+    testLocalHost:function(){
+      var basePath = __dirname + '/../../WPG-2.0/WPG/app/i18n';
+      writeAsJson(basePath,'12345678');
+    }
+  };
 }

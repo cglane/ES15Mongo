@@ -9,6 +9,7 @@
   <body ng-app = 'main'>
     <div ui-view></div>
     <!-- =========dependencies========= -->
+    <script type="text/javascript" src="./socket.io/socket.io.js"></script>
     <script src="./node_modules/angular/angular.js" charset="utf-8"></script>
     <script src="./node_modules/underscore/underscore.js" charset="utf-8"></script>
     <script src="./node_modules/jquery/dist/jquery.js" charset="utf-8"></script>
@@ -23,6 +24,7 @@
     <script src="./node_modules/ng-file-upload/dist/ng-file-upload.min.js" charset="utf-8"></script>
     <script src="./node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js" charset="utf-8"></script>
     <script src="./node_modules/angular-file-upload/dist/angular-file-upload.min.js" charset="utf-8"></script>
+    <script src="./node_modules/angular-socket-io/socket.js" charset="utf-8"></script>
     <!-- <==============modules and controllers=======> -->
     <script src="./main/main.module.js" charset="utf-8"></script>
     <script src="./controller/main.controller.js" charset="utf-8"></script>
@@ -34,8 +36,10 @@
     <script src="./controller/companyGroups.controller.js" charset="utf-8"></script>
     <script src="./controller/modal.instance.controller.js" charset="utf-8"></script>
     <script src="./controller/upload.controller.js" charset="utf-8"></script>
+    <script src="./controller/deployController.js" charset="utf-8"></script>
     <script src="./service/main.service.js" charset="utf-8"></script>
     <script src="./service/login.service.js" charset="utf-8"></script>
+    <script src="./service/socket.service.js" charset="utf-8"></script>
     <!-- <====================directives======================> -->
     <script src="./directives/readFile.js" charset="utf-8"></script>
   </body>

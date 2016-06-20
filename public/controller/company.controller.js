@@ -4,9 +4,11 @@
 
 angular
   .module('main')
-  .controller('CompanyController',function($uibModal,$stateParams,$state,$location,$scope,MainService,$filter){
+  .controller('CompanyController',function(SocketService,$uibModal,$stateParams,$state,$location,$scope,MainService,$filter){
     var cc = this;
-
+    SocketService.on('progress',function(el){
+      console.log(el,'el');
+    })
     function init(){
       cc.companies = [];
       MainService.getCompanies().then(function(companies){
@@ -73,6 +75,22 @@ angular
 
     modalInstance.result.then(function () {
       console.log('hello');
+    }, function () {
+    });
+    }
+
+    cc.deployCloud = function(){
+    var modalInstance = $uibModal.open({
+      templateUrl: '../templates/deploy-cloud-tpl.html',
+      controller: 'DeployController',
+      resolve: {
+        items: function () {
+          return cc.companies;
+        }
+      }
+    });
+    modalInstance.result.then(function (term) {
+      console.log('closed');
     }, function () {
     });
     }
