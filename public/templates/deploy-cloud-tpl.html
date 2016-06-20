@@ -4,10 +4,13 @@
 
         </div>
         <div class="modal-body">
-              <uib-progressbar max="max" value="dynamic"><span style="color:white; white-space:nowrap;">{{dynamic}} / {{max}}</span></uib-progressbar>
+              <h1>Local Download</h1>
+              <uib-progressbar max="localMax" value="localDynamic"><span style="color:white; white-space:nowrap;">{{localDynamic}} / {{localMax}}</span></uib-progressbar>
+              <h1>AWS Upload</h1>
+              <uib-progressbar max="awsMax" value="awsDynamic"><span style="color:white; white-space:nowrap;">{{awsDynamic}} / {{awsMax}}</span></uib-progressbar>
               <h1>
                 <span class = "glyphicon glyphicon-cloud-upload">
-                  <button class = "btn btn-primary"ng-click = "writeAll()">Deploy</button>
+                  <a ng-click = "writeAll()"><button class = "btn btn-primary">Deploy</button></a>
                 </span>
               </h1>
               <h3 ng-show = "deployComplete">

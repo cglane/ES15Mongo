@@ -15,8 +15,8 @@ var writeFile = require('./writeFile/write.js');
 
 var port = process.env.PORT || 3000;
 
-mongoose.connect('mongodb://localhost:27017/myappdatabase');
-// mongoose.connect("gdg_admin:G8Q'j]'ZS}d[]Uvs@mongo.gdg.do:27017/gdg_langs");
+// mongoose.connect('mongodb://localhost:27017/myappdatabase');
+mongoose.connect("gdg_admin:G8Q'j]'ZS}d[]Uvs@mongo.gdg.do:27017/gdg_langs");
 
 
 //connect to public html files

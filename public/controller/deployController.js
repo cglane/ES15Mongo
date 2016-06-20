@@ -5,14 +5,21 @@
 angular
   .module('main')
   .controller('DeployController',function(SocketService,$uibModalInstance,$uibModal,$stateParams,$state,$route,$location,$scope,MainService,$filter){
-    $scope.max = 0;
-    $scope.dynamic = 0;
+    $scope.awsMax = 0;
+    $scope.awsDynamic = 0;
+    $scope.localMax = 0;
+    $scope.localDynamic = 0;
     $scope.deployComplete = false;
 
-    SocketService.on('progress',function(el){
-      $scope.max = el.total;
-      $scope.dynamic = el.itr;
+    SocketService.on('amazonFolder',function(el){
+      $scope.awsMax = el.total;
+      $scope.awsDynamic = el.itr;
     });
+
+    SocketService.on('localFolder',function(el){
+      $scope.localMax = el.total;
+      $scope.localDynamic = el.itr;
+    })
 
     $scope.writeAll = function(){
       MainService.writeAllSocket().then(function(el){

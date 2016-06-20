@@ -11,8 +11,8 @@ var getCtrl = require('./getController.js');
 //connect to rollbase
 
 AWS.config.update({
-    "accessKeyId": config.LanguageAPI.accessKeyId,
-    "secretAccessKey": config.LanguageAPI.secretAccessKey,
+    "accessKeyId": config.LanguageAPI.AccessKeyId,
+    "secretAccessKey": config.LanguageAPI.SecretAccessKey,
     "region":'us-east-1'
  });
 
@@ -41,15 +41,14 @@ function uploadFolder(clientId){
   _.each(subFolders,function(langFolder,langItr){
     var files = fs.readdirSync(__dirname + '/../../langFiles/'+clientId+"/"+ langFolder);
     _.each(files,function(jsonFile,fileItr){
-      //pass to s3
       var s3 = new AWS.S3(),
           // userKey = 'wpg_c/'+clientId+'/app/i18n/'+langFolder,
-          userKey = 'testingLangFiles/'+clientId+'/'+langFolder +'/'+jsonFile,
+          userKey = 'LangFiles/'+clientId+'/'+langFolder +'/'+jsonFile,
           readStream = fs.createReadStream(__dirname+'/../../langFiles/'+clientId+"/"+langFolder+"/"+jsonFile),
           params = {Bucket:'static.gooddonegreat.com', Key: userKey, Body: readStream};
         s3.upload(params,function(err,data){
           if(err)throw err;
-          if(langItr == langFolder.length-1 && fileItr == jsonFile.length-1){
+          if(langItr == subFolders.length-1 && fileItr == files.length-1){
             deferred.resolve();
           }
         })
@@ -67,7 +66,6 @@ function addEnglishTranslation(englishObj,companyObj){
             companyObj[otherLang][group] = englishObj[group];
           }
           if(!companyObj[otherLang][group][key]){
-            console.log(otherLang,key);
             companyObj[otherLang][group][key] = englishObj[group][key];
           }
         }
@@ -124,6 +122,7 @@ function writeToFolder(basePath,object){
 }
 
 function writeAsJson(basePath, clientId, callback){
+  var deferred = q.defer();
   var companyObj = {'en-US':{},'de-DE':{},'en-GB':{},'es-SP':{},'fr-FR':{},'it-IT':{},'nl-NL':{},'pt-BR':{},'zh-CN':{}};
   companyTerms(config.gdgId).then(function(returnObj){
     companyTerms(clientId).then(function(companyObj){
@@ -138,24 +137,25 @@ function writeAsJson(basePath, clientId, callback){
       }
       var rtnObj = addEnglishTranslation(returnObj['en-US'],returnObj);
       writeToFolder(basePath,rtnObj).then(function(){
-        callback(basePath);
+        deferred.resolve(basePath)
       });
     })
   })
+  return deferred.promise;
 }
 
-function writeFoldersLocally(){
+function writeFoldersLocally(socket){
   var deferred = q.defer();
   var itr = 0;
   getClientIds().then(function(clients){
     function loop(){
       var basePath = __dirname + '/../../langFiles/'+clients[itr].id;
-      writeAsJson(basePath, clients[itr].id,function(folderPath){
-        console.log(client[itr].id, ': written locally');
+      socket.emit('localFolder',{itr:itr,total:clients.length-1})
+      writeAsJson(basePath, clients[itr].id).then(function(folderPath){
+        if(++itr < clients.length)loop();
+        else  deferred.resolve(clients);
       });
-      if(++itr < clients.length)loop();
     }loop();
-    deferred.resolve(clients);
   })
   return deferred.promise;
 }
@@ -175,23 +175,23 @@ module.exports = function(socket){
             if(++itr < clients.length) loop();
           })
         }loop();
-        console.log('All Files Written And Uploaded!!!!!!!!');
       })
     },
 
     writeAllSocket: function(req,res){
-      writeFoldersLocally().then(function(clients){
+      writeFoldersLocally(socket).then(function(clients){
+        console.log('writeFoldersLocally');
         var itr = 0;
         function loop(){
           console.log(clients[itr].id,'upload');
-          // uploadFolder(clients[itr].id).then(function(){
+          uploadFolder(clients[itr].id).then(function(){
             console.log(clients[itr].id,'complete');
-            socket.emit("progress", {itr:itr,total:clients.length-1});
+            socket.emit("amazonFolder", {itr:itr,total:clients.length-1});
             if(++itr < clients.length) loop();
-          // })
+            else res.send({'success':true})
+          })
         }loop();
-        res.send({'success':true})
-        console.log('All Files Written And Uploaded!!!!!!!!');
+
       })
     },
 

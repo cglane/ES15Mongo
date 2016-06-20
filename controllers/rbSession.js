@@ -15,6 +15,7 @@ rbSession.connect = function(customerId, user, pass, callback) {
 
   var url = 'https://' + (process.env.GDG_PREFIX || 'www') + '.gdg.do/rest/api/login?loginName='+user+'&password='+pass+'&custId='+customerId+'&output=json';
   request.get(url, function(error, response, body) {
+    if(error)throw error;
     console.log('login', body);
     res = JSON.parse(body);
     if (res.sessionId) callback(null, res.sessionId);
