@@ -13,7 +13,7 @@ var config = require('./config');
 var writeFile = require('./writeFile/write.js');
 //================Configuration==========//
 
-var port = config.PORT || 3000;
+var port = config.PORT || 80;
 
 // mongoose.connect('mongodb://localhost:27017/myappdatabase');
 mongoose.connect("gdg_admin:G8Q'j]'ZS}d[]Uvs@mongo.gdg.do:27017/gdg_langs");
