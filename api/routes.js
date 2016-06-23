@@ -38,6 +38,9 @@ module.exports = function (apiRoutes, io) {
   apiRoutes.get('/get_companyids',getCtrl.getClients);
 
   apiRoutes.get('/get_all_clientIds',getCtrl.getAllClientIds);
+
+  apiRoutes.post('/get_company_names',getCtrl.getCompanyNames);
+
 //=============Change To Soft Delete============//
 
   apiRoutes.delete('/soft_delete/:_id',editCtrl.softDelete);

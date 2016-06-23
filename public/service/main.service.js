@@ -82,7 +82,12 @@
         return $http.get(url + "/api/writeAllSocket")
       };
 
+      var getCompanyNames = function(idObj){
+        return $http.post(url + '/api/get_company_names',idObj)
+      }
+
     return{
+      getCompanyNames:getCompanyNames,
       writeAllSocket:writeAllSocket,
       getAllClientIds:getAllClientIds,
       uploadFile:uploadFile,

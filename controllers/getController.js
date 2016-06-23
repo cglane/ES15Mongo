@@ -50,7 +50,13 @@ var rollbase = require('./rbSession.js');
     return deferred.promise;
   };
 
-
+function idExists(clientId){
+  var deferred = q.defer();
+  Term.find({'translations.clientId':clientId},function(err,terms){
+    deferred.resolve((terms.length > 1));
+  })
+  return deferred.promise;
+}
 
 module.exports = {
 
@@ -91,6 +97,21 @@ module.exports = {
     })
   },
 
+  getCompanyNames:function(req,res,next){
+    var itr = 0;
+    var companyArr = req.body.data;
+    var returnArr = [];
+    function loop(){
+      idExists(companyArr[itr].id).then(function(el){
+        console.log(itr,'itr');
+        console.log(el,'el');
+        (el)?returnArr.push(companyArr[itr]):null;
+        if(++itr < companyArr.length)loop();
+        else res.send(returnArr);
+      })
+    }loop();
+  },
+
   getNeedTranslation:function(req,res,next){
     var returnArr = [];
     Term.find({'translations.needsTrans': true},function(err,allTerms){
@@ -106,7 +127,8 @@ module.exports = {
           returnObj[trans.clientId] = trans.clientId;
         })
       })
-      res.send(returnObj)
+      console.log('send the return array');
+      res.send({'success':true})
     })
   },
 
@@ -127,6 +149,7 @@ module.exports = {
       })
     })
   },
+
   getClients: function(req, res, next) {
     if (!req.cookies.rbSessionId) {
       res.send({error: 'logouts'});

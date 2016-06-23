@@ -7,20 +7,13 @@ angular
   .controller('CompanyController',function(SocketService,$uibModal,$stateParams,$state,$location,$scope,MainService,$filter){
     var cc = this;
 
-    function init(){
-      cc.companies = [];
-      MainService.getCompanies().then(function(companies){
-        MainService.getCompanyIds().then(function(companyIds){
-          _.each(companyIds.data,function(companyObj){
-            _.each(companies.data,function(id){
-              if(id === companyObj.id){
-                cc.companies.push(companyObj);
-              }
-            })
-          })
+    cc.init = function(){
+      MainService.getAllClientIds().then(function(companyArr){
+        MainService.getCompanyNames(companyArr).then(function(res){
+          console.log(res,'res');
+            cc.companies = res.data;
         })
       })
-      console.log(cc.companies,'companies');
     };
 
     cc.seeCompany = function(id){
@@ -92,14 +85,10 @@ angular
     }, function () {
     });
     }
-    ////init/////
+    
     SocketService.on('connect', function () {
           console.log('socket connected');
-          init();
      });
 
-    init();
-
-    ////init////
 });
 })();
