@@ -11,7 +11,7 @@
   </div>
   <div ng-controller = "CompanyGroupsController as cg"class="jumbotron">
     <h1 class = 'col-md-offset-1'>
-      {{cg.clientId}}
+      {{cg.clientId}} {{cg.clientName}}
       <span ng-controller = "CompanyController as cc"ng-click = "cc.modalTerm(cg.clientId,null)" class = "glyphicon glyphicon-plus"></span>
     </h1>
   </div>

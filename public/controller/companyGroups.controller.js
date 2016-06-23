@@ -7,6 +7,7 @@ angular
   .controller('CompanyGroupsController',function($stateParams,$location,$scope,MainService,$filter){
     var cg = this;
     cg.clientId = $stateParams.clientId;
+    cg.clientName = $stateParams.clientName;
     
     function init(){
       MainService.getCompanyTerms(cg.clientId).then(function(terms){

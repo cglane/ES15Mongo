@@ -8,9 +8,6 @@ module.exports = function (apiRoutes, io) {
   uploadCtrl = require('../controllers/uploadController.js'),
   writeCtrl = require('../controllers/writeController.js')(io);
 
-  //============Write Files======================//
-
-  // apiRoutes.get('/write_i18n/:clientId',getCtrl.writei18n);
 
   //============Upload and Edit==================//
   apiRoutes.post('/create_term',createCtrl.createTerm);

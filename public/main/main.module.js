@@ -62,7 +62,7 @@
             templateUrl:'templates/companies-tpl.html'
           })
           .state("view_companies",{
-            url:'/view_company/:clientId',
+            url:'/view_company/:clientId/:clientName',
             controller:'CompanyGroupsController',
             templateUrl:'templates/view-companies-tpl.html'
           })

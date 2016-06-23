@@ -50,7 +50,7 @@ module.exports = {
     rbLogin(null, req.body.username, req.body.password,
       function(err, sessionId) {
 
-        var sessionLength = 9000000;
+        var sessionLength = 3000000;
         res.cookie('rbSessionId', sessionId, { maxAge: sessionLength, httpOnly: true });
         var url = 'https://www.gdg.do/rest/api/selectQuery?' +
           'sessionId=' + sessionId +

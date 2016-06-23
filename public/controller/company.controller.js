@@ -4,7 +4,7 @@
 
 angular
   .module('main')
-  .controller('CompanyController',function($uibModal,$stateParams,$state,$location,$scope,MainService,$filter){
+  .controller('CompanyController',function(SocketService,$uibModal,$stateParams,$state,$location,$scope,MainService,$filter){
     var cc = this;
 
     function init(){
@@ -92,7 +92,14 @@ angular
     }, function () {
     });
     }
+    ////init/////
+    SocketService.on('connect', function () {
+          console.log('socket connected');
+          init();
+     });
 
     init();
+
+    ////init////
 });
 })();

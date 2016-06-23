@@ -13,7 +13,7 @@ var config = require('./config');
 var writeFile = require('./writeFile/write.js');
 //================Configuration==========//
 
-var port = process.env.PORT || 3000;
+var port = config.PORT || 3000;
 
 // mongoose.connect('mongodb://localhost:27017/myappdatabase');
 mongoose.connect("gdg_admin:G8Q'j]'ZS}d[]Uvs@mongo.gdg.do:27017/gdg_langs");
@@ -31,6 +31,7 @@ app.use(cookieParser());
 app.post('/api/login/',loginCtrl.doLogin);
 app.post('/api/logout/',loginCtrl.logOut);
 
+
 //check for sessionId
 app.use(function(req,res,next){
   if(req.cookies.rbSessionId === undefined){
@@ -40,6 +41,8 @@ app.use(function(req,res,next){
   }
 })
 
+
+
 // use morgan to log requests to the console
 app.use(morgan('dev'));
 
@@ -47,7 +50,6 @@ app.use(morgan('dev'));
 app.use(methodOverride());
 
 // ## CORS middleware
- // http://stackoverflow.com/questions/7067966/how-to-allow-cors-in-express-nodejs
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -63,11 +65,12 @@ var allowCrossDomain = function(req, res, next) {
 };
 app.use(allowCrossDomain);
 
+///----socket connection----///
 io.on('connection', function(socket){
   console.log('socket connected');
   require('./api/routes.js')(apiRoutes,socket);
-  socket.emit("greetings", {msg:"hello"});
 });
+
 // ---------------------------------------------------------
 // get an instance of the router for api routes
 // ---------------------------------------------------------

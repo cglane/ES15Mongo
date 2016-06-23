@@ -169,9 +169,7 @@ module.exports = function(socket){
       writeFoldersLocally().then(function(clients){
         var itr = 0;
         function loop(){
-          console.log(clients[itr].id,'upload');
           uploadFolder(clients[itr].id).then(function(){
-            console.log(clients[itr].id,'complete');
             if(++itr < clients.length) loop();
           })
         }loop();
@@ -180,18 +178,14 @@ module.exports = function(socket){
 
     writeAllSocket: function(req,res){
       writeFoldersLocally(socket).then(function(clients){
-        console.log('writeFoldersLocally');
         var itr = 0;
         function loop(){
-          console.log(clients[itr].id,'upload');
           uploadFolder(clients[itr].id).then(function(){
-            console.log(clients[itr].id,'complete');
             socket.emit("amazonFolder", {itr:itr,total:clients.length-1});
             if(++itr < clients.length) loop();
             else res.send({'success':true})
           })
         }loop();
-
       })
     },
 
