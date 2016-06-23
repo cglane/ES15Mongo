@@ -31,7 +31,7 @@
     })
     .config(function($stateProvider, $urlRouterProvider) {
 
-      $urlRouterProvider.otherwise('/companies');
+      $urlRouterProvider.otherwise('/login');
 
       $stateProvider
 

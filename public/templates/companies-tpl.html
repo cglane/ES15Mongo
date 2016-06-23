@@ -21,10 +21,13 @@
     <h6 class = 'col-md-offset-4' >Add A Term</h6>
   </div>
   <div ng-init="cc.init()" ng-controller = 'CompanyController as cc'class="col-md-6 col-md-offset-3">
+    <div ng-if = "!cc.companies"class="list-group">
+      <h1>{{cc.loadingText}}</h1>
+    </div>
     <ul class = 'list-group 'ng-repeat = 'company in cc.companies'>
       <li ng-click = 'cc.seeCompany(company)'class = 'list-group-item '><a ng-href="#/view_company/{{company.id}}/{{company.name}}"><h3>{{company.id}} {{company.name}}</h3></a></li>
     </ul>
-    <ul class = 'list-group'>
+    <ul ng-show = "cc.companies"class = 'list-group'>
       <li ng-click = 'cc.goMain()'class = 'list-group-item'><a href="#/main"><h3>See All</h3></a></li>
     </ul>
   </div>

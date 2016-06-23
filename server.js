@@ -35,6 +35,7 @@ app.post('/api/logout/',loginCtrl.logOut);
 //check for sessionId
 app.use(function(req,res,next){
   if(req.cookies.rbSessionId === undefined){
+    res.send('noSessId');
     console.log('sessionId has expired');
   }else if(req.cookies.rbSessionId){
     next();

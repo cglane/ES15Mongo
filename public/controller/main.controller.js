@@ -13,7 +13,7 @@ angular
       return _.groupBy(array,"group")
     }
 
-    function init(){
+    vm.init = function(){
       MainService.getAllTerms().then(function(terms){
          vm.groups = filterGroup(terms.data);
          allTerms = terms;
@@ -34,6 +34,5 @@ angular
       vm.showSearch = false;
     }
 
-    init();
 });
 })();

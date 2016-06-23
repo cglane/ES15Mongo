@@ -28,7 +28,7 @@
     </h2>
   </div>
 </div>
-<div class = "col-md-offset-1"ng-controller = "MainController as vm"class="row">
+<div ng-init = "vm.init()"class = "col-md-offset-1"ng-controller = "MainController as vm"class="row">
   <div class="container col-lg-6">
     <ul ng-repeat = "(key,val) in vm.groups" class = "list-group">
       <li ng-click = 'showKeys = !showKeys'class = "list-group-item"><a>{{key}}</a>

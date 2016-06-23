@@ -16,7 +16,7 @@
     </h1>
   </div>
 
-  <div ng-controller = "CompanyGroupsController as cg ">
+  <div ng-init = "cg.init()"ng-controller = "CompanyGroupsController as cg ">
   <div class="container col-lg-6 col-md-offset-2">
     <ul ng-repeat = "(key, val) in cg.groups" class = "list-group">
       <li ng-show = 'cg.hideEmpty(key)'ng-click = 'showGroups = !showGroups'class = "list-group-item"><a>{{key}}</a>

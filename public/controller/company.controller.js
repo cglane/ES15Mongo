@@ -4,14 +4,21 @@
 
 angular
   .module('main')
-  .controller('CompanyController',function(SocketService,$uibModal,$stateParams,$state,$location,$scope,MainService,$filter){
+  .controller('CompanyController',function(SocketService,$uibModal,$interval,$stateParams,$state,$location,$scope,MainService,$filter){
     var cc = this;
+    cc.loadingText = "Loading may take a few seconds....";
+
 
     cc.init = function(){
+      var promise = $interval(function () {
+        cc.loadingText+= '.';
+      }, 800);
+
       MainService.getAllClientIds().then(function(companyArr){
         MainService.getCompanyNames(companyArr).then(function(res){
-          console.log(res,'res');
-            cc.companies = res.data;
+          $interval.cancel(promise);
+          if(res.data == 'noSessId')$location.path('login')
+          else cc.companies = res.data;
         })
       })
     };
@@ -85,7 +92,7 @@ angular
     }, function () {
     });
     }
-    
+
     SocketService.on('connect', function () {
           console.log('socket connected');
      });

@@ -8,8 +8,7 @@ angular
     var cg = this;
     cg.clientId = $stateParams.clientId;
     cg.clientName = $stateParams.clientName;
-    
-    function init(){
+    cg.init = function(){
       MainService.getCompanyTerms(cg.clientId).then(function(terms){
         cg.groups = terms.data;
         console.log(terms.data,'terms');
@@ -36,6 +35,5 @@ angular
       return (Object.keys(subVal).length > 0)? true: false;
     }
 
-    init();
 });
 })();
