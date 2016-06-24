@@ -3,7 +3,7 @@
   angular
     .module('main')
     .factory('LoginService',function($http){
-      var url = '/';
+      var url = '';
 
       var doLogin = function(obj){
         return $http.post(url+'/api/login/',obj);

@@ -3,7 +3,7 @@
   angular
     .module('main')
     .factory('MainService',function($http){
-      var url = '/',
+      var url = '',
           userName = localStorage.getItem('userName');
 
       var getAllTerms = function(){
