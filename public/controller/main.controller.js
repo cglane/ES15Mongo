@@ -23,9 +23,7 @@ angular
     vm.searchTerms = function(){
       vm.searchParams = vm.searchParams;
       vm.searchResults = $filter('filter')(allTerms.data,{key:vm.searchParams});
-      console.log(vm.searchResults,'searchResults');
       vm.searchError = (!vm.searchResults || vm.searchResults.length <1)? true : false;
-      console.log(vm.searchError,'searchError');
     }
 
     vm.clearSearch = function(){

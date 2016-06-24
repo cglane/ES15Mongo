@@ -22,8 +22,7 @@ angular
     };
 
     $scope.addToDB = function(myForm){
-      $scope.uploadObj.clientId = $scope.uploadObj.clientId.split(',')[1];
-
+      $scope.uploadObj.clientId = $scope.uploadObj.clientId.split(',')[0];
       if(!myForm.$error.required){
         $scope.uploadObj.keys = Object.keys($scope.uploadObj.jsonData)
         MainService.uploadFile($scope.uploadObj).then(function(el){

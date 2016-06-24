@@ -103,8 +103,6 @@ module.exports = {
     var returnArr = [];
     function loop(){
       idExists(companyArr[itr].id).then(function(el){
-        console.log(itr,'itr');
-        console.log(el,'el');
         (el)?returnArr.push(companyArr[itr]):null;
         if(++itr < companyArr.length)loop();
         else res.send(returnArr);
@@ -127,7 +125,6 @@ module.exports = {
           returnObj[trans.clientId] = trans.clientId;
         })
       })
-      console.log('send the return array');
       res.send({'success':true})
     })
   },
@@ -181,7 +178,6 @@ module.exports = {
         '&id=' + req.cookies.rbUserId +
         '&objName=USER&composite=1&objNames=CUSTOMER&fieldList=id,name,gdg_2_0&output=json';
       request.get(url, function(err, rbRes, bodyString) {
-        console.log(bodyString);
         var body;
         try { body = JSON.parse(bodyString); }
         catch (err) { res.send(err) }

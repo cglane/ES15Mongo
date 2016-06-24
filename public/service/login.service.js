@@ -3,14 +3,13 @@
   angular
     .module('main')
     .factory('LoginService',function($http){
-      var url = 'http://localhost:3000';
 
       var doLogin = function(obj){
-        return $http.post(url+'/api/login/',obj);
+        return $http.post('/api/login/',obj);
       };
 
       var doLogOut = function(){
-        return $http.post(url+'/api/logout/',{withCredentials:true});
+        return $http.post('/api/logout/',{withCredentials:true});
       };
 
 

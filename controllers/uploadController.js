@@ -13,6 +13,7 @@ function transExists(term,clientId,language){
       returnVal = true;
     }
   })
+  console.log(returnVal,'transExists');
   return returnVal;
 }
 
@@ -105,6 +106,7 @@ function amEnglish(term){
   _.each(term.translations,function(el,itr){
     if (el.lang == 'en-US') returnVal = true ;
   })
+  console.log(returnVal,'returnVal');
   return returnVal;
 }
 
@@ -112,12 +114,14 @@ function addTermToDB(key,value,language,group,clientId,createdBy){
   var deferred = q.defer();
   Term.findOne({'key':key, 'group': group}).exec(function(err,term){
     if(err)throw err;
-    if(term && amEnglish(term)){
+    if(!!term && amEnglish(term)){
+      console.log('insertTranslation');
       insertTranslation(term,value,language,false,clientId).then(function(el){
         deferred.resolve(el);
       });
     }else{
       if(language == 'en-US'){
+        console.log('createTerm');
         createTerm(key,value,language,group,clientId,createdBy).then(function(el){
           deferred.resolve(el);
         });

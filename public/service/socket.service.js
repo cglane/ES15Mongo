@@ -3,7 +3,7 @@
   angular
     .module('main')
     .factory('SocketService',function($rootScope){
-      var socket = io("http://localhost:3000/");
+      var socket = io("");
 
       return {
         on: function(event, cb){
