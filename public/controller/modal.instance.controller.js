@@ -66,8 +66,13 @@ angular
             });
         }else{
           for (var i = 0; i < $scope.addedTranslations.length; i++) {
-            $scope.addedTranslations[i].optionClientId = $scope.addedTranslations[i].optionClientId.split(',')[1];
-            addTranslation($scope.addedTranslations[i],$scope.term._id)
+            console.log($scope.addedTranslations[i],'addedTranslations');
+            if($scope.clientId){
+              $scope.addedTranslations[i].clientId = $scope.clientId;
+            }else{
+              $scope.addedTranslations[i].optionClientId = $scope.addedTranslations[i].optionClientId.split(',')[1];
+            }
+            addTranslation($scope.addedTranslations[i],$scope.term._id);
           }
         }
         ($scope.term)?$state.reload():null;

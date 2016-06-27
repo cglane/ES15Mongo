@@ -41,7 +41,7 @@
     <select  ng-if = "!clientId "class="form-control" ng-model = "addedTranslations[$index].optionClientId" required>
       <option ng-repeat = "company in companyIds">{{company.name}},{{company.id}}</option>
     </select>
-    <select ng-if = "clientId" class="form-control" ng-init = "addedTranslations[$index].clientId = clientDataStr"ng-model = "addedTranslations[$index].optionClientId">
+    <select ng-if = "clientId" class="form-control" ng-model = "addedTranslations[$index].optionClientId">
       <option selected="clientDataStr">{{clientDataStr}}</option>
     </select>
   </fieldset>

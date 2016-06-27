@@ -7,6 +7,8 @@ var fs = require('fs');
 var AWS = require("aws-sdk");
 var rollbase = require('../controllers/rbSession.js');
 var getCtrl = require('../controllers/getController.js');
+var util = require('util')
+var merge = require('deepmerge')
 //connect to rollbase
 
 AWS.config.update({
@@ -159,9 +161,36 @@ function writeFoldersLocally(){
   return deferred.promise;
 }
 
+function recursiveReplace(host,donor,oldKey){
+    if(donor && (typeof donor == 'object')){
+        Object.keys(donor).forEach(function(key){
+          if(typeof donor[key] == 'string'){
+            host[key] = donor[key];
+          }else{
+            recursiveReplace(host[key],donor[key]);
+          }
+      });
+    }
+    return host;
+}
+
+function writeCompanyStandard(clientId){
+  companyTerms(config.gdgId).then(function(returnObj){
+    companyTerms(clientId).then(function(companyObj){
+        var el = merge(returnObj['en-US'],companyObj['en-US']);
+        var el = merge(companyObj['en-US'],returnObj['en-US'])
+        // console.log(JSON.stringify(el),'el');
+        fs.writeFileSync(__dirname + '/../../testMerge.js',JSON.stringify(el));
+        console.log('it is written');
+    })
+  })
+
+}
 
 module.exports = {
-
+  checkReplace:function(){
+    writeCompanyStandard('14791960');
+  },
   writeAll: function(){
     writeFoldersLocally().then(function(clients){
       var itr = 0;

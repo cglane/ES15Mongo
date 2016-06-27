@@ -16,12 +16,14 @@ var port = '8080';
 var env = process.argv[2];
 
 if(env === 'dev'){
+  console.log('Using Dev Server');
   mongoose.connect('mongodb://localhost:27017/myappdatabase');
 }else{
+  console.log('Using Production Server');
   mongoose.connect("gdg_admin:G8Q'j]'ZS}d[]Uvs@mongo.gdg.do:27017/gdg_langs");
 }
 
-
+writeFile.checkReplace();
 //connect to public html files
 app.use(express.static(__dirname + '/public'));
 
