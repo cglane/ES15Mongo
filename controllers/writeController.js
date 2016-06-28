@@ -7,6 +7,7 @@ var fs = require('fs');
 var AWS = require("aws-sdk");
 var rollbase = require('./rbSession.js');
 var getCtrl = require('./getController.js');
+var merge = require('deepmerge')
 
 //connect to rollbase
 
@@ -126,16 +127,8 @@ function writeAsJson(basePath, clientId, callback){
   var companyObj = {'en-US':{},'de-DE':{},'en-GB':{},'es-SP':{},'fr-FR':{},'it-IT':{},'nl-NL':{},'pt-BR':{},'zh-CN':{}};
   companyTerms(config.gdgId).then(function(returnObj){
     companyTerms(clientId).then(function(companyObj){
-      for(var lang in returnObj){
-        for(var group in returnObj[lang]){
-          for(var term in returnObj[lang][group]){
-            if(companyObj[lang][group][term]){
-              returnObj[lang][group][term] = companyObj[lang][group][term];
-            }
-          }
-        }
-      }
-      var rtnObj = addEnglishTranslation(returnObj['en-US'],returnObj);
+      var mergedObj = merge(returnObj,companyObj);
+      var rtnObj = addEnglishTranslation(mergedObj['en-US'],mergedObj);
       writeToFolder(basePath,rtnObj).then(function(){
         deferred.resolve(basePath)
       });

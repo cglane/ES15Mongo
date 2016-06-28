@@ -23,7 +23,6 @@ if(env === 'dev'){
   mongoose.connect("gdg_admin:G8Q'j]'ZS}d[]Uvs@mongo.gdg.do:27017/gdg_langs");
 }
 
-writeFile.checkReplace();
 //connect to public html files
 app.use(express.static(__dirname + '/public'));
 
