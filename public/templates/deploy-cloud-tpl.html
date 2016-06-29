@@ -9,9 +9,9 @@
               <h1>AWS Upload</h1>
               <uib-progressbar max="awsMax" value="awsDynamic"><span style="color:white; white-space:nowrap;">{{awsDynamic}} / {{awsMax}}</span></uib-progressbar>
               <h1>
-                <span class = "glyphicon glyphicon-cloud-upload">
-                  <a ng-click = "writeAll()"><button class = "btn btn-primary">Deploy</button></a>
-                </span>
+                <a class = "btn btn-danger" ng-click = "writeAll(); myVar = !myVar" ng-disabled = 'myVar'>
+                  <span class = "glyphicon glyphicon-cloud"></span>
+                  Deploy</a>
               </h1>
               <h3 ng-show = "deployComplete">
                 All Files Uploaded To Amazon!
@@ -19,7 +19,6 @@
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
         </div>
 
 </div>

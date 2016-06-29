@@ -12,11 +12,13 @@ angular
     $scope.deployComplete = false;
 
     SocketService.on('amazonFolder',function(el){
+      console.log(el,'amazonFolder');
       $scope.awsMax = el.total;
       $scope.awsDynamic = el.itr;
     });
 
     SocketService.on('localFolder',function(el){
+      console.log(el,'el');
       $scope.localMax = el.total;
       $scope.localDynamic = el.itr;
     })

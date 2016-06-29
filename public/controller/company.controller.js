@@ -7,8 +7,8 @@ angular
   .controller('CompanyController',function(SocketService,$uibModal,$interval,$stateParams,$state,$location,$scope,MainService,$filter){
     var cc = this;
     cc.loadingText = "Loading may take a few seconds....";
-
-
+    cc.isloading = {}
+    cc.isReady = false;
     cc.init = function(){
       var promise = $interval(function () {
         cc.loadingText+= '.';
@@ -18,7 +18,10 @@ angular
         MainService.getCompanyNames(companyArr).then(function(res){
           $interval.cancel(promise);
           if(res.data == 'noSessId')$location.path('login')
-          else cc.companies = res.data;
+          else {
+          cc.isReady = true;
+          cc.companies = res.data;
+          }
         })
       })
     };
@@ -77,7 +80,8 @@ angular
     });
     }
 
-    cc.deployCloud = function(){
+    cc.deployCloud = function(companiesReady){
+    if(cc.isReady){
     var modalInstance = $uibModal.open({
       templateUrl: '../templates/deploy-cloud-tpl.html',
       controller: 'DeployController',
@@ -91,6 +95,7 @@ angular
       console.log('closed');
     }, function () {
     });
+  }
     }
 
     SocketService.on('connect', function () {

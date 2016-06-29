@@ -14,7 +14,6 @@ module.exports = function (apiRoutes, io) {
 
   apiRoutes.post('/create_translation',createCtrl.insertTranslation)
 
-
   apiRoutes.put('/edit_term/:_id',editCtrl.editTerm);
 
   apiRoutes.put('/edit_translation/:termId/:transId',editCtrl.editTranslation);
@@ -30,10 +29,6 @@ module.exports = function (apiRoutes, io) {
   apiRoutes.get('/get_company_terms/:clientId',getCtrl.getCompanyTerms);
 
   apiRoutes.get('/get_need_translation/',getCtrl.getNeedTranslation);
-
-  apiRoutes.get('/get_companies/',getCtrl.getCompanies);
-
-  apiRoutes.get('/get_full_company_terms/:clientId', getCtrl.getFullCompanyTerms)
 
   apiRoutes.get('/get_companyids',getCtrl.getClients);
 

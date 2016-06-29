@@ -1,26 +1,24 @@
-<div class="row">
+<div  ng-controller = "CompanyController as cc">
   <div style = "font-size:1.5em"class = "col-lg-offset-1"ng-controller = "LoginController">
       <p ng-click = "logOut()"class = "col-md-1 text-center">
         <span>LogOut</span><br>
-        <span ng-mouseover = "log = !log" ng-mouseleave = "log = !log"class = "glyphicon glyphicon-log-out"></span>
+        <span class = "glyphicon glyphicon-log-out"></span>
       </p>
-      <p ng-controller = "CompanyController as cc" ng-click = "cc.folderUpload()"class = "col-md-1 text-center">
+      <p  ng-click = "cc.folderUpload()"class = "col-md-1 text-center">
         <span>Upload</span><br>
-        <span ng-mouseover = "uploadJson = !uploadJson" ng-mouseleave = "uploadJson = !uploadJson" class = "glyphicon glyphicon-upload"></span>
+        <span  class = "glyphicon glyphicon-upload"></span>
       </p>
-      <p ng-controller = "CompanyController as cc" ng-click = "cc.deployCloud()"class = "col-md-1 text-center">
+      <p ng-click = "cc.deployCloud(cc.companiesReady)"class = "col-md-1 text-center">
         <span>Deploy</span><br>
-        <span ng-mouseover = "deploy = !deploy"ng-mouseleave = "deploy = !deploy"class = "glyphicon glyphicon-cloud-upload"></span>
+        <span class = "glyphicon glyphicon-cloud-upload"></span>
       </p>
   </div>
-  <div ng-controller = "CompanyController as cc"class="jumbotron">
+  <div class="jumbotron">
     <h1 class = 'col-md-offset-1'>
       Companies
-      <span ng-click = "cc.modalTerm()" class = "glyphicon glyphicon-plus"></span>
     </h1>
-    <h6 class = 'col-md-offset-4' >Add A Term</h6>
   </div>
-  <div ng-init="cc.init()" ng-controller = 'CompanyController as cc'class="col-md-6 col-md-offset-3">
+  <div ng-init="cc.init()" class="col-md-6 col-md-offset-3">
     <div ng-if = "!cc.companies"class="list-group">
       <h1>{{cc.loadingText}}</h1>
     </div>
@@ -31,4 +29,5 @@
       <li ng-click = 'cc.goMain()'class = 'list-group-item'><a href="#/main"><h3>See All</h3></a></li>
     </ul>
   </div>
+</div>
 </div>

@@ -45,16 +45,8 @@
         return $http.delete( '/api/soft_delete/'+id);
       }
 
-      var getCompanies = function(){
-        return $http.get( '/api/get_companies/');
-      }
-
       var deleteTrans = function(transId){
         return $http.delete('/api/delete_translation/'+localStorage.getItem('termId')+'/'+transId);
-      }
-
-      var getFullCompanyTerms = function(clientId){
-        return $http.get('/api/get_full_company_terms/'+clientId);
       }
 
       var createTerm = function(term){
@@ -94,9 +86,7 @@
       getCompanyIds: getCompanyIds,
       createTranslation:createTranslation,
       createTerm:createTerm,
-      getFullCompanyTerms:getFullCompanyTerms,
       deleteTrans:deleteTrans,
-      getCompanies:getCompanies,
       deleteTerm:deleteTerm,
       getOneTerm:getOneTerm,
       getAllTerms:getAllTerms,
