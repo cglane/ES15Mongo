@@ -40,36 +40,6 @@ function getClientIds(){
     return deferred.promise;
 };
 
-/**
-*Parses All Terms' translations for clientId
-@param {string} clientId
-@return {boolean} whether client has custom translations or not
-*/
-
-function idExists(clientId){
-  var deferred = q.defer();
-  Term.find({'translations.clientId':clientId},function(err,terms){
-    deferred.resolve((terms.length > 1));
-  })
-  return deferred.promise;
-}
-
-function customClients(callback){
-  console.log('customClients');
-  var returnArr = [];
-  var itr = 0;
-  getClientIds().then(function(clients){
-    function loop(){
-      console.log(returnArr,'returnArrß');
-      idExists(clients[itr].id).then(function(el){
-        console.log(el,'el');
-        (el)?returnArr.push(clients[itr]):null;
-        if(++itr < clients.length)loop()
-        else callback(returnArr);
-      })
-    }loop();
-  })
-}
 
 /**
 *Uploads local folder contents to s3 bucket with same name
@@ -197,8 +167,6 @@ module.exports = function(socket){
 
   return {
     writeCustom:function(req,res){
-      console.log('hit it');
-        console.log(req.body,'body');
         writeFoldersLocally(socket,req.body).then(function(){
           res.send({success:true})
         });

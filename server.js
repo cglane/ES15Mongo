@@ -72,6 +72,7 @@ app.use(allowCrossDomain);
 
 ///----socket connection----///
 io.on('connection', function(socket){
+  socket.emit('connected');
   console.log('socket connected');
   require('./api/routes.js')(apiRoutes,socket);
 });
