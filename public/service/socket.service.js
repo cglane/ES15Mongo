@@ -4,6 +4,7 @@
     .module('main')
     .factory('SocketService',function($rootScope){
       var socket = io("");
+
       return {
         on: function(event, cb){
           socket.on(event, function(data){

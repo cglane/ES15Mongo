@@ -2,9 +2,15 @@
   "use strict"
   angular
     .module('main')
+<<<<<<< HEAD
     .factory('MainService',function($http,$rootScope){
 
       var userName = localStorage.getItem('userName');
+=======
+    .factory('MainService',function($http){
+      var url = '',
+          userName = localStorage.getItem('userName');
+>>>>>>> 5d7bfeb947a8e2005100f89ca43f7f7ecd677f0b
 
       var getAllTerms = function(){
         return $http.get('/api/get_all_terms/');
