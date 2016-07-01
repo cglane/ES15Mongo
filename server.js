@@ -15,7 +15,6 @@ var writeFile = require('./writeFile/write.js');
 var port = '8080';
 var env = process.argv[2];
 
-<<<<<<< HEAD
 if(env === 'dev'){
   console.log('Using Dev Server');
   mongoose.connect('mongodb://localhost:27017/myappdatabase');
@@ -23,13 +22,11 @@ if(env === 'dev'){
   console.log('Using Production Server');
   mongoose.connect("gdg_admin:G8Q'j]'ZS}d[]Uvs@mongo.gdg.do:27017/gdg_langs");
 }
-=======
+
 var port = config.PORT || 8080;
 
 // mongoose.connect('mongodb://localhost:27017/myappdatabase');
 mongoose.connect("gdg_admin:G8Q'j]'ZS}d[]Uvs@mongo.gdg.do:27017/gdg_langs");
-
->>>>>>> 5d7bfeb947a8e2005100f89ca43f7f7ecd677f0b
 
 //connect to public html files
 app.use(express.static(__dirname + '/public'));
