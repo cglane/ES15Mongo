@@ -24,7 +24,7 @@
 <a ng-click = "addTranslation()"><span>Add A Translation</span></a>
 <div ng-repeat = "trans in translations">
   <fieldset class="form-group">
-    <label>Translation {{$index + 1}}</label>
+    <label>Translation {{$index}}</label>
     <input type="text"  ng-model = "addedTranslations[$index].value"placeholder="Value"class="form-control" required>
     <label>Language</label>
     <select   class="form-control" ng-model = "addedTranslations[$index].lang" required>

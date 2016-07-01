@@ -60,7 +60,7 @@ angular
         if(!$scope.term){
           createTerm($scope.addedTerm,function(termId){
               for (var i = 0; i < $scope.addedTranslations.length; i++) {
-                $scope.addedTranslations[i].optionClientId = $scope.addedTranslations[i].optionClientId.split(',')[1];
+                $scope.addedTranslations[i].optionClientId = $scope.clientId;
                 addTranslation($scope.addedTranslations[i],termId);
               }
             });
