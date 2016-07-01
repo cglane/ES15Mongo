@@ -6,6 +6,13 @@ var config = require('../config.js');
 var q = require('q');
 var request = require('request');
 var rollbase = require('./rbSession.js');
+var merge = require('deepmerge')
+  /**
+  *Extract specific langage translations from Term
+  *@param {object} term The term, who's array of translations will be parsed
+  *@param {string} language The matching language to be returned
+  *@return {array} All translations matching language param
+  */
 
   function extractTranslations(term,language){
     var returnArr = [];
@@ -15,6 +22,15 @@ var rollbase = require('./rbSession.js');
     return returnArr;
   };
 
+  /**
+  *Parses translations for company translations
+  *@param {string} gdgId The default id for GDG 2.0 Code
+  *@param {string} companyId The company identification
+  *@param {object} Term the term, who's array of translations will be parsed
+  *@param {string} language The specific language that should be matched
+  *@return {object} Returns companyTranslation if it exists, otherwise returning the GDG translation
+  */
+
   function rateTranslation(gdgId,companyId,term,language){
     var gdgTrans,companyTrans;
     _.each(extractTranslations(term,language),function(trans){
@@ -23,6 +39,13 @@ var rollbase = require('./rbSession.js');
     })
     return (companyTrans)? companyTrans:gdgTrans;
   };
+
+  /**
+  *Agregates company translations in i18n format, only returning custom content
+  *@param{string} clientId The client who's terms will be aggregated
+  *@return{object} i18n language object organized by languge/group/termKey
+  */
+
 
   function companyTerms(clientId){
     var deferred = q.defer();
@@ -36,12 +59,11 @@ var rollbase = require('./rbSession.js');
           }
         })
       })
+      //insert CompanyTranslations
       _.each(terms,function(term){
         _.each(term.translations,function(trans){
-          if (trans.clientId == clientId) {
-            if(companyObj[trans.lang]){
+          if (trans.clientId == clientId && companyObj[trans.lang]) {
               companyObj[trans.lang][term.group][term.key] = trans.val;
-            }
           }
         })
       })
@@ -49,6 +71,12 @@ var rollbase = require('./rbSession.js');
     })
     return deferred.promise;
   };
+
+  /**
+  *Parses All Terms' translations for clientId
+  @param {string} clientId
+  @return {boolean} whether client has custom translations or not
+  */
 
 function idExists(clientId){
   var deferred = q.defer();
@@ -74,6 +102,8 @@ module.exports = {
     })
   },
 
+/* Returns all terms with key value of a certain group*/
+
   getAllTranslationsByGroup:function(req,res,next){
     var group = req.params.group,
         companyId = parseInt(req.params.companyId),
@@ -97,14 +127,14 @@ module.exports = {
     })
   },
 
+  /**Cross reference rollbase clientIds with mongoDB clientIds*/
+
   getCompanyNames:function(req,res,next){
     var itr = 0;
     var companyArr = req.body.data;
     var returnArr = [];
     function loop(){
       idExists(companyArr[itr].id).then(function(el){
-        console.log(itr,'itr');
-        console.log(el,'el');
         (el)?returnArr.push(companyArr[itr]):null;
         if(++itr < companyArr.length)loop();
         else res.send(returnArr);
@@ -112,6 +142,7 @@ module.exports = {
     }loop();
   },
 
+  /**Check all translation objects for needTrans field value of true*/
   getNeedTranslation:function(req,res,next){
     var returnArr = [];
     Term.find({'translations.needsTrans': true},function(err,allTerms){
@@ -119,37 +150,8 @@ module.exports = {
     })
   },
 
-  getCompanies:function(req,res,next){
-    var returnObj = {};
-    Term.find({'softDelete':false},function(err,allTerms){
-      _.each(allTerms,function(terms){
-        _.each(terms.translations,function(trans){
-          returnObj[trans.clientId] = trans.clientId;
-        })
-      })
-      console.log('send the return array');
-      res.send({'success':true})
-    })
-  },
-
-  getFullCompanyTerms: function(req,res,next){
-    var companyObj = {'en-US':{},'de-DE':{},'en-GB':{},'es-SP':{},'fr-FR':{},'it-IT':{},'nl-NL':{},'pt-BR':{},'zh-CN':{}};
-    companyTerms(config.gdgId).then(function(returnObj){
-      companyTerms(req.params.clientId).then(function(companyObj){
-        for(var lang in returnObj){
-          for(var group in returnObj[lang]){
-            for(var term in returnObj[lang][group]){
-              if(companyObj[lang][group][term]){
-                returnObj[lang][group][term] = companyObj[lang][group][term];
-              }
-            }
-          }
-        }
-        res.send(returnObj)
-      })
-    })
-  },
-
+  /**Rollbase call for all ClientIds*/
+  
   getClients: function(req, res, next) {
     if (!req.cookies.rbSessionId) {
       res.send({error: 'logouts'});
@@ -181,7 +183,6 @@ module.exports = {
         '&id=' + req.cookies.rbUserId +
         '&objName=USER&composite=1&objNames=CUSTOMER&fieldList=id,name,gdg_2_0&output=json';
       request.get(url, function(err, rbRes, bodyString) {
-        console.log(bodyString);
         var body;
         try { body = JSON.parse(bodyString); }
         catch (err) { res.send(err) }

@@ -1,11 +1,13 @@
 var Promise = require('es6-promise').Promise;
 var Term = require('../models/term.js');
+
  module.exports = {
+
+   /**Edit pre-existing term with new information*/
 
   editTerm: function(req,res,next){
       var re = req.body,
           _id =  req.params._id;
-          console.log(req.body,'body');
       Term.findOneAndUpdate({
           '_id': _id
         },{$set:{
@@ -22,6 +24,8 @@ var Term = require('../models/term.js');
             })
           },
 
+  /**Sets softDelete field as true*/
+
   softDelete: function(req,res){
       var _id = req.params._id;
       Term.findOneAndUpdate({
@@ -36,6 +40,8 @@ var Term = require('../models/term.js');
           res.send(thisTerm);
         })
       },
+
+    /**Updates information within specific translation object*/
 
     editTranslation:function(req,res){
       Term.findOneAndUpdate(
@@ -55,6 +61,8 @@ var Term = require('../models/term.js');
         });
     },
 
+    /** Removes translation object from Term array*/
+
     deleteTranslation:function(req,res){
       Term.findOneAndUpdate({'_id':req.params.termId},
         {$pull:{
@@ -63,7 +71,6 @@ var Term = require('../models/term.js');
       },function(err,term){
         if(err)throw err;
          res.send(term);
-        console.log(term,'term');
       })
     }
 

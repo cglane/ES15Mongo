@@ -6,6 +6,14 @@ var fs = require('fs'),
     path = require('path'),
     csv = require('csv-parser');
 
+/**
+*Checks if translation already exists in term translation array
+*@param {object} term The term who's translations will be checked
+*@param {string} clientId ClientId to be referenced
+*@param {string} language Language to be referenced
+*@return {boolean} if client translation exists for language
+*/
+
 function transExists(term,clientId,language){
   var returnVal = false;
   _.each(term.translations,function(trans){
@@ -16,6 +24,13 @@ function transExists(term,clientId,language){
   return returnVal;
 }
 
+/**
+*Searches for lanugage specific translation
+*@param {object} term The term who's translations will be checked
+*@param {string} clientId ClientId to be referenced
+*@param {string} language Language to be referenced
+*@return {string} returns the translation value of translation object
+*/
 
 function transVal(term,lang,callback){
   _.each(term.translations,function(trans){
@@ -25,37 +40,14 @@ function transVal(term,lang,callback){
   })
 }
 
-function addTranslationsTerm(term,usVal,clientId){
-  var langs = ['de-DE','en-GB','es-SP','fr-FR','it-IT','nl-NL','pt-BR','zh-CN'],
-      returnArr = [];
-      _.each(langs,function(lang){
-        if( term.translations.every(function(trans){
-            return trans.lang !== lang;
-          })){
-            term.translations.push({
-              clientId:clientId,
-              lang:lang,
-              val:usVal,
-              needsTrans:true
-            })
-          }
-      })
-      term.save(function(err,term){
-        if(err)throw err;
-        console.log(term.key,term.group);
-      });
-}
-
-function needsTrans(){
-  Term.find({'softDelete':false},function(err,allTerms){
-    if(err)throw err;
-    _.each(allTerms,function(currTerm){
-      transVal(currTerm,'en-US',function(el){
-        addTranslationsTerm(currTerm,el);
-      })
-    });
-  })
-}
+/**
+*Adds translation to term object
+*@param {object} term
+*@param {string} value
+*@param {string} language
+*@param {needsTrans} boolean
+*@param {string} clientId
+*/
 
 function insertTranslation(term,value,language,needsTrans,clientId){
   var deferred = q.defer();
@@ -68,15 +60,23 @@ function insertTranslation(term,value,language,needsTrans,clientId){
     })
     term.save(function(err,termRes){
       if(err)throw err;
-      // console.log(termRes.key,': translation added');
       deferred.resolve('translation added');
     })
   }else{
     deferred.resolve('translation not added');
-    // console.log('translation not added already exists');
   }
   return deferred.promise;
 }
+
+/**
+*Creates a new term in the db with an initial translation
+*@param {string} key
+*@param {string} value
+*@param {string} language
+*@param {string} group
+*@param {string} clientId
+*@param {string} createTerm
+*/
 
 function createTerm(key,value,language,group,clientId,createdBy){
   var deferred = q.defer();
@@ -94,11 +94,16 @@ function createTerm(key,value,language,group,clientId,createdBy){
   })
   newTerm.save(function(err,item){
     if(err)throw err;
-    // console.log(key,": saved successfully");
     deferred.resolve('term created');
   })
   return deferred.promise;
 }
+
+/**
+*Makes sure english translation exists for term
+*@param {object} term Contains all translation objects to be referenced
+*@return {boolean}
+*/
 
 function amEnglish(term){
   var returnVal = false;
@@ -108,11 +113,21 @@ function amEnglish(term){
   return returnVal;
 }
 
+/**
+*Adds passed values to DB as a new Term or as a translation, throwing error on duplicates
+*@param {string} key
+*@param {string} value Value of translation
+*@param {string} group
+*@param {string} clientId
+*@param {string} createdBy
+*@return {promise}
+*/
+
 function addTermToDB(key,value,language,group,clientId,createdBy){
   var deferred = q.defer();
   Term.findOne({'key':key, 'group': group}).exec(function(err,term){
     if(err)throw err;
-    if(term && amEnglish(term)){
+    if(!!term && amEnglish(term)){
       insertTranslation(term,value,language,false,clientId).then(function(el){
         deferred.resolve(el);
       });
@@ -129,6 +144,17 @@ function addTermToDB(key,value,language,group,clientId,createdBy){
   return deferred.promise;
 }
 
+/**
+*Adds json array of object to mongodb as new translations or Terms
+*@param {array} keys Array of term keys
+*@param {object} jsonData all the translation values of keys in language
+*@param {string} language
+*@param {string} group
+*@param {string} clientId
+*@param {string} createdBy
+*@return {promise}
+*/
+
 function addFileToDB(data){
   var deferred = q.defer();
   var responses = [];
@@ -144,7 +170,6 @@ function addFileToDB(data){
             data.createdBy)
             .then(function(el){
               responses.push(el);
-            console.log(el);
           }))
           if(++itr < data.keys.length)loop();
         }loop();
@@ -158,9 +183,13 @@ function addFileToDB(data){
 
 
 module.exports = {
+  /**
+  *@module
+  *Uploads a json array of objects to mongodb
+  *@param {object} req.body array of key names
+  */
   uploadFile:function(req,res){
         addFileToDB(req.body).then(function(returnStr){
-          console.log(req.body,'req.body');
           res.send({'success':true,'comments': returnStr})
         });
   }

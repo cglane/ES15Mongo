@@ -12,6 +12,7 @@ angular
         ct.key = $stateParams.key;
         ct.group = $stateParams.group;
         ct.clientId = $stateParams.clientId;
+        ct.clientName = $stateParams.clientName;
 
     function init(){
       MainService.getOneTerm(ct.key,ct.group).then(function(res){

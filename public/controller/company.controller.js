@@ -4,10 +4,12 @@
 
 angular
   .module('main')
-  .controller('CompanyController',function(SocketService,$uibModal,$interval,$stateParams,$state,$location,$scope,MainService,$filter){
+  .controller('CompanyController',function(SocketService,$uibModal,$interval,$stateParams,$state,$location,$scope,$rootScope,MainService,$filter){
+
     var cc = this;
     cc.loadingText = "Loading may take a few seconds....";
-
+    cc.isloading = {}
+    cc.isReady = false;
 
     cc.init = function(){
       var promise = $interval(function () {
@@ -15,16 +17,20 @@ angular
       }, 800);
 
       MainService.getAllClientIds().then(function(companyArr){
+        $rootScope.clients = companyArr.data;
         MainService.getCompanyNames(companyArr).then(function(res){
+          $rootScope.customClients = res.data;
           $interval.cancel(promise);
           if(res.data == 'noSessId')$location.path('login')
-          else cc.companies = res.data;
+          else {
+          cc.isReady = true;
+          cc.companies = res.data;
+          }
         })
       })
     };
 
     cc.seeCompany = function(id){
-      console.log('alskdj');
       $location.path('view_company/'+id);
     };
 
@@ -34,7 +40,6 @@ angular
 
     cc.hideEmpty = function(key){
       if(cc.companies[key]){
-        console.log(cc.companies[key]);
       }
       return false;
     };
@@ -72,12 +77,12 @@ angular
       });
 
     modalInstance.result.then(function () {
-      console.log('hello');
     }, function () {
     });
     }
 
-    cc.deployCloud = function(){
+    cc.deployCloud = function(companiesReady){
+    if(cc.isReady){
     var modalInstance = $uibModal.open({
       templateUrl: '../templates/deploy-cloud-tpl.html',
       controller: 'DeployController',
@@ -88,9 +93,9 @@ angular
       }
     });
     modalInstance.result.then(function (term) {
-      console.log('closed');
     }, function () {
     });
+  }
     }
 
     SocketService.on('connect', function () {

@@ -8,10 +8,10 @@
     </a>
   </h1>
 </div>
-<div ng-controller = "MainController as vm"class="jumbotron">
+<div ng-init = "vm.init()"ng-controller = "MainController as vm">
+<div class="jumbotron">
   <h1 class = 'col-md-offset-1'>
     Groups
-    <span ng-controller = "CompanyController as cc"ng-click = "cc.modalTerm(null,null)" class = "glyphicon glyphicon-plus"></span>
   </h1>
   <br>
   <div class="input-group col-lg-6 col-md-offset-1">
@@ -28,7 +28,7 @@
     </h2>
   </div>
 </div>
-<div ng-init = "vm.init()"class = "col-md-offset-1"ng-controller = "MainController as vm"class="row">
+<div class = "col-md-offset-1"class="row">
   <div class="container col-lg-6">
     <ul ng-repeat = "(key,val) in vm.groups" class = "list-group">
       <li ng-click = 'showKeys = !showKeys'class = "list-group-item"><a>{{key}}</a>
@@ -41,4 +41,5 @@
       </ul>
     </ul>
   </div>
+</div>
 </div>

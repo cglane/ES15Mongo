@@ -1,6 +1,14 @@
 var Term = require('../models/term.js');
 var _ = require('underscore');
 
+/**
+*Checks if data matches any of pre-existing translations
+*@function
+*@param {array} translations - array of translations objects
+*@param {object} data - single translation data set
+*@return {boolean} Boolean value does or does not exist in list
+*/
+
 function translationExists(translations,data){
   var rtnVal = false;
   _.each(translations,function(trans){
@@ -12,6 +20,8 @@ function translationExists(translations,data){
 }
 
 module.exports = {
+
+/**Creates A New Term if doesn't already exist*/
 
   createTerm: function(req,res,next){
     var re = req.body,
@@ -36,11 +46,12 @@ module.exports = {
       });
     },
 
+    /**Inserts a Translation into Term's array of translations*/
+
     insertTranslation:function(req,res){
       Term.findOne({_id:req.body.termId},function(err,term){
         if(err)throw err;
         if(!translationExists(term.translations,req.body)){
-          //insert Translation
           term.translations.push({
             clientId:req.body.clientId,
             lang:req.body.lang,

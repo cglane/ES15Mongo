@@ -7,6 +7,7 @@ var fs = require('fs');
 var AWS = require("aws-sdk");
 var rollbase = require('./rbSession.js');
 var getCtrl = require('./getController.js');
+var merge = require('deepmerge')
 
 //connect to rollbase
 
@@ -15,6 +16,10 @@ AWS.config.update({
     "secretAccessKey": config.LanguageAPI.SecretAccessKey,
     "region":'us-east-1'
  });
+
+/**
+*Calls rollbase for clientIds
+*/
 
 function getClientIds(){
     var deferred = q.defer();
@@ -35,26 +40,31 @@ function getClientIds(){
     return deferred.promise;
 };
 
-function uploadFolder(clientId){
-  var deferred = q.defer();
+
+/**
+*Uploads local folder contents to s3 bucket with same name
+*@param {string} clientId
+*@param {socket} socket Passes information back to client about status of deploy
+*/
+
+function uploadFolder(clientId, socket){
   var subFolders = fs.readdirSync(__dirname + '/../../langFiles/'+clientId);
   _.each(subFolders,function(langFolder,langItr){
     var files = fs.readdirSync(__dirname + '/../../langFiles/'+clientId+"/"+ langFolder);
     _.each(files,function(jsonFile,fileItr){
       var s3 = new AWS.S3(),
-          // userKey = 'wpg_c/'+clientId+'/app/i18n/'+langFolder,
           userKey = 'LangFiles/'+clientId+'/'+langFolder +'/'+jsonFile,
           readStream = fs.createReadStream(__dirname+'/../../langFiles/'+clientId+"/"+langFolder+"/"+jsonFile),
           params = {Bucket:'static.gooddonegreat.com', Key: userKey, Body: readStream};
         s3.upload(params,function(err,data){
           if(err)throw err;
           if(langItr == subFolders.length-1 && fileItr == files.length-1){
-            deferred.resolve();
+            console.log('emit amazonFolder');
+            socket.emit("amazonFolder");
           }
         })
     })
   })
-  return deferred.promise;
 }
 
 function addEnglishTranslation(englishObj,companyObj){
@@ -126,16 +136,8 @@ function writeAsJson(basePath, clientId, callback){
   var companyObj = {'en-US':{},'de-DE':{},'en-GB':{},'es-SP':{},'fr-FR':{},'it-IT':{},'nl-NL':{},'pt-BR':{},'zh-CN':{}};
   companyTerms(config.gdgId).then(function(returnObj){
     companyTerms(clientId).then(function(companyObj){
-      for(var lang in returnObj){
-        for(var group in returnObj[lang]){
-          for(var term in returnObj[lang][group]){
-            if(companyObj[lang][group][term]){
-              returnObj[lang][group][term] = companyObj[lang][group][term];
-            }
-          }
-        }
-      }
-      var rtnObj = addEnglishTranslation(returnObj['en-US'],returnObj);
+      var mergedObj = merge(returnObj,companyObj);
+      var rtnObj = addEnglishTranslation(mergedObj['en-US'],mergedObj);
       writeToFolder(basePath,rtnObj).then(function(){
         deferred.resolve(basePath)
       });
@@ -144,54 +146,39 @@ function writeAsJson(basePath, clientId, callback){
   return deferred.promise;
 }
 
-function writeFoldersLocally(socket){
+function writeFoldersLocally(socket, clients){
   var deferred = q.defer();
   var itr = 0;
-  getClientIds().then(function(clients){
     function loop(){
       var basePath = __dirname + '/../../langFiles/'+clients[itr].id;
-      socket.emit('localFolder',{itr:itr,total:clients.length-1})
+      socket.emit('localFolder')
       writeAsJson(basePath, clients[itr].id).then(function(folderPath){
+        console.log('it has been written');
+        uploadFolder(clients[itr].id,socket);
         if(++itr < clients.length)loop();
         else  deferred.resolve(clients);
       });
     }loop();
-  })
   return deferred.promise;
 }
-
 
 module.exports = function(socket){
 
 
   return {
-    writeAll: function(req,res){
-      writeFoldersLocally().then(function(clients){
-        var itr = 0;
-        function loop(){
-          uploadFolder(clients[itr].id).then(function(){
-            if(++itr < clients.length) loop();
-          })
-        }loop();
-      })
+    writeCustom:function(req,res){
+        writeFoldersLocally(socket,req.body).then(function(){
+          res.send({success:true})
+        });
     },
-
     writeAllSocket: function(req,res){
-      writeFoldersLocally(socket).then(function(clients){
-        var itr = 0;
-        function loop(){
-          uploadFolder(clients[itr].id).then(function(){
-            socket.emit("amazonFolder", {itr:itr,total:clients.length-1});
-            if(++itr < clients.length) loop();
-            else res.send({'success':true})
-          })
-        }loop();
+      getClientIds().then(function(clients){
+        writeFoldersLocally(socket,clients).then(function(){
+          res.send({success:true})
+        })
       })
+
     },
 
-    testLocalHost:function(){
-      var basePath = __dirname + '/../../WPG-2.0/WPG/app/i18n';
-      writeAsJson(basePath,'12345678');
-    }
-}
+  }
 }
