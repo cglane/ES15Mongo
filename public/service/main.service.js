@@ -2,7 +2,7 @@
   "use strict"
   angular
     .module('main')
-    .factory('MainService',function($http){
+    .factory('MainService',function($http,$rootScope){
 
       var userName = localStorage.getItem('userName');
 
@@ -71,14 +71,19 @@
       };
 
       var writeAllSocket = function(){
-        return $http.get( "/api/writeAllSocket")
+        return $http.post( "/api/writeAllSocket",null)
       };
 
       var getCompanyNames = function(idObj){
         return $http.post( '/api/get_company_names',idObj)
       }
 
+      var writeCustom = function(){
+        return $http.post('/api/writeCustom',$rootScope.customClients);
+      }
+
     return{
+      writeCustom:writeCustom,
       getCompanyNames:getCompanyNames,
       writeAllSocket:writeAllSocket,
       getAllClientIds:getAllClientIds,

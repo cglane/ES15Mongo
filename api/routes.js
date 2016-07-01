@@ -47,11 +47,9 @@ module.exports = function (apiRoutes, io) {
   apiRoutes.post('/uploadFile/',uploadCtrl.uploadFile);
 
 //==============Write Files to AWS============//
+  apiRoutes.post('/writeCustom/',writeCtrl.writeCustom);
 
-
-  apiRoutes.get('/writeAllFiles/',writeCtrl.writeAll);
-
-  apiRoutes.get('/writeAllSocket/',writeCtrl.writeAllSocket);
+  apiRoutes.post('/writeAllSocket/',writeCtrl.writeAllSocket);
 
 
 }
