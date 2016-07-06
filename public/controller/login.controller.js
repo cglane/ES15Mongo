@@ -13,7 +13,6 @@ angular
       }
       LoginService.doLogin(obj).then(function(res){
         if(res.data.success){
-          console.log(res.data.userName);
           localStorage.setItem('userName',res.data.userName)
           $location.path("/companies");
         }

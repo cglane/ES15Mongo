@@ -67,6 +67,12 @@ function uploadFolder(clientId, socket){
   })
 }
 
+/**
+*Inserts the english translation value for other languages in term if translation does not exist
+*@param {object} englishObj An object with all groups and keys/values of english translations
+*@param {object} companyObj All the language objects of a merged client language file
+*@return {object} The companyObj with english translations where other languages missing
+*/
 function addEnglishTranslation(englishObj,companyObj){
   for(group in englishObj){
     for(key in englishObj[group]){
@@ -84,6 +90,12 @@ function addEnglishTranslation(englishObj,companyObj){
   }
   return companyObj;
 }
+
+/**
+*Iterates through all company translations organizing by groups and languages
+*@param {string} clientId
+*@return {object} A master object of all company Terms in i18n format
+*/
 
 function companyTerms(clientId){
   var deferred = q.defer();
@@ -112,6 +124,12 @@ function companyTerms(clientId){
   return deferred.promise;
 }
 
+/**
+*Writes folder locally iterating through object and writing files
+*@param {string} basePath path for creating the folder--outside of the local directory
+*@param {object} object merged client language file organized by language
+*/
+
 function writeToFolder(basePath,object){
   var deferred = q.defer();
     mkdirp.sync(basePath);
@@ -131,6 +149,13 @@ function writeToFolder(basePath,object){
       return deferred.promise;
 }
 
+/**
+*Aggregates company specific translations and merges with GDG 2.0 translations, then calling writeToFolder
+* writes folders locally so they can be uploaded to S3
+*@param {string} basePath path for writing folder locally
+*@param {string} clientId
+*/
+
 function writeAsJson(basePath, clientId, callback){
   var deferred = q.defer();
   var companyObj = {'en-US':{},'de-DE':{},'en-GB':{},'es-SP':{},'fr-FR':{},'it-IT':{},'nl-NL':{},'pt-BR':{},'zh-CN':{}};
@@ -145,6 +170,13 @@ function writeAsJson(basePath, clientId, callback){
   })
   return deferred.promise;
 }
+
+
+/**
+*Merges client translation data with GDG 2.0 translations for all clients, writes locally and uploads to Amazon S3 bucket
+*@param {socket}
+*@param {array} clients array of client objects
+*/
 
 function writeFoldersLocally(socket, clients){
   var deferred = q.defer();
@@ -167,14 +199,16 @@ module.exports = function(socket){
 
   return {
     writeCustom:function(req,res){
+        res.send('cloudflare issue');
         writeFoldersLocally(socket,req.body).then(function(){
-          res.send({success:true})
+          // res.send({success:true})
         });
     },
     writeAllSocket: function(req,res){
+      res.send('cloudflare issue');
       getClientIds().then(function(clients){
         writeFoldersLocally(socket,clients).then(function(){
-          res.send({success:true})
+          // res.send({success:true})
         })
       })
 

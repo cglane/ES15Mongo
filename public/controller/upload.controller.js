@@ -9,7 +9,6 @@ angular
     $scope.companyIds = MainService.getCompanyIds();
     MainService.getAllClientIds().then(function(arr){
       $scope.companyIds = arr.data;
-      console.log(arr.data,'arr');
     })
     $scope.languages = []
 
