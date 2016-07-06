@@ -66,7 +66,6 @@ angular
             });
         }else{
           for (var i = 0; i < $scope.addedTranslations.length; i++) {
-            console.log($scope.addedTranslations[i],'addedTranslations');
             if($scope.clientId){
               $scope.addedTranslations[i].clientId = $scope.clientId;
             }else{

@@ -25,9 +25,6 @@ if(env === 'dev'){
 
 var port = config.PORT || 8080;
 
-// mongoose.connect('mongodb://localhost:27017/myappdatabase');
-mongoose.connect("gdg_admin:G8Q'j]'ZS}d[]Uvs@mongo.gdg.do:27017/gdg_langs");
-
 //connect to public html files
 app.use(express.static(__dirname + '/public'));
 
