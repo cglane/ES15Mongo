@@ -21,10 +21,15 @@ angular
     }
 
     vm.searchTerms = function(){
-      vm.searchParams = vm.searchParams;
-      vm.searchResults = $filter('filter')(allTerms.data,{key:vm.searchParams});
-      vm.searchError = (!vm.searchResults || vm.searchResults.length <1)? true : false;
+      vm.searchResults = allTerms.data.filter(function(el){
+        if(el.key === vm. searchParams) return true;
+          for (var i = 0; i < el.translations.length; i++) {
+            if(el.translations[i].val.toLowerCase().indexOf(vm.searchParams) != -1) return true;
+          }
+      })
+        vm.searchError = (!vm.searchResults || vm.searchResults.length <1)? true : false;
     }
+
 
     vm.clearSearch = function(){
       vm.searchParams = undefined;

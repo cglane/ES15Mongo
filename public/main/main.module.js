@@ -46,11 +46,6 @@
             controller:'MainController',
             templateUrl: 'templates/main-tpl.html'
           })
-          .state("view_group",{
-            url:'/view_group/:group',
-            controller:'GroupController',
-            templateUrl: 'templates/view-group-tpl.html'
-          })
           .state("view_term",{
             url:'/view_term/:key/:group',
             controller:'TermController',

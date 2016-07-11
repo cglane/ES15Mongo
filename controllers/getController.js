@@ -50,7 +50,7 @@ var merge = require('deepmerge')
   function companyTerms(clientId){
     var deferred = q.defer();
     var companyObj = {'en-US':{},'de-DE':{},'en-GB':{},'es-SP':{},'fr-FR':{},'it-IT':{},'nl-NL':{},'pt-BR':{},'zh-CN':{}};
-    Term.find({'softDelete': false},function(err,terms){
+    Term.find({'translations':{$elemMatch:{'clientId':clientId}}, 'softDelete': false}, function(err,terms){
       //setUp Object
       _.each(terms,function(term){
         _.each(term.translations,function(trans){
@@ -62,8 +62,8 @@ var merge = require('deepmerge')
       //insert CompanyTranslations
       _.each(terms,function(term){
         _.each(term.translations,function(trans){
-          if (trans.clientId == clientId && companyObj[trans.lang]) {
-              companyObj[trans.lang][term.group][term.key] = trans.val;
+          if (companyObj[trans.lang]) {
+            companyObj[trans.lang][term.group][term.key] = trans.val;
           }
         })
       })
@@ -71,20 +71,6 @@ var merge = require('deepmerge')
     })
     return deferred.promise;
   };
-
-  /**
-  *Parses All Terms' translations for clientId
-  @param {string} clientId
-  @return {boolean} whether client has custom translations or not
-  */
-
-function idExists(clientId){
-  var deferred = q.defer();
-  Term.find({'translations.clientId':clientId},function(err,terms){
-    deferred.resolve((terms.length > 1));
-  })
-  return deferred.promise;
-}
 
 module.exports = {
 
@@ -133,13 +119,13 @@ module.exports = {
     var itr = 0;
     var companyArr = req.body.data;
     var returnArr = [];
-    function loop(){
-      idExists(companyArr[itr].id).then(function(el){
-        (el)?returnArr.push(companyArr[itr]):null;
-        if(++itr < companyArr.length)loop();
-        else res.send(returnArr);
-      })
-    }loop();
+    var clients = Term.distinct('translations.clientId',function(err,clients){
+        function loop(){
+          if(_.contains(clients,companyArr[itr].id))returnArr.push(companyArr[itr])
+          if(++itr < companyArr.length) loop()
+          else(res.send(returnArr))
+        }loop()
+    });
   },
 
   /**Check all translation objects for needTrans field value of true*/
@@ -151,7 +137,7 @@ module.exports = {
   },
 
   /**Rollbase call for all ClientIds*/
-  
+
   getClients: function(req, res, next) {
     if (!req.cookies.rbSessionId) {
       res.send({error: 'logouts'});
