@@ -6,7 +6,8 @@ var config = require('../config.js');
 var q = require('q');
 var request = require('request');
 var rollbase = require('./rbSession.js');
-var merge = require('deepmerge')
+var merge = require('deepmerge');
+var objectID= require('mongodb').ObjectID;
   /**
   *Extract specific langage translations from Term
   *@param {object} term The term, who's array of translations will be parsed
@@ -46,7 +47,58 @@ var merge = require('deepmerge')
   *@return{object} i18n language object organized by languge/group/termKey
   */
 
-
+  // function companyTerms(clientId){
+  //   var deferred = q.defer();
+  //   var companyObj = {'en-US':{},'de-DE':{},'en-GB':{},'es-SP':{},'fr-FR':{},'it-IT':{},'nl-NL':{},'pt-BR':{},'zh-CN':{}};
+  //   // Term.find({'translations':{$elemMatch:{'clientId':clientId}}, 'softDelete': false})
+  //   //           .aggregate([{$unwind:{path:"$translations", preserveNullAndEmptyArrays: true}}]) function(err,terms){
+  //   //
+  //   //   deferred.resolve(companyObj);
+  //   // })
+  //   Term.aggregate([
+  //     {
+  //       "$match":{
+  //         "translations.clientId": parseInt(clientId)
+  //       }
+  //     },
+  //     {
+  //       "$unwind": "$translations"
+  //     },
+  //     {
+  //       "$match":{
+  //         "translations.clientId":parseInt(clientId)
+  //       }
+  //     },
+  //     {
+  //       "$project":{
+  //         _id: 0,
+  //         lang: '$translations.lang',
+  //         group: 1,
+  //         key : '$key'
+  //       }
+  //     },
+  //     {
+  //       '$group':{
+  //         _id: {lang:"$lang", group: "$group"},
+  //         keys: {"$push": "$key"}
+  //       }
+  //     }
+  //   ],
+  //     function(err, results){
+  //       var list = {};
+  //       for (var i = 0; i < results.length; i++) {
+  //         if(!list[results[i]._id.lang]){
+  //           list[results[i]._id.lang] = {};
+  //         }
+  //         else if(!list[results[i]._id.lang][results[i]._id.group]){
+  //           list[results[i]._id.lang][results[i]._id.group] = results[i].keys;
+  //         }
+  //       }
+  //       deferred.resolve(list);
+  //
+  //     })
+  //     return deferred.promise;
+  // };
   function companyTerms(clientId){
     var deferred = q.defer();
     var companyObj = {'en-US':{},'de-DE':{},'en-GB':{},'es-SP':{},'fr-FR':{},'it-IT':{},'nl-NL':{},'pt-BR':{},'zh-CN':{}};
