@@ -114,7 +114,7 @@ var objectID= require('mongodb').ObjectID;
       //insert CompanyTranslations
       _.each(terms,function(term){
         _.each(term.translations,function(trans){
-          if (companyObj[trans.lang]) {
+          if (trans.clientId == clientId && companyObj[trans.lang]) {
             companyObj[trans.lang][term.group][term.key] = trans.val;
           }
         })
