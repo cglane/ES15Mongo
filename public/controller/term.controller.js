@@ -13,13 +13,24 @@ angular
         group = $stateParams.group;
 
     function init(){
-      MainService.getOneTerm(key,group).then(function(res){
-        localStorage.setItem('termId',res.data._id);
-        tc.term = res.data;
-        tc.term.createdAt  = new Date(1 * tc.term.createdAt);
-        tc.translations = res.data.translations;
-        tc.noRepeatKeys = ['translations','__v','_id','updatedBy','softDelete','createdAt','updatedAt','createdBy'];
+      MainService.getAllClientIds().then(function(arr){
+        $scope.companyIds = arr.data;
+
+        MainService.getOneTerm(key,group).then(function(res){
+          localStorage.setItem('termId',res.data._id);
+          tc.term = res.data;
+          tc.term.createdAt  = new Date(1 * tc.term.createdAt);
+          tc.translations = res.data.translations;
+          tc.noRepeatKeys = ['translations','__v','_id','updatedBy','softDelete','createdAt','updatedAt','createdBy'];
+        })
       })
+    }
+
+    tc.showCompName = function(clientId){
+      var compObj =  $scope.companyIds.filter(function(comp){
+        return comp.id === clientId;
+      })
+      return (compObj[0])? compObj[0].name : null;
     }
 
     tc.termKeys = function(key){

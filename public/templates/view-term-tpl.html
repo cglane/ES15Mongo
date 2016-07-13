@@ -38,9 +38,14 @@
     </ul>
       <ul ng-show= 'showKeys'ng-repeat = "trans in tc.term.translations">
         <ul ng-repeat = "(subKey, subVal) in trans">
-          <li ng-hide = "subKey == 'needsTrans' || subKey == '_id'">
+          <li ng-hide = "subKey == 'needsTrans' || subKey == '_id' || subKey == 'clientId'">
             <a>{{subKey}}:</a>
             <a editable-text="subVal"onbeforesave="tc.editTranslation(subKey,$data,trans)">{{ subVal || "empty" }}</a>
+          </li>
+          <li ng-show = "subKey == 'clientId'">
+            <a>{{subKey}}:</a>
+            <a editable-text="subVal"onbeforesave="tc.editTranslation(subKey,$data,trans)">{{ subVal || "empty" }}</a>
+            <a >{{tc.showCompName(subVal)}}</a>
           </li>
           <li ng-show = "subKey == '_id'">
             <a>{{subKey}}:</a>
