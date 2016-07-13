@@ -22,9 +22,9 @@ angular
 
     vm.searchTerms = function(){
       vm.searchResults = allTerms.data.filter(function(el){
-        if(el.key.indexOf(vm.searchParams) > -1) return true;
+        if(el.key.toLowerCase().indexOf(vm.searchParams.toLowerCase()) > -1) return true;
         for (var i = 0; i < el.translations.length; i++) {
-            if(el.translations[i].val.toLowerCase().indexOf(vm.searchParams) != -1) return true;
+            if(el.translations[i].val.toLowerCase().indexOf(vm.searchParams.toLowerCase()) != -1) return true;
         }
       })
         vm.searchError = (!vm.searchResults || vm.searchResults.length <1)? true : false;
