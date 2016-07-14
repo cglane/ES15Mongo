@@ -9,6 +9,7 @@ var cookieParser = require('cookie-parser');
 var loginCtrl = require("./controllers/loginController.js");
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
+io.set('heartbeat timeout', 1000);
 var config = require('./config');
 var writeFile = require('./writeFile/write.js');
 //================Configuration==========//
@@ -73,11 +74,16 @@ var allowCrossDomain = function(req, res, next) {
 app.use(allowCrossDomain);
 
 ///----socket connection----///
+
 io.on('connection', function(socket){
   socket.emit('connected');
-  console.log('socket connected');
+
   require('./api/routes.js')(apiRoutes,socket);
 });
+io.on('error',function(err){
+  console.log("Socket.IO Error");
+  console.log(err.stack);
+})
 
 // ---------------------------------------------------------
 // get an instance of the router for api routes

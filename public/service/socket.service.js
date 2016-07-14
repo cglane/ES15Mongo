@@ -4,7 +4,7 @@
     .module('main')
     .factory('SocketService',function($rootScope){
       var socket = io("");
-
+      socket.heartbeatTimeout = 200000;
       return {
         on: function(event, cb){
           socket.on(event, function(data){

@@ -10,24 +10,23 @@ angular
     $scope.deployComplete = false;
 
     SocketService.on('amazonFolder',function(el){
-      $scope.awsDynamic++;
+      ($scope.awsDynamic < $scope.awsMax)?$scope.awsDynamic++: null;
     });
 
     SocketService.on('localFolder',function(el){
-      $scope.localDynamic++;
+      ($scope.localDynamic < $scope.localMax)?$scope.localDynamic++: null;
     })
-
     $scope.writeAll = function(){
-      $scope.awsMax = $rootScope.clients.length-1;
-      $scope.localMax = $rootScope.clients.length-1;
+      $scope.awsMax = $rootScope.clients.length;
+      $scope.localMax = $rootScope.clients.length;
       MainService.writeAllSocket().then(function(el){
         if(el.data.success)$scope.deployComplete = true;
       })
     };
 
     $scope.writeCustom = function(){
-      $scope.awsMax = $rootScope.customClients.length-1;
-      $scope.localMax = $rootScope.customClients.length-1;
+      $scope.awsMax = $rootScope.customClients.length;
+      $scope.localMax = $rootScope.customClients.length;
       MainService.writeCustom().then(function(el){
         if(el.data.success)$scope.deployComplete = true;
       })
