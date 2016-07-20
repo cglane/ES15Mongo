@@ -9,7 +9,7 @@ var cookieParser = require('cookie-parser');
 var loginCtrl = require("./controllers/loginController.js");
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-io.set('heartbeat timeout', 1000);
+io.set('heartbeat timeout', 10000);
 var config = require('./config');
 var writeFile = require('./writeFile/write.js');
 //================Configuration==========//
@@ -77,7 +77,6 @@ app.use(allowCrossDomain);
 
 io.on('connection', function(socket){
   socket.emit('connected');
-
   require('./api/routes.js')(apiRoutes,socket);
 });
 io.on('error',function(err){
