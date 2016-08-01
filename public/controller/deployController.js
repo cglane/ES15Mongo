@@ -12,10 +12,12 @@ angular
     $scope.localMax = $rootScope.customClients.length;
 
     SocketService.on('amazonFolder',function(el){
+      console.log('amazonFolder');
       ($scope.awsDynamic < $scope.awsMax)?$scope.awsDynamic++: null;
     });
 
     SocketService.on('localFolder',function(el){
+      console.log('localFolder');
       ($scope.localDynamic < $scope.localMax)?$scope.localDynamic++: null;
       $scope.$apply();
     })
