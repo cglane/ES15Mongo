@@ -6,16 +6,14 @@
 
 angular
   .module('main')
-  .controller('TermController',function($stateParams,$location,$scope,MainService,$filter,$state){
+  .controller('TermController',function($stateParams,$rootScope,$location,$scope,MainService,$filter,$state){
 
     var tc = this,
         key = $stateParams.key,
         group = $stateParams.group;
 
     function init(){
-      MainService.getAllClientIds().then(function(arr){
-        $scope.companyIds = arr.data;
-
+        $scope.companyIds = ($rootScope.clients)?$rootScope: [];
         MainService.getOneTerm(key,group).then(function(res){
           localStorage.setItem('termId',res.data._id);
           tc.term = res.data;
@@ -23,7 +21,6 @@ angular
           tc.translations = res.data.translations;
           tc.noRepeatKeys = ['translations','__v','_id','updatedBy','softDelete','createdAt','updatedAt','createdBy'];
         })
-      })
     }
 
     tc.showCompName = function(clientId){

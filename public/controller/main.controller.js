@@ -16,17 +16,19 @@ angular
     vm.init = function(){
       MainService.getAllTerms().then(function(terms){
          vm.groups = filterGroup(terms.data);
-         allTerms = terms;
+         allTerms = terms.data;
       })
     }
 
     vm.searchTerms = function(){
-      vm.searchResults = allTerms.data.filter(function(el){
-        if(el.key.toLowerCase().indexOf(vm.searchParams.toLowerCase()) > -1) return true;
-        for (var i = 0; i < el.translations.length; i++) {
-            if(el.translations[i].val.toLowerCase().indexOf(vm.searchParams.toLowerCase()) != -1) return true;
-        }
-      })
+      if(allTerms.length > 0){
+        vm.searchResults = allTerms.filter(function(el){
+          if(el.key.toLowerCase().indexOf(vm.searchParams.toLowerCase()) > -1) return true;
+          for (var i = 0; i < el.translations.length; i++) {
+              if(el.translations[i].val.toLowerCase().indexOf(vm.searchParams.toLowerCase()) != -1) return true;
+          }
+        })
+      }
         vm.searchError = (!vm.searchResults || vm.searchResults.length <1)? true : false;
     }
 

@@ -10,7 +10,7 @@ angular
     cc.loadingText = "Loading may take a few seconds....";
     cc.isloading = {}
     cc.isReady = false;
-
+    cc.runningLocally = (document.location.hostname == 'localhost');
     cc.init = function(){
       var promise = $interval(function () {
         cc.loadingText+= '.';
