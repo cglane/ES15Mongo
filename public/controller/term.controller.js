@@ -13,7 +13,7 @@ angular
         group = $stateParams.group;
 
     function init(){
-        $scope.companyIds = ($rootScope.clients)?$rootScope: [];
+        $scope.companyIds = ($rootScope.clients)?$rootScope.clients: [];
         MainService.getOneTerm(key,group).then(function(res){
           localStorage.setItem('termId',res.data._id);
           tc.term = res.data;
