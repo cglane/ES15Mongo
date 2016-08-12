@@ -29,7 +29,9 @@ angular
         })
       })
     };
-
+    MainService.getAllTemplates().then(function(response){
+      console.log(response,'allTemplates');
+    })
     cc.seeCompany = function(id){
       $location.path('view_company/'+id);
     };

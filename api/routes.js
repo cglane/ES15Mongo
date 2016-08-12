@@ -36,6 +36,8 @@ module.exports = function (apiRoutes, io) {
 
   apiRoutes.post('/get_company_names',getCtrl.getCompanyNames);
 
+  apiRoutes.get('/get_all_templates', getCtrl.getAllTemplates);
+
 //=============Change To Soft Delete============//
 
   apiRoutes.delete('/soft_delete/:_id',editCtrl.softDelete);

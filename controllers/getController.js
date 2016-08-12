@@ -1,5 +1,6 @@
 var Promise = require('es6-promise').Promise;
 var Term = require('../models/term.js');
+var Templates = require('../models/Template.js')
 var _ = require('underscore');
 var getCtrl = require('./getController.js');
 var config = require('../config.js');
@@ -248,6 +249,12 @@ module.exports = {
             }
             module.exports.getClients(obj,secondObj);
         });
+  },
+  getAllTemplates:function(req,res){
+    Templates.find({},function(err,templates){
+      if(err) throw err;
+      res.send(templates);
+    })
   }
 
 }

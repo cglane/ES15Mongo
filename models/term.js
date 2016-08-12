@@ -1,7 +1,9 @@
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var config = require("../config.js")
+var mongoose = require('mongoose'),
+    termConnection = require('../mongoConnections/term.js'),
+     Schema = mongoose.Schema,
+     config = require("../config.js")
+
 var TermSchema = new Schema({
     group: {type:String},
     key: {type:String},
@@ -19,4 +21,4 @@ var TermSchema = new Schema({
     softDelete:{type:Boolean,default: false}
 });
 
-module.exports = mongoose.model('Term', TermSchema);
+module.exports = termConnection.model('Term', TermSchema);

@@ -5,6 +5,7 @@ var methodOverride = require('method-override');
 var bodyParser  = require('body-parser');
 var morgan      = require('morgan');
 var mongoose    = require('mongoose');
+var Schema = mongoose.Schema;
 var cookieParser = require('cookie-parser');
 var loginCtrl = require("./controllers/loginController.js");
 var server = require('http').createServer(app);
@@ -15,14 +16,19 @@ var writeFile = require('./writeFile/write.js');
 //================Configuration==========//
 var port = '8080';
 var env = process.argv[2];
+//Term DB Connection
+ require('./mongoConnections/term.js');
+//Template DB createConnection
+ require('./mongoConnections/templates.js');
 
-if(env === 'dev'){
-  console.log('Using Dev Server');
-  mongoose.connect('mongodb://localhost:27017/myappdatabase');
-}else{
-  console.log('Using Production Server');
-  mongoose.connect("gdg_admin:G8Q'j]'ZS}d[]Uvs@mongo.gdg.do:27017/gdg_langs");
-}
+
+// if(env === 'dev'){
+//   console.log('Using Dev Server');
+//   mongoose.connect('mongodb://localhost:27017/myappdatabase');
+// }else{
+//   console.log('Using Production Server');
+//   mongoose.connect("gdg_admin:G8Q'j]'ZS}d[]Uvs@mongo.gdg.do:27017/gdg_langs");
+// }
 
 var port = config.PORT || 8080;
 

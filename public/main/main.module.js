@@ -66,6 +66,11 @@
             controller:'CompanyTermController',
             templateUrl:'templates/view-company-term-tpl.html'
           })
+          // .state("view_templates"),{
+          //   url:'/view_templates',
+          //   template: require('../templates/template-tpl.html'),
+          //   controller: 'TemplatesController',
+          // }
   });
 
 

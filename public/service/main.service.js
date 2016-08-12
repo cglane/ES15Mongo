@@ -81,8 +81,11 @@
       var writeCustom = function(){
         return $http.post('/api/writeCustom',$rootScope.customClients);
       }
-
+      var getAllTemplates = function(){
+        return $http.get('/api/get_all_templates');
+      }
     return{
+      getAllTemplates:getAllTemplates,
       writeCustom:writeCustom,
       getCompanyNames:getCompanyNames,
       writeAllSocket:writeAllSocket,
