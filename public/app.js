@@ -9,7 +9,7 @@ import uirouter from 'angular-ui-router';
 //config
 import router from './router.js';
 //services
-import MainService from './services/main.service.js';
+import MainService from './service/main.service.js';
 import LoginService from './service/login.service.js';
 import SocketService from './service/socket.service.js';
 

@@ -1,10 +1,6 @@
 
-(function(){
-"use strict";
-
-angular
-  .module('main')
-  .controller('CompanyController',function(SocketService,$uibModal,$interval,$stateParams,$state,$location,$scope,$rootScope,MainService,$filter){
+CompanyController.$inject = ['SocketService','$uibModal','$interval','$stateParams','$state','$location','$scope','$rootScope','MainService','$filter'];
+export default function CompanyController(SocketService,$uibModal,$interval,$stateParams,$state,$location,$scope,$rootScope,MainService,$filter) {
 
     var cc = this;
     cc.loadingText = "Loading may take a few seconds....";
@@ -29,9 +25,7 @@ angular
         })
       })
     };
-    MainService.getAllTemplates().then(function(response){
-      console.log(response,'allTemplates');
-    })
+
     cc.seeCompany = function(id){
       $location.path('view_company/'+id);
     };
@@ -104,5 +98,4 @@ angular
           console.log('socket connected');
      });
 
-});
-})();
+}

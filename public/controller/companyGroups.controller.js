@@ -1,10 +1,6 @@
 
-(function(){
-"use strict";
-
-angular
-  .module('main')
-  .controller('CompanyGroupsController',function($stateParams,$location,$scope,MainService,$filter){
+CompanyGroupsController.$inject['$stateParams','$location','$scope','MainService','$filter']
+  export default function CompanyGroupsController($stateParams,$location,$scope,MainService,$filter){
     var cg = this;
     cg.clientId = $stateParams.clientId;
     cg.clientName = $stateParams.clientName;
@@ -35,5 +31,4 @@ angular
       return (Object.keys(subVal).length > 0)? true: false;
     }
 
-});
-})();
+}

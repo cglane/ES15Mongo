@@ -1,21 +1,16 @@
-(function(){
-  "use strict"
-  angular
-    .module('main')
-    .factory('SocketService',function($rootScope){
-      var socket = io("");
-      socket.heartbeatTimeout = 200000;
-      return {
-        on: function(event, cb){
-          socket.on(event, function(data){
-            cb(data);
-            $rootScope.$apply();
-          });
-        },
-        emit: function(event, data){
-          socket.emit(event, data);
-          // $rootScope.$apply();
-        }
+  export default function SocketService(){
+    var Socket = {};
+    var liveSocket = io("");
+    liveSocket.heartbeatTimeout = 200000;
+      Socket.on =  function(event, cb){
+        liveSocket.on(event, function(data){
+          cb(data);
+          $rootScope.$apply();
+        });
+      };
+      Socket.emit = function(event, data){
+        liveSocket.emit(event, data);
+        // $rootScope.$apply();
       }
-  });
-})();
+    return Socket;
+  }

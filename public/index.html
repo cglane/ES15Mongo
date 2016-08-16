@@ -6,41 +6,9 @@
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css" media="screen" title="no title" charset="utf-8">
 
   </head>
-  <body ng-app = 'main'>
-    <div ui-view></div>
-    <!-- =========dependencies========= -->
-    <script type="text/javascript" src="./socket.io/socket.io.js"></script>
-    <script src="./node_modules/angular/angular.js" charset="utf-8"></script>
-    <script src="./node_modules/underscore/underscore.js" charset="utf-8"></script>
-    <script src="./node_modules/jquery/dist/jquery.js" charset="utf-8"></script>
-    <script src="./node_modules/angular-route/angular-route.js" charset="utf-8"></script>
-    <script src="./node_modules/angular-ui-router/release/angular-ui-router.js" charset="utf-8"></script>
-    <script src="./node_modules/bootstrap/dist/js/bootstrap.js" charset="utf-8"></script>
-    <script src="./node_modules/angular-xeditable/dist/js/xeditable.js" charset="utf-8"></script>
-    <script src="./node_modules/angular-touch/angular-touch.js" charset="utf-8"></script>
-    <script src="./node_modules/angular-animate/angular-animate.js" charset="utf-8"></script>
-    <script src="./node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js" charset="utf-8"></script>
-    <script src="./node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js" charset="utf-8"></script>
-    <script src="./node_modules/ng-file-upload/dist/ng-file-upload.min.js" charset="utf-8"></script>
-    <script src="./node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js" charset="utf-8"></script>
-    <script src="./node_modules/angular-file-upload/dist/angular-file-upload.min.js" charset="utf-8"></script>
-    <script src="./node_modules/angular-socket-io/socket.js" charset="utf-8"></script>
-    <script src="./node_modules/q/q.js" charset="utf-8"></script>
-    <!-- <==============modules and controllers=======> -->
-    <script src="./main/main.module.js" charset="utf-8"></script>
-    <script src="./controller/main.controller.js" charset="utf-8"></script>
-    <script src="./controller/login.controller.js" charset="utf-8"></script>
-    <script src="./controller/term.controller.js" charset="utf-8"></script>
-    <script src="./controller/company.controller.js" charset="utf-8"></script>
-    <script src="./controller/companyTerm.controller.js" charset="utf-8"></script>
-    <script src="./controller/companyGroups.controller.js" charset="utf-8"></script>
-    <script src="./controller/modal.instance.controller.js" charset="utf-8"></script>
-    <script src="./controller/upload.controller.js" charset="utf-8"></script>
-    <script src="./controller/deployController.js" charset="utf-8"></script>
-    <script src="./service/main.service.js" charset="utf-8"></script>
-    <script src="./service/login.service.js" charset="utf-8"></script>
-    <script src="./service/socket.service.js" charset="utf-8"></script>
-    <!-- <====================directives======================> -->
-    <script src="./directives/readFile.js" charset="utf-8"></script>
+  <body>
+    <div ui-view>
+      <script src="./bundle.js" charset="utf-8"></script>
+    </div>
   </body>
 </html>

@@ -1,10 +1,5 @@
-
-(function(){
-"use strict";
-
-angular
-  .module('main')
-  .controller('DeployController',function(SocketService,$uibModalInstance,$uibModal,$stateParams,$state,$route,$location,$scope, $rootScope,MainService,$filter){
+  DeployController.$inject['SocketService','$uibModalInstance','$uibModal','$stateParams','$state','$route','$location','$scope', '$rootScope','MainService','$filter']
+  export default function DeployController(SocketService,$uibModalInstance,$uibModal,$stateParams,$state,$route,$location,$scope, $rootScope,MainService,$filter){
     $scope.awsDynamic = 0;
     $scope.localDynamic = 0;
     $scope.deployComplete = false;
@@ -42,5 +37,4 @@ angular
     };
 
 
-});
-})();
+}

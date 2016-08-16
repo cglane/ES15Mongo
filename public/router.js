@@ -37,10 +37,3 @@ export default function routes($sP, $uRP) {
   //   controller: 'TemplatesController',
   // }
 }
-
-
-
-
-
-
-})();

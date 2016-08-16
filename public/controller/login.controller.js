@@ -1,10 +1,6 @@
 
-(function(){
-"use strict";
-
-angular
-  .module('main')
-  .controller('LoginController',function($stateParams,$location,$scope,LoginService){
+  LoginController.$inject['$stateParams','$location','$scope','LoginService']
+  export default function LoginController($stateParams,$location,$scope,LoginService){
 
     $scope.login = function(){
       var obj = {
@@ -27,5 +23,4 @@ angular
       })
     };
 
-});
-})();
+}

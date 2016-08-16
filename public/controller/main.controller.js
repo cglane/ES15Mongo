@@ -1,10 +1,7 @@
 
-(function(){
-"use strict";
+MainController.$inject = ['$stateParams','$location','$scope','MainService','$filter'];
+export default function MainController($stateParams,$location,$scope,MainService,$filter) {
 
-angular
-  .module('main')
-  .controller('MainController',function($stateParams,$location,$scope,MainService,$filter){
     var vm = this;
     vm.groups = {};
     vm.showSearch = false;
@@ -39,5 +36,4 @@ angular
       vm.showSearch = false;
     }
 
-});
-})();
+}
