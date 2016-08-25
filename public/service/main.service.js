@@ -1,4 +1,5 @@
-  export default function  MainService(){
+  MainService.$inject = ['$http'];
+  export default function  MainService($http){
     var MainService = {};
     var userName = localStorage.getItem('userName');
 

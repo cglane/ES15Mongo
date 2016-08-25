@@ -1,4 +1,5 @@
-export default function LoginService(){
+LoginService.$inject = ['$http'];
+export default function LoginService($http){
   var Login = {};
   var url = '';
 

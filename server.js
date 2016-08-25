@@ -81,10 +81,10 @@ app.use(allowCrossDomain);
 
 ///----socket connection----///
 
-io.on('connection', function(socket){
-  socket.emit('connected');
-  require('./api/routes.js')(apiRoutes,socket);
-});
+// io.on('connection', function(socket){
+//   socket.emit('connected');
+//   require('./api/routes.js')(apiRoutes,socket);
+// });
 io.on('error',function(err){
   console.log("Socket.IO Error");
   console.log(err.stack);
@@ -97,6 +97,8 @@ var apiRoutes = express.Router();
 //routes for api
 //adding prefix of api to all fo these routes
 app.use('/api', apiRoutes);
+require('./api/routes.js')(apiRoutes);
+
 // ===============================================
 server.listen(port);
 

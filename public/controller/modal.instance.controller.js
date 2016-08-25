@@ -1,5 +1,5 @@
 
-  modalInstanceController.$inject['items','$uibModalInstance','$uibModal','$stateParams','$state','$route','$location','$scope','MainService','$filter']
+  modalInstanceController.$inject = ['items','$uibModalInstance','$uibModal','$stateParams','$state','$route','$location','$scope','MainService','$filter']
    export default function modalInstanceController(items,$uibModalInstance,$uibModal,$stateParams,$state,$route,$location,$scope,MainService,$filter){
 
     function init(){

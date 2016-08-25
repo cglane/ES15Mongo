@@ -1,5 +1,5 @@
 
-CompanyGroupsController.$inject['$stateParams','$location','$scope','MainService','$filter']
+CompanyGroupsController.$inject = ['$stateParams','$location','$scope','MainService','$filter']
   export default function CompanyGroupsController($stateParams,$location,$scope,MainService,$filter){
     var cg = this;
     cg.clientId = $stateParams.clientId;

@@ -3,9 +3,11 @@
  * @description
  * App to allow TPMs to manage portal settings for their clients
  */
+
 import angular from 'angular';
 import uirouter from 'angular-ui-router';
-
+import io from 'angular-socket-io';
+import * as _ from 'underscore';
 //config
 import router from './router.js';
 //services
@@ -14,7 +16,8 @@ import LoginService from './service/login.service.js';
 import SocketService from './service/socket.service.js';
 
 //controllers
-import CompanyGroupsController from './controller/company.controller.js';
+import CompanyController from './controller/company.controller.js';
+import CompanyGroupsController from './controller/CompanyGroups.controller.js';
 import CompanyTermController from './controller/companyTerm.controller.js';
 import DeployController from './controller/DeployController.js';
 import LoginController from './controller/login.controller.js';
@@ -28,8 +31,11 @@ angular.module('gdgLangApp', [uirouter])
   //config
   .config(router)
   //services
-  .service('MainService', MainService)
+  .factory('MainService', MainService)
+  .factory('LoginService', LoginService)
+  .factory('SocketService', SocketService)
   //controllers
+  .controller('CompanyController', CompanyController)
   .controller('CompanyGroupsController', CompanyGroupsController)
   .controller('CompanyTermController', CompanyTermController)
   .controller('DeployController', DeployController)

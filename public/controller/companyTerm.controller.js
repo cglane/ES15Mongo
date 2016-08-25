@@ -1,7 +1,7 @@
 
 
 
-CompanyTermController.$inject['$uibModal','$stateParams','$location','$scope','MainService','$filter','$state']
+CompanyTermController.$inject = ['$uibModal','$stateParams','$location','$scope','MainService','$filter','$state']
   export default function CompanyTermController($uibModal,$stateParams,$location,$scope,MainService,$filter,$state){
 
     var ct = this;

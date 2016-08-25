@@ -1,4 +1,5 @@
 
+
 MainController.$inject = ['$stateParams','$location','$scope','MainService','$filter'];
 export default function MainController($stateParams,$location,$scope,MainService,$filter) {
 

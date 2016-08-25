@@ -1,7 +1,7 @@
 
 
 
-  TermController.$inject['$stateParams','$rootScope','$location','$scope','MainService','$filter','$state']
+  TermController.$inject = ['$stateParams','$rootScope','$location','$scope','MainService','$filter','$state']
     export default function TermController($stateParams,$rootScope,$location,$scope,MainService,$filter,$state){
 
     var tc = this,

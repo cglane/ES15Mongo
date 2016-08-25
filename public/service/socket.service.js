@@ -1,4 +1,5 @@
-  export default function SocketService(){
+  SocketService.$inject = ['$rootScope',"socket"]
+  export default function SocketService($rootScope){
     var Socket = {};
     var liveSocket = io("");
     liveSocket.heartbeatTimeout = 200000;

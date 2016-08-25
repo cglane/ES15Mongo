@@ -1,5 +1,5 @@
 
-  LoginController.$inject['$stateParams','$location','$scope','LoginService']
+  LoginController.$inject = ['$stateParams','$location','$scope','LoginService']
   export default function LoginController($stateParams,$location,$scope,LoginService){
 
     $scope.login = function(){

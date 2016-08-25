@@ -1,5 +1,5 @@
 
-  UploadController.$inject['Upload','$uibModalInstance','$uibModal','$stateParams','$state','$route','$location','$window','$scope','MainService','$filter']
+  UploadController.$inject = ['Upload','$uibModalInstance','$uibModal','$stateParams','$state','$route','$location','$window','$scope','MainService','$filter']
   export default function UploadController(Upload,$uibModalInstance,$uibModal,$stateParams,$state,$route,$location,$window,$scope,MainService,$filter){
     $scope.uploadObj = {};
     $scope.companyIds = MainService.getCompanyIds();
