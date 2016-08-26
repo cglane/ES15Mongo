@@ -6,3 +6,5 @@ i18n
 ./langFiles
 ./language_files
 ./WPG-2.0
+./LanguageDeployment.pem
+./config.js
